@@ -26,8 +26,10 @@ describe("API 실행기 도구 정의", () => {
 });
 
 describe("API 오류", () => {
-  it("크레딧 부족은 멈추고, 요청 제한과 서버 오류는 다시 시도한다", () => {
+  it("크레딧 부족과 키 만료는 멈추고, 요청 제한과 서버 오류는 다시 시도한다", () => {
     expect(httpLimit(402)).toBe("quota");
+    expect(httpLimit(401)).toBe("quota");
+    expect(httpLimit(403)).toBe("quota");
     expect(httpLimit(429)).toBe("retry");
     expect(httpLimit(503)).toBe("retry");
     expect(httpLimit(400)).toBeNull();

@@ -38,10 +38,11 @@ export function toOpenAiTools(tools: McpTool[], browser: BrowserServer) {
 
 /**
  * HTTP 오류를 사용량·용량 오류로 가린다(OpenRouter 기준).
- * 402는 충전한 크레딧이 떨어진 것이라 기다려도 풀리지 않는다. 429와 5xx는 잠시 뒤 다시 시도한다.
+ * 402는 충전한 크레딧이 떨어진 것이고, 401·403은 키가 만료됐거나 잘못된 것이다. 둘 다 기다려도 풀리지 않으므로 멈춘다.
+ * 멈춘 실행은 결과를 남기지 않으니 새 키를 넣고 같은 명령을 돌리면 이어서 돈다. 429와 5xx는 잠시 뒤 다시 시도한다.
  */
 export function httpLimit(status: number): AgentRun["limit"] {
-  if (status === 402) return "quota";
+  if (status === 402 || status === 401 || status === 403) return "quota";
   if (status === 429 || status >= 500) return "retry";
   return null;
 }
@@ -68,7 +69,7 @@ export async function runOpenAiCompat(o: AgentInput): Promise<AgentRun> {
   const effort = envValue("OPENAI_COMPAT_REASONING_EFFORT") ?? "medium";
   if (!apiKey) {
     log({ type: "error", text: "OPENROUTER_API_KEY가 없다. 레포 루트 .env에 넣을 것" });
-    return result({ exitReason: "error", numTurns: 0, toolCalls: [], finalAnswer: "", model: "", limit: null });
+    return result({ exitReason: "error", numTurns: 0, toolCalls: [], finalAnswer: "", model: "", limit: "quota" });
   }
 
   const mcp = await openMcp(o.browser.args);
