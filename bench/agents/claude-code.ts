@@ -1,25 +1,10 @@
 // Claude Code를 헤드리스로 실행하고 stream-json 출력에서 도구 호출과 턴 수를 뽑는다.
 // IntentGuard src/bench/claude.ts를 옮기면서 이 실험에 필요 없는 비용·토큰 집계는 뺐다.
 import { execFileSync, spawn } from "node:child_process";
-import { createWriteStream, existsSync } from "node:fs";
+import { createWriteStream, existsSync, writeFileSync } from "node:fs";
 import path from "node:path";
-
-export interface ToolCall {
-  name: string;
-  input: unknown;
-  isError: boolean;
-  /** 결과 앞부분. 배경 클릭 시도와 오류 문장을 세는 데 쓴다 */
-  resultPreview: string;
-}
-
-export interface ClaudeRun {
-  durationMs: number;
-  exitReason: "completed" | "timeout" | "error";
-  numTurns: number;
-  toolCalls: ToolCall[];
-  finalAnswer: string;
-  model: string;
-}
+import { TMP } from "../../probe/lib/mcp.js";
+import type { AgentInput, AgentRun, ToolCall } from "./types.js";
 
 export function resolveClaudeBin(): string {
   if (process.env.CLAUDE_BIN) return process.env.CLAUDE_BIN;
@@ -39,6 +24,30 @@ function killTree(pid: number) {
   }
 }
 
+/**
+ * 에이전트에게는 브라우저 MCP 하나만 준다. 셸·파일 도구는 없다(--tools "").
+ * 사용자 설정과 다른 MCP 서버가 끼지 않도록 --strict-mcp-config와 --setting-sources local을 쓴다.
+ */
+function claudeArgs(o: AgentInput): string[] {
+  const b = o.browser;
+  const configPath = path.join(TMP, `mcp-${b.name}.json`);
+  writeFileSync(configPath, JSON.stringify({ mcpServers: { [b.name]: { command: b.command, args: b.args } } }));
+  const qualified = (tool: string) => `mcp__${b.name}__${tool}`;
+  return [
+    "-p",
+    "--model", o.model,
+    "--output-format", "stream-json",
+    "--verbose",
+    "--tools", "",
+    "--mcp-config", configPath,
+    "--strict-mcp-config",
+    "--allowedTools", ...(b.allowed ? b.allowed.map(qualified) : [`mcp__${b.name}`]),
+    "--disallowedTools", ...b.denied.map(qualified),
+    "--setting-sources", "local",
+    "--no-session-persistence",
+  ];
+}
+
 interface Item {
   type: string;
   id?: string;
@@ -51,10 +60,10 @@ interface Item {
 
 const textOf = (c: Item["content"]) => (typeof c === "string" ? c : (c ?? []).map((x) => x.text ?? "").join("\n"));
 
-export function runClaude(o: { args: string[]; prompt: string; timeoutMs: number; rawLogPath: string }): Promise<ClaudeRun> {
+export function runClaudeCode(o: AgentInput): Promise<AgentRun> {
   return new Promise((resolve) => {
     const started = Date.now();
-    const child = spawn(resolveClaudeBin(), o.args, { stdio: ["pipe", "pipe", "pipe"], detached: process.platform !== "win32" });
+    const child = spawn(resolveClaudeBin(), claudeArgs(o), { stdio: ["pipe", "pipe", "pipe"], detached: process.platform !== "win32" });
     const raw = createWriteStream(o.rawLogPath);
     const calls = new Map<string, ToolCall>();
     let buffer = "";
@@ -119,6 +128,8 @@ export function runClaude(o: { args: string[]; prompt: string; timeoutMs: number
         toolCalls: [...calls.values()],
         finalAnswer: typeof f?.result === "string" ? f.result : "",
         model: Object.keys(f?.modelUsage ?? {})[0] ?? "",
+        // --tools ""로 내장 도구를 모두 뺐으므로 브라우저 밖 도구는 부를 수 없다
+        outsideTools: [],
       });
     });
   });
