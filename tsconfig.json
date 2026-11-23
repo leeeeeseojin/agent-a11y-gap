@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "ES2023",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "types": ["node"]
+  },
+  "include": ["cases/*.ts", "probe", "bench", "e2e", "tests", "analysis/*.ts", "playwright.config.ts", "vitest.config.ts"]
+}

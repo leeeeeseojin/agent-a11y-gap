@@ -1,0 +1,10 @@
+node_modules/
+.venv/
+.ipynb_checkpoints/
+__pycache__/
+test-results/
+playwright-report/
+# 수집기가 실행 중에 쓰는 임시 폴더 (Playwright MCP 출력, 브라우저 프로필)
+.tmp/
+# 2층 원본 스트림 로그는 크고 경로가 섞여 있어 올리지 않는다. 요약 JSON만 runs/에 남긴다
+runs/**/raw/

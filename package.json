@@ -1,0 +1,28 @@
+{
+  "name": "agent-a11y-gap",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.8.0",
+  "description": "브라우저 MCP가 에이전트에게 주는 스냅샷과 사람이 받는 접근성 트리의 차이를 측정한다",
+  "scripts": {
+    "serve": "tsx probe/serve.ts",
+    "probe": "tsx probe/run.ts",
+    "bench": "tsx bench/run.ts",
+    "import:intentguard": "tsx analysis/import-intentguard.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:e2e": "playwright test"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/sdk": "1.32.2",
+    "@playwright/mcp": "0.0.86",
+    "@playwright/test": "1.65.1",
+    "@types/node": "^26.6.6",
+    "chrome-devtools-mcp": "1.13.0",
+    "playwright": "1.65.1",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^5.1.0"
+  }
+}
