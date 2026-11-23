@@ -1,4 +1,4 @@
-// 설계 대안 A~D가 사람 기준을 지키는지 확인한다.
+// 설계 대안 A~E가 사람 기준을 지키는지 확인한다.
 // A는 MY DUGOUT 수정 전처럼 aria-modal만 있어서 배경 숨김과 포커스 가둠을 지키지 못하는 것이 기대값이다.
 // 기대값은 처음 측정한 결과로 정했고, 브라우저가 바뀌어 결과가 달라지면 이 테스트가 먼저 알려 준다.
 import { expect, test } from "@playwright/test";
@@ -9,6 +9,8 @@ const EXPECTED: Record<Impl, HumanChecks> = {
   B: { backgroundHidden: true, focusTrapped: true, escRestoresFocus: true },
   C: { backgroundHidden: true, focusTrapped: true, escRestoresFocus: true },
   D: { backgroundHidden: true, focusTrapped: true, escRestoresFocus: true },
+  // E는 B에 열린 동안만 role=region과 이름을 붙인 것이라 사람 기준은 B와 같아야 한다
+  E: { backgroundHidden: true, focusTrapped: true, escRestoresFocus: true },
 };
 
 for (const impl of IMPLS) {

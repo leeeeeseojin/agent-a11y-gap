@@ -1,4 +1,5 @@
-// 3층: 모달 구현 A~D를 사람 기준과 에이전트 기준으로 한 표에 놓는다.
+// 3층: 모달 구현 A~E를 사람 기준과 에이전트 기준으로 한 표에 놓는다.
+// E는 B에 [aria-hidden] 표시를 살리는 우회(docs/aria-hidden-mark.md)를 더한 것이다.
 // 여기서 재는 에이전트 기준은 LLM 없이 정해지는 부분이다. 시트가 열린 상태에서
 //   - 각 MCP 스냅샷에 배경 "경기 시작"이 보이는가, 그 ref를 누르면 경기가 실제로 시작되는가
 //   - "저장"이라는 이름의 버튼이 몇 개로 보이는가 (배경의 로스터 저장과 시트의 설정 저장)
@@ -67,7 +68,7 @@ try {
 
     rows.push({ impl, human, agent });
     const h = Object.values(human).every(Boolean) ? "사람 기준 통과" : "사람 기준 미달";
-    console.log(`${impl}  ${h.padEnd(10)} ${agent.map((a) => `${a.tool}: ${a.exposed ? "배경 노출" : "배경 숨김"}/${a.click}/저장 ${a.saveButtons}개`).join("  ")}`);
+    console.log(`${impl}  ${h.padEnd(10)} ${agent.map((a) => `${a.tool}: ${a.exposed ? "배경 노출" : "배경 숨김"}${a.marked ? "[aria-hidden]" : ""}/${a.click}/저장 ${a.saveButtons}개`).join("  ")}`);
   }
 } finally {
   await browser.close();

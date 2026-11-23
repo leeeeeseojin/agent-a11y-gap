@@ -1,8 +1,8 @@
-// 경기 준비 화면 + 운영 설정 시트. 구현(A~D)만 다르고 화면 문구와 동작은 같다.
+// 경기 준비 화면 + 운영 설정 시트. 구현(A~E)만 다르고 화면 문구와 동작은 같다.
 // 상태는 바뀔 때마다 서버(/state/<run>)에 올린다. 2층 채점은 에이전트의 보고가 아니라 이 값으로 한다.
 
 const params = new URLSearchParams(location.search);
-const IMPL = ["A", "B", "C", "D"].includes(params.get("impl")) ? params.get("impl") : "B";
+const IMPL = ["A", "B", "C", "D", "E"].includes(params.get("impl")) ? params.get("impl") : "B";
 const RUN = params.get("run") ?? "manual";
 const app = document.getElementById("app");
 
@@ -65,7 +65,7 @@ function saveRoster() {
 }
 
 // ---------------------------------------------------------------------------
-// 시트 내용 (네 구현이 같이 쓴다)
+// 시트 내용 (모든 구현이 같이 쓴다)
 // ---------------------------------------------------------------------------
 
 function sheetBody(draft, onSave, onClose) {
@@ -144,7 +144,7 @@ function openSheet(opener) {
     return;
   }
 
-  // A·B: div 시트. 반투명 판이 화면을 덮어 배경 클릭을 막는다.
+  // A·B·E: div 시트. 반투명 판이 화면을 덮어 배경 클릭을 막는다.
   const root = document.getElementById("app");
   const dialog = el("div", { class: "sheet", role: "dialog", "aria-modal": "true", "aria-labelledby": "sheet-title", tabindex: "-1" }, ...sheetBody(draft, () => save(), () => close()));
   const backdrop = el("div", { class: "sheet-backdrop", onclick: (e) => e.target === backdrop && close() }, dialog);
@@ -157,17 +157,27 @@ function openSheet(opener) {
   close = () => {
     document.removeEventListener("keydown", onKey);
     backdrop.remove();
-    if (IMPL === "B") {
+    if (IMPL === "B" || IMPL === "E") {
       root.removeAttribute("inert");
       root.removeAttribute("aria-hidden");
+    }
+    if (IMPL === "E") {
+      root.removeAttribute("role");
+      root.removeAttribute("aria-label");
     }
     opener?.focus();
     renderStatus();
   };
-  if (IMPL === "B") {
+  if (IMPL === "B" || IMPL === "E") {
     // B: MY DUGOUT Sheet.tsx와 같은 처리. 사람·스크린 리더 기준으로는 배경이 사라진다
     root.setAttribute("inert", "");
     root.setAttribute("aria-hidden", "true");
+  }
+  if (IMPL === "E") {
+    // E: B에 docs/aria-hidden-mark.md의 우회 2를 더했다. #app의 자식이 하나뿐이라 B에서는 스냅샷을 줄일 때
+    // [aria-hidden] 표시가 사라지는데, 이름 있는 영역은 펼쳐지지 않으므로 표시가 남는다. 열린 동안에만 붙인다
+    root.setAttribute("role", "region");
+    root.setAttribute("aria-label", "배경 화면");
   }
   document.addEventListener("keydown", onKey);
   document.body.append(backdrop);

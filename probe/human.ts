@@ -1,7 +1,7 @@
 // 모달의 사람 기준 세 가지. E2E(e2e/modal.spec.ts)와 3층 표(probe/layer3.ts)가 같은 함수를 쓴다.
 import type { Page } from "playwright";
 
-export const IMPLS = ["A", "B", "C", "D"] as const;
+export const IMPLS = ["A", "B", "C", "D", "E"] as const;
 export type Impl = (typeof IMPLS)[number];
 
 export interface HumanChecks {
