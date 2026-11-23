@@ -2,13 +2,15 @@
 //
 //   pnpm bench --model claude-haiku-5-5 --impl B --task settings-then-start --reps 1
 //   pnpm bench --agent antigravity --model gpt-oss-120b-medium --impl B --reps 1
+//   pnpm bench --agent api --model openai/gpt-oss-120b --impl B --reps 1   (OpenRouter, 키는 .env)
 //   pnpm bench --model claude-sonnet-5-5 --browser devtools      (DevTools MCP로 보조 실험)
 //
 // 기본 실험은 과제 4 × 구현 4 × 모델 3 × 3회 = 144회다. 모델 비용이 들기 때문에 1층에서
 // 차이가 난 조건만 넘긴다. 결과는 runs/layer2/<browser>/<task>__<impl>__<model>__<rep>.json.
 //
-// Claude 모델은 Claude Code로, Gemini·GPT-OSS는 Antigravity CLI로 돌린다. 두 실행기는 같은 브라우저 MCP와
-// 같은 도구 권한(agents/browser.ts)을 쓰지만 턴을 세는 방식이 달라서, 턴 수는 같은 실행기 안에서만 비교한다.
+// Claude 모델은 Claude Code로, Gemini·GPT-OSS는 Antigravity CLI로 돌린다. Antigravity 한도에 막힌 모델은
+// OpenAI 호환 API 실행기(--agent api)로 돌릴 수 있다. 세 실행기는 같은 브라우저 MCP와 같은 도구 권한(agents/browser.ts)을
+// 쓰지만 시스템 지시와 턴을 세는 방식이 달라서, 턴 수와 성공률은 같은 실행기 안에서만 비교한다.
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { parseArgs } from "node:util";
@@ -17,6 +19,7 @@ import { startServer } from "../probe/serve.js";
 import { runAntigravity } from "./agents/antigravity.js";
 import { browserServer } from "./agents/browser.js";
 import { runClaudeCode } from "./agents/claude-code.js";
+import { runOpenAiCompat } from "./agents/openai-compat.js";
 import type { AgentRun } from "./agents/types.js";
 import { ambiguousTargets, blockedClicks } from "./metrics.js";
 import { TASKS, invalidReason, outcomeOf, type ModalState } from "./tasks.js";
@@ -33,16 +36,21 @@ const { values } = parseArgs({
   },
 });
 
-const agent = values.agent === "antigravity" ? "antigravity" : "claude-code";
+const AGENTS = { "claude-code": runClaudeCode, antigravity: runAntigravity, api: runOpenAiCompat } as const;
+type Agent = keyof typeof AGENTS;
+if (!(values.agent! in AGENTS)) throw new Error(`--agent는 ${Object.keys(AGENTS).join(", ")} 중 하나`);
+const agent = values.agent as Agent;
 const browser = values.browser === "devtools" ? "devtools" : "playwright";
 const impls = (values.impl?.length ? values.impl : IMPLS).filter((i): i is Impl => (IMPLS as readonly string[]).includes(i));
 const tasks = values.task?.length ? TASKS.filter((t) => values.task!.includes(t.id)) : TASKS;
 const reps = Number(values.reps);
-const runAgent = agent === "antigravity" ? runAntigravity : runClaudeCode;
+const runAgent = AGENTS[agent];
+// API 모델 이름(openai/gpt-oss-120b)의 "/"는 파일 이름에 쓸 수 없어서 바꾼다
+const modelKey = values.model!.replaceAll("/", "-");
 const MAX_ATTEMPTS = 4;
 const RETRY_WAIT_MS = 60_000;
-if (agent === "antigravity" && !browserServer(browser).allowed) {
-  throw new Error("Antigravity는 Playwright MCP로만 돌린다. DevTools MCP는 허용 목록을 정리해 두지 않았다 (agents/browser.ts)");
+if (agent !== "claude-code" && !browserServer(browser).allowed) {
+  throw new Error(`${agent}는 Playwright MCP로만 돌린다. DevTools MCP는 허용 목록을 정리해 두지 않았다 (agents/browser.ts)`);
 }
 
 const server = await startServer();
@@ -68,7 +76,7 @@ try {
   run: for (const task of tasks)
     for (const impl of impls)
       for (let rep = 1; rep <= reps; rep++) {
-        const runId = `${task.id}__${impl}__${values.model}__${rep}`;
+        const runId = `${task.id}__${impl}__${modelKey}__${rep}`;
         if (alreadyDone(path.join(outDir, `${runId}.json`))) {
           skipped++;
           continue;
