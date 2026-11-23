@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="ko" data-case="aria-hidden-named-region">
+<head><meta charset="utf-8"><link rel="icon" href="data:,"><title>aria-hidden 이름 있는 영역</title><link rel="stylesheet" href="_probe.css"></head>
+<body>
+<!-- 이름 있는 영역(section aria-label)에 aria-hidden=true를 건다. 조상 div 패턴과 달리 이 영역은 스냅샷에서 접히지 않으므로
+     [aria-hidden] 표시가 영역 줄에 남는다. 표시가 사라지는 원인이 "이름 없는 조상이 접히는 것"인지 확인하기 위한 대조군이다. -->
+<h1>aria-hidden 이름 있는 영역</h1>
+<button data-probe="CONTROL">CONTROL</button>
+<section aria-label="배경" aria-hidden="true">
+  <button data-probe="TARGET">TARGET</button>
+</section>
+<script src="_probe.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="ko" data-case="aria-hidden-self">
+<head><meta charset="utf-8"><link rel="icon" href="data:,"><title>aria-hidden 버튼 자체</title><link rel="stylesheet" href="_probe.css"></head>
+<body>
+<!-- aria-hidden=true를 버튼에 직접 건다. aria-hidden 조상 패턴과 숨김 효과는 같고 속성의 위치만 다르다.
+     Playwright AI 스냅샷은 이 경우에 [aria-hidden] 표시를 붙인다(PR #42268). 조상 패턴과 나란히 두어 표시 누락을 비교한다. -->
+<h1>aria-hidden 버튼 자체</h1>
+<button data-probe="CONTROL">CONTROL</button>
+<button data-probe="TARGET" aria-hidden="true">TARGET</button>
+<script src="_probe.js"></script>
+</body>
+</html>

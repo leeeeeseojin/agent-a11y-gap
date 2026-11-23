@@ -1,5 +1,7 @@
 // 1층에서 비교하는 숨김 패턴 목록이다. 페이지는 cases/patterns/<id>.html에 있다.
-// preliminary가 true인 9종은 예비 재현에서 이미 돌려 본 것이고, 나머지 5종은 이번에 더했다.
+// preliminary가 true인 9종은 예비 재현에서 이미 돌려 본 것이고, 나머지 7종은 이번에 더했다.
+// aria-hidden은 속성의 위치만 다른 세 가지(조상 div, 버튼 자체, 이름 있는 영역)를 붙여 두었다.
+// 스냅샷의 [aria-hidden] 표시가 어떤 구조에서 사라지는지 비교하기 위해서다.
 export interface Pattern {
   id: string;
   label: string;
@@ -10,6 +12,8 @@ export interface Pattern {
 
 export const PATTERNS: Pattern[] = [
   { id: "aria-hidden-ancestor", label: "aria-hidden 조상", mechanism: "attribute", preliminary: true },
+  { id: "aria-hidden-self", label: "aria-hidden 버튼 자체", mechanism: "attribute", preliminary: false },
+  { id: "aria-hidden-named-region", label: "aria-hidden 이름 있는 영역", mechanism: "attribute", preliminary: false },
   { id: "inert-ancestor", label: "inert 조상", mechanism: "attribute", preliminary: true },
   { id: "modal-inert-aria-hidden", label: "모달 + 배경 inert·aria-hidden", mechanism: "attribute", preliminary: true },
   { id: "native-dialog-showmodal", label: "네이티브 dialog.showModal()", mechanism: "attribute", preliminary: true },
