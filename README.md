@@ -66,6 +66,8 @@
 - 모달 배경을 숨기는 흔한 방식(`#root`에 aria-hidden)이 바로 이 경우다. MY DUGOUT 수정본의 `button [ref=e54]: 경기 시작`에
   아무 표시가 없었던 이유도 이것이다. 이 표시 누락을 다룬 이슈는 playwright와 playwright-mcp에서 찾지 못했고,
   재현 페이지는 `cases/patterns/aria-hidden-*.html` 세 개다.
+- 표시는 자식이 하나뿐인 aria-hidden div가 스냅샷을 줄이는 단계(`unwrapSingleChildGenerics`)에서 펼쳐질 때 버려진다.
+  Playwright에서 고치는 방법 두 가지와, 그 전에 화면 코드에서 할 수 있는 우회 두 가지를 검증해 [docs/aria-hidden-mark.md](docs/aria-hidden-mark.md)에 정리했다.
 
 → [analysis/01_snapshot_matrix.ipynb](analysis/01_snapshot_matrix.ipynb) · [원본 스냅샷](runs/layer1/)
 
@@ -137,6 +139,7 @@ probe/            LLM 없이 도는 측정 (1·3층)
   human.ts        사람 기준 검사 (E2E와 공유)
   layer1.ts       1층 실행기
   layer3.ts       3층 실행기
+  aria-hidden-mark.ts  구조별 [aria-hidden] 표시 확인
   serve.ts        테스트 페이지 서버. 클릭과 화면 상태를 기록한다
 bench/            에이전트 과제와 실행기 (2층)
 e2e/              사람 기준 E2E (Playwright Test)
@@ -144,7 +147,7 @@ tests/            단위 테스트 (Vitest)
 runs/             실행 원본 기록. 버전 조합별 폴더
 analysis/         Python 노트북 01~03과 IntentGuard 기록 CSV
 report/           리포트와 그림
-docs/             출발점과 연구 계획
+docs/             출발점, 연구 계획, [aria-hidden] 표시 누락 분석
 ```
 
 ## 한계
