@@ -55,7 +55,20 @@
   이슈 [#36938](https://github.com/microsoft/playwright/issues/36938)은 PR [#43211](https://github.com/microsoft/playwright/pull/43211)로
   닫혔고, 1.65 API 리뷰 [#43792](https://github.com/microsoft/playwright/issues/43792)에서 로케이터와 ARIA 스냅샷은 이런 요소를
   걸러내지 않고 클릭할 때 `element is inert`로 기다리도록 정리됐다. 위 표의 시간 초과가 바로 이 대기다.
-  그래서 사람 기준과의 격차는 Playwright의 의도된 설계에서 나온다. aria-hidden 조상은 이 결정에 들어 있지 않으며, 선행 이슈를 확인하는 중이다.
+  그래서 사람 기준과의 격차는 Playwright의 의도된 설계에서 나온다.
+- aria-hidden 요소가 AI 스냅샷에 남는 것도 의도된 동작이다. PR [#42268](https://github.com/microsoft/playwright/pull/42268)은
+  AI 모드 스냅샷이 눈에 보이는 aria-hidden 요소를 일부러 포함한다고 밝히고, 대신 `getByRole`로는 찾을 수 없다는 뜻으로
+  `[aria-hidden]` 표시를 붙였다. 그런데 이 표시는 속성이 직접 붙은 요소에만 달린다. 속성이 이름 없는 조상 div에 있으면
+  스냅샷을 줄이는 과정([#41604](https://github.com/microsoft/playwright/pull/41604))에서 그 div가 접히면서 표시도 함께 사라진다.
+
+  | `aria-hidden` 위치 | AI 스냅샷 (Playwright 1.65.1) |
+  | --- | --- |
+  | 버튼 자체 | `button [aria-hidden] [ref=e3]: TARGET` |
+  | 조상 div | `button [ref=e7]: TARGET` (표시 없음) |
+  | 이름 있는 조상 영역 | `region [aria-hidden]` 아래 `button [ref=e11]: TARGET` |
+
+  모달 배경을 숨기는 흔한 방식(`#root`에 aria-hidden)이 두 번째 경우다. MY DUGOUT 수정본의 `button [ref=e54]: 경기 시작`에
+  아무 표시가 없었던 이유도 이것이다. 이 표시 누락을 다룬 이슈는 playwright와 playwright-mcp에서 찾지 못했다.
 
 → [analysis/01_snapshot_matrix.ipynb](analysis/01_snapshot_matrix.ipynb) · [원본 스냅샷](runs/layer1/)
 
