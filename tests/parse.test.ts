@@ -12,6 +12,26 @@ describe("parsePlaywrightSnapshot", () => {
     expect(f).toMatchObject({ exposed: true, named: false, ref: "e54" });
   });
 
+  it("[aria-hidden] 표시: 버튼 줄에 있으면 찾는다", () => {
+    const f = parsePlaywrightSnapshot('- generic [ref=e1]:\n  - button "CONTROL" [ref=e2]\n  - button [aria-hidden] [ref=e3]: TARGET');
+    expect(f).toMatchObject({ exposed: true, named: false, marked: true });
+  });
+
+  it("[aria-hidden] 표시: 조상 줄에 있어도 찾는다 (이름 있는 영역)", () => {
+    const f = parsePlaywrightSnapshot('- generic [ref=e1]:\n  - region [aria-hidden] [ref=e2]:\n    - button [ref=e3]: TARGET');
+    expect(f.marked).toBe(true);
+  });
+
+  it("[aria-hidden] 표시: 형제 줄의 표시는 대상과 상관없다", () => {
+    const f = parsePlaywrightSnapshot('- generic [ref=e1]:\n  - button [aria-hidden] [ref=e2]: OTHER\n  - button [ref=e3]: TARGET');
+    expect(f.marked).toBe(false);
+  });
+
+  it("[aria-hidden] 표시: 조상 div가 접힌 스냅샷에는 단서가 없다", () => {
+    const f = parsePlaywrightSnapshot('- generic [ref=e1]:\n  - button "CONTROL" [ref=e2]\n  - button [ref=e3]: TARGET');
+    expect(f).toMatchObject({ exposed: true, named: false, marked: false });
+  });
+
   it("없으면 노출되지 않음", () => {
     expect(parsePlaywrightSnapshot('- button "CONTROL" [ref=e2]').exposed).toBe(false);
   });
