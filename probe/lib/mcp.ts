@@ -10,8 +10,16 @@ export const TMP = path.resolve(".tmp");
 // 두 패키지 모두 package.json의 exports에 CLI 경로가 없어 require.resolve로는 못 찾는다
 export const pkgDir = (name: string) => path.resolve("node_modules", name);
 
+export interface McpTool {
+  name: string;
+  description?: string;
+  inputSchema: Record<string, unknown>;
+}
+
 export interface McpSession {
   call(name: string, args: Record<string, unknown>): Promise<{ text: string; isError: boolean }>;
+  /** 서버가 알려 주는 도구 목록. 2층 API 실행기가 모델에게 넘길 도구 정의를 여기서 만든다 */
+  listTools(): Promise<McpTool[]>;
   close(): Promise<void>;
 }
 
@@ -30,6 +38,9 @@ export async function openMcp(args: string[]): Promise<McpSession> {
         // 도구 호출 자체가 실패해도(시간 초과 등) 결과로 기록해야 하므로 던지지 않는다
         return { text: String(e), isError: true };
       }
+    },
+    async listTools() {
+      return (await client.listTools()).tools as McpTool[];
     },
     close: () => client.close(),
   };
