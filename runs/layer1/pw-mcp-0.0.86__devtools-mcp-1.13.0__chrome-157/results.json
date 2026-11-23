@@ -1,5 +1,5 @@
 {
-  "collectedAt": "2026-11-23T07:28:14.902Z",
+  "collectedAt": "2026-11-23T09:27:59.746Z",
   "versions": {
     "playwrightMcp": "0.0.86",
     "chromeDevtoolsMcp": "1.13.0",
@@ -151,7 +151,7 @@
       "named": true,
       "ref": "getByRole",
       "click": "timeout",
-      "evidence": "getByRole('button', { name: 'TARGET' }) → 1개 | TimeoutError: locator.click: Timeout 3000ms exceeded."
+      "evidence": "getByRole('button', { name: 'TARGET' }) → 1개 | - element is inert"
     },
     {
       "pattern": "modal-inert-aria-hidden",
@@ -277,7 +277,7 @@
       "named": true,
       "ref": "e5",
       "click": "timeout",
-      "evidence": "- button \"TARGET\" [ref=e5] | TimeoutError: browserBackend.callTool: Timeout 5000ms exceeded."
+      "evidence": "- button \"TARGET\" [ref=e5] | - element is inert"
     },
     {
       "pattern": "modal-inert-aria-hidden",
@@ -286,7 +286,7 @@
       "named": false,
       "ref": "e4",
       "click": "timeout",
-      "evidence": "- button [ref=e4]: TARGET | TimeoutError: browserBackend.callTool: Timeout 5000ms exceeded."
+      "evidence": "- button [ref=e4]: TARGET | - element is inert"
     },
     {
       "pattern": "native-dialog-showmodal",

@@ -1,5 +1,5 @@
 {
-  "collectedAt": "2026-11-23T07:38:53.994Z",
+  "collectedAt": "2026-11-23T09:28:59.504Z",
   "versions": {
     "playwrightMcp": "0.0.86",
     "chromeDevtoolsMcp": "1.13.0",
@@ -51,7 +51,7 @@
           "named": false,
           "ref": "e7",
           "click": "timeout",
-          "evidence": "- button [ref=e7]: 경기 시작 | TimeoutError: browserBackend.callTool: Timeout 5000ms exceeded.",
+          "evidence": "- button [ref=e7]: 경기 시작 | - element is inert",
           "saveButtons": 2
         },
         {
