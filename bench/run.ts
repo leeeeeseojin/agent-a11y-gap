@@ -10,6 +10,7 @@ import path from "node:path";
 import { parseArgs } from "node:util";
 import { IMPLS, type Impl } from "../probe/human.js";
 import { TMP, devtoolsMcpArgs, playwrightMcpArgs } from "../probe/lib/mcp.js";
+import { classifyClickError } from "../probe/parse.js";
 import { startServer } from "../probe/serve.js";
 import { runClaude, type ToolCall } from "./claude.js";
 import { TASKS, outcomeOf, type ModalState } from "./tasks.js";
@@ -49,9 +50,16 @@ function agentSetup() {
   };
 }
 
-/** 배경 요소를 누르려다 막힌 흔적. 1층에서 본 오류 문장들로 센다. */
+/**
+ * 배경 요소를 누르려다 막힌 흔적. 1층과 같은 분류 함수를 써서 가로막힘과 시간 초과만 센다.
+ * inert 배경은 "element is inert"로 기다리다 시간 초과가 나므로 timeout 쪽으로 들어간다.
+ */
 function blockedClicks(calls: ToolCall[]): number {
-  return calls.filter((c) => /click/i.test(c.name) && c.isError && /intercepts pointer events|Timeout|did not become interactive/i.test(c.resultPreview)).length;
+  return calls.filter((c) => {
+    if (!/click/i.test(c.name) || !c.isError) return false;
+    const kind = classifyClickError(c.resultPreview);
+    return kind === "intercepted" || kind === "timeout";
+  }).length;
 }
 
 const server = await startServer();
