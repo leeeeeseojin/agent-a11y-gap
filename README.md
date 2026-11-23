@@ -116,6 +116,7 @@ pnpm probe                # 1층: 패턴 16 × 도구 4 → runs/layer1/
 pnpm probe:design         # 3층: 구현 A~D 표 → runs/layer3/
 pnpm bench --model claude-haiku-5-5 --impl B --task settings-then-start --reps 1   # 2층 (모델 비용 발생)
 pnpm bench --agent antigravity --model gpt-oss-120b-medium --impl B --reps 1       # 2층, Antigravity CLI로
+pnpm bench --agent api --model openai/gpt-oss-120b --impl B --reps 1              # 2층, OpenAI 호환 API로 (키는 .env)
 pnpm import:intentguard --from ../intentguard
 ```
 
