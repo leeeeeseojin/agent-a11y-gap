@@ -48,11 +48,19 @@ export function classifyClickError(message: string): "intercepted" | "timeout" |
   return "error";
 }
 
-/** 오류 응답에서 원인이 드러나는 한 줄. "### Error" 같은 머리글과 터미널 색 코드는 뺀다. */
+/**
+ * 오류 응답에서 원인이 드러나는 한 줄. "### Error" 같은 머리글과 터미널 색 코드는 뺀다.
+ * 시간 초과는 그 자체보다 Playwright가 무엇을 기다렸는지가 중요하다. 1.65부터 inert 요소는 로케이터에서
+ * 걸러지지 않고 클릭할 때 "element is inert"로 기다리게 되었으므로(Playwright #43792) 그 줄을 먼저 고른다.
+ */
 export function errorLine(text: string): string {
   const lines = meaningfulLines(text);
   const pick =
-    lines.find((l) => /intercepts pointer events/i.test(l)) ?? lines.find((l) => /error|timeout|not found|did not/i.test(l)) ?? lines[0] ?? "";
+    lines.find((l) => /intercepts pointer events/i.test(l)) ??
+    lines.find((l) => /element is inert/i.test(l)) ??
+    lines.find((l) => /error|timeout|not found|did not/i.test(l)) ??
+    lines[0] ??
+    "";
   return pick.slice(0, 200);
 }
 
