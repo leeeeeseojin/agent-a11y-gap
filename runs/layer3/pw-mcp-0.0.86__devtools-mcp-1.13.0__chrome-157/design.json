@@ -1,0 +1,125 @@
+{
+  "collectedAt": "2026-11-23T07:38:53.994Z",
+  "versions": {
+    "playwrightMcp": "0.0.86",
+    "chromeDevtoolsMcp": "1.13.0",
+    "playwright": "1.65.1",
+    "chrome": "157.0.8103.80",
+    "node": "v22.23.0",
+    "os": "win32 10.0.26200"
+  },
+  "rows": [
+    {
+      "impl": "A",
+      "human": {
+        "backgroundHidden": false,
+        "focusTrapped": false,
+        "escRestoresFocus": true
+      },
+      "agent": [
+        {
+          "tool": "pw-mcp-snapshot",
+          "exposed": true,
+          "named": true,
+          "ref": "e7",
+          "click": "intercepted",
+          "evidence": "- button \"경기 시작\" [ref=e7] | - <div class=\"sheet-backdrop\">…</div> intercepts pointer events",
+          "saveButtons": 2
+        },
+        {
+          "tool": "devtools-mcp-snapshot",
+          "exposed": true,
+          "named": true,
+          "ref": "1_5",
+          "click": "no-effect",
+          "evidence": "uid=1_5 button \"경기 시작\" | Successfully clicked on the element",
+          "saveButtons": 2
+        }
+      ]
+    },
+    {
+      "impl": "B",
+      "human": {
+        "backgroundHidden": true,
+        "focusTrapped": true,
+        "escRestoresFocus": true
+      },
+      "agent": [
+        {
+          "tool": "pw-mcp-snapshot",
+          "exposed": true,
+          "named": false,
+          "ref": "e7",
+          "click": "timeout",
+          "evidence": "- button [ref=e7]: 경기 시작 | TimeoutError: browserBackend.callTool: Timeout 5000ms exceeded.",
+          "saveButtons": 2
+        },
+        {
+          "tool": "devtools-mcp-snapshot",
+          "exposed": false,
+          "named": false,
+          "ref": null,
+          "click": "not-attempted",
+          "evidence": "",
+          "saveButtons": 1
+        }
+      ]
+    },
+    {
+      "impl": "C",
+      "human": {
+        "backgroundHidden": true,
+        "focusTrapped": true,
+        "escRestoresFocus": true
+      },
+      "agent": [
+        {
+          "tool": "pw-mcp-snapshot",
+          "exposed": true,
+          "named": true,
+          "ref": "e7",
+          "click": "intercepted",
+          "evidence": "- button \"경기 시작\" [ref=e7] | - <dialog open=\"\" class=\"sheet\" aria-labelledby=\"sheet-title\">…</dialog> intercepts pointer events",
+          "saveButtons": 2
+        },
+        {
+          "tool": "devtools-mcp-snapshot",
+          "exposed": false,
+          "named": false,
+          "ref": null,
+          "click": "not-attempted",
+          "evidence": "",
+          "saveButtons": 1
+        }
+      ]
+    },
+    {
+      "impl": "D",
+      "human": {
+        "backgroundHidden": true,
+        "focusTrapped": true,
+        "escRestoresFocus": true
+      },
+      "agent": [
+        {
+          "tool": "pw-mcp-snapshot",
+          "exposed": false,
+          "named": false,
+          "ref": null,
+          "click": "not-attempted",
+          "evidence": "",
+          "saveButtons": 1
+        },
+        {
+          "tool": "devtools-mcp-snapshot",
+          "exposed": false,
+          "named": false,
+          "ref": null,
+          "click": "not-attempted",
+          "evidence": "",
+          "saveButtons": 1
+        }
+      ]
+    }
+  ]
+}
