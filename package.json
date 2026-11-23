@@ -7,7 +7,7 @@
   "description": "브라우저 MCP가 에이전트에게 주는 스냅샷과 사람이 받는 접근성 트리의 차이를 측정한다",
   "scripts": {
     "serve": "tsx probe/serve.ts",
-    "probe": "tsx probe/run.ts",
+    "probe": "tsx probe/layer1.ts",
     "bench": "tsx bench/run.ts",
     "import:intentguard": "tsx analysis/import-intentguard.ts",
     "typecheck": "tsc --noEmit",

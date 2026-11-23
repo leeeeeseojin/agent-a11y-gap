@@ -12,18 +12,31 @@ export type Tool = "cdp-ax-tree" | "pw-get-by-role" | "pw-mcp-snapshot" | "devto
  */
 export type ClickOutcome = "clicked" | "intercepted" | "timeout" | "no-effect" | "stale-ref" | "error" | "not-attempted";
 
-export interface Observation {
-  pattern: string;
+export interface Reading {
   tool: Tool;
-  /** TARGET 텍스트가 도구 출력 어디든 나타나는가 */
+  /** 대상 텍스트가 도구 출력 어디든 나타나는가 */
   exposed: boolean;
-  /** button 역할에 접근성 이름 TARGET이 붙어 있는가 (이름 없이 텍스트만 남으면 false) */
+  /** button 역할에 대상 이름이 접근성 이름으로 붙어 있는가 (텍스트만 남으면 false) */
   named: boolean;
   /** 도구가 그 요소를 가리키는 클릭용 ref/uid를 줬는가 */
   ref: string | null;
   click: ClickOutcome;
   /** 판정 근거가 된 도구 출력 한 줄 또는 오류 요약 */
   evidence: string;
+}
+
+export interface Observation extends Reading {
+  pattern: string;
+}
+
+/** 수집기 하나가 페이지 하나에서 확인할 대상 */
+export interface ProbeTarget {
+  url: string;
+  /** 사람에게는 숨겨져 있어야 하는 버튼의 텍스트 (패턴 페이지는 TARGET) */
+  name: string;
+  /** 그 버튼이 실제로 눌렸는가. 도구의 응답이 아니라 서버 기록으로 판정한다 */
+  wasClicked: () => Promise<boolean>;
+  saveSnapshot?: (tool: Tool, text: string) => void;
 }
 
 export interface Versions {
