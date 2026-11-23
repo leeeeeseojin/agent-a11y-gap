@@ -1,5 +1,5 @@
 {
-  "collectedAt": "2026-11-23T09:46:23.810Z",
+  "collectedAt": "2026-11-23T17:42:59.595Z",
   "versions": {
     "playwrightMcp": "0.0.86",
     "chromeDevtoolsMcp": "1.13.0",
@@ -116,6 +116,36 @@
           "click": "not-attempted",
           "evidence": "",
           "saveButtons": 1
+        },
+        {
+          "tool": "devtools-mcp-snapshot",
+          "exposed": false,
+          "named": false,
+          "marked": false,
+          "ref": null,
+          "click": "not-attempted",
+          "evidence": "",
+          "saveButtons": 1
+        }
+      ]
+    },
+    {
+      "impl": "E",
+      "human": {
+        "backgroundHidden": true,
+        "focusTrapped": true,
+        "escRestoresFocus": true
+      },
+      "agent": [
+        {
+          "tool": "pw-mcp-snapshot",
+          "exposed": true,
+          "named": false,
+          "marked": true,
+          "ref": "e7",
+          "click": "timeout",
+          "evidence": "- button [ref=e7]: 경기 시작 | - element is inert",
+          "saveButtons": 2
         },
         {
           "tool": "devtools-mcp-snapshot",
