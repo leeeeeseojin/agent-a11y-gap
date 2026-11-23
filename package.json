@@ -8,6 +8,7 @@
   "scripts": {
     "serve": "tsx probe/serve.ts",
     "probe": "tsx probe/layer1.ts",
+    "probe:design": "tsx probe/layer3.ts",
     "bench": "tsx bench/run.ts",
     "import:intentguard": "tsx analysis/import-intentguard.ts",
     "typecheck": "tsc --noEmit",
