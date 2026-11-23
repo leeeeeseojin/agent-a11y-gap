@@ -1,5 +1,5 @@
 {
-  "collectedAt": "2026-11-23T09:27:59.746Z",
+  "collectedAt": "2026-11-23T09:45:10.498Z",
   "versions": {
     "playwrightMcp": "0.0.86",
     "chromeDevtoolsMcp": "1.13.0",
@@ -14,6 +14,27 @@
       "tool": "cdp-ax-tree",
       "exposed": false,
       "named": false,
+      "marked": false,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": ""
+    },
+    {
+      "pattern": "aria-hidden-self",
+      "tool": "cdp-ax-tree",
+      "exposed": false,
+      "named": false,
+      "marked": false,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": ""
+    },
+    {
+      "pattern": "aria-hidden-named-region",
+      "tool": "cdp-ax-tree",
+      "exposed": false,
+      "named": false,
+      "marked": false,
       "ref": null,
       "click": "not-attempted",
       "evidence": ""
@@ -23,6 +44,7 @@
       "tool": "cdp-ax-tree",
       "exposed": false,
       "named": false,
+      "marked": false,
       "ref": null,
       "click": "not-attempted",
       "evidence": ""
@@ -32,6 +54,7 @@
       "tool": "cdp-ax-tree",
       "exposed": false,
       "named": false,
+      "marked": false,
       "ref": null,
       "click": "not-attempted",
       "evidence": ""
@@ -41,6 +64,7 @@
       "tool": "cdp-ax-tree",
       "exposed": false,
       "named": false,
+      "marked": false,
       "ref": null,
       "click": "not-attempted",
       "evidence": ""
@@ -50,6 +74,7 @@
       "tool": "cdp-ax-tree",
       "exposed": false,
       "named": false,
+      "marked": false,
       "ref": null,
       "click": "not-attempted",
       "evidence": ""
@@ -59,6 +84,7 @@
       "tool": "cdp-ax-tree",
       "exposed": false,
       "named": false,
+      "marked": false,
       "ref": null,
       "click": "not-attempted",
       "evidence": ""
@@ -68,6 +94,7 @@
       "tool": "cdp-ax-tree",
       "exposed": true,
       "named": true,
+      "marked": false,
       "ref": null,
       "click": "not-attempted",
       "evidence": "button \"TARGET\""
@@ -77,6 +104,7 @@
       "tool": "cdp-ax-tree",
       "exposed": true,
       "named": true,
+      "marked": false,
       "ref": null,
       "click": "not-attempted",
       "evidence": "button \"TARGET\""
@@ -86,6 +114,7 @@
       "tool": "cdp-ax-tree",
       "exposed": true,
       "named": true,
+      "marked": false,
       "ref": null,
       "click": "not-attempted",
       "evidence": "button \"TARGET\""
@@ -95,6 +124,7 @@
       "tool": "cdp-ax-tree",
       "exposed": false,
       "named": false,
+      "marked": false,
       "ref": null,
       "click": "not-attempted",
       "evidence": ""
@@ -104,6 +134,7 @@
       "tool": "cdp-ax-tree",
       "exposed": true,
       "named": true,
+      "marked": false,
       "ref": null,
       "click": "not-attempted",
       "evidence": "button \"TARGET\""
@@ -113,6 +144,7 @@
       "tool": "cdp-ax-tree",
       "exposed": false,
       "named": false,
+      "marked": false,
       "ref": null,
       "click": "not-attempted",
       "evidence": ""
@@ -122,6 +154,7 @@
       "tool": "cdp-ax-tree",
       "exposed": false,
       "named": false,
+      "marked": false,
       "ref": null,
       "click": "not-attempted",
       "evidence": ""
@@ -131,6 +164,7 @@
       "tool": "cdp-ax-tree",
       "exposed": false,
       "named": false,
+      "marked": false,
       "ref": null,
       "click": "not-attempted",
       "evidence": ""
@@ -140,6 +174,27 @@
       "tool": "pw-get-by-role",
       "exposed": false,
       "named": false,
+      "marked": false,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": ""
+    },
+    {
+      "pattern": "aria-hidden-self",
+      "tool": "pw-get-by-role",
+      "exposed": false,
+      "named": false,
+      "marked": false,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": ""
+    },
+    {
+      "pattern": "aria-hidden-named-region",
+      "tool": "pw-get-by-role",
+      "exposed": false,
+      "named": false,
+      "marked": false,
       "ref": null,
       "click": "not-attempted",
       "evidence": ""
@@ -149,6 +204,7 @@
       "tool": "pw-get-by-role",
       "exposed": true,
       "named": true,
+      "marked": false,
       "ref": "getByRole",
       "click": "timeout",
       "evidence": "getByRole('button', { name: 'TARGET' }) → 1개 | - element is inert"
@@ -158,6 +214,7 @@
       "tool": "pw-get-by-role",
       "exposed": false,
       "named": false,
+      "marked": false,
       "ref": null,
       "click": "not-attempted",
       "evidence": ""
@@ -167,6 +224,7 @@
       "tool": "pw-get-by-role",
       "exposed": true,
       "named": true,
+      "marked": false,
       "ref": "getByRole",
       "click": "intercepted",
       "evidence": "getByRole('button', { name: 'TARGET' }) → 1개 | - <dialog id=\"d\" open=\"\" aria-label=\"설정\">…</dialog> intercepts pointer events"
@@ -176,6 +234,7 @@
       "tool": "pw-get-by-role",
       "exposed": false,
       "named": false,
+      "marked": false,
       "ref": null,
       "click": "not-attempted",
       "evidence": ""
@@ -185,6 +244,7 @@
       "tool": "pw-get-by-role",
       "exposed": false,
       "named": false,
+      "marked": false,
       "ref": null,
       "click": "not-attempted",
       "evidence": ""
@@ -194,6 +254,7 @@
       "tool": "pw-get-by-role",
       "exposed": true,
       "named": true,
+      "marked": false,
       "ref": "getByRole",
       "click": "clicked",
       "evidence": "getByRole('button', { name: 'TARGET' }) → 1개"
@@ -203,6 +264,7 @@
       "tool": "pw-get-by-role",
       "exposed": true,
       "named": true,
+      "marked": false,
       "ref": "getByRole",
       "click": "intercepted",
       "evidence": "getByRole('button', { name: 'TARGET' }) → 1개 | - <div class=\"backdrop\">…</div> intercepts pointer events"
@@ -212,6 +274,7 @@
       "tool": "pw-get-by-role",
       "exposed": true,
       "named": true,
+      "marked": false,
       "ref": "getByRole",
       "click": "intercepted",
       "evidence": "getByRole('button', { name: 'TARGET' }) → 1개 | - <div class=\"backdrop\">…</div> intercepts pointer events"
@@ -221,6 +284,7 @@
       "tool": "pw-get-by-role",
       "exposed": false,
       "named": false,
+      "marked": false,
       "ref": null,
       "click": "not-attempted",
       "evidence": ""
@@ -230,6 +294,7 @@
       "tool": "pw-get-by-role",
       "exposed": true,
       "named": true,
+      "marked": false,
       "ref": "getByRole",
       "click": "timeout",
       "evidence": "getByRole('button', { name: 'TARGET' }) → 1개 | TimeoutError: locator.click: Timeout 3000ms exceeded."
@@ -239,6 +304,7 @@
       "tool": "pw-get-by-role",
       "exposed": false,
       "named": false,
+      "marked": false,
       "ref": null,
       "click": "not-attempted",
       "evidence": ""
@@ -248,6 +314,7 @@
       "tool": "pw-get-by-role",
       "exposed": false,
       "named": false,
+      "marked": false,
       "ref": null,
       "click": "not-attempted",
       "evidence": ""
@@ -257,6 +324,7 @@
       "tool": "pw-get-by-role",
       "exposed": false,
       "named": false,
+      "marked": false,
       "ref": null,
       "click": "not-attempted",
       "evidence": ""
@@ -266,6 +334,27 @@
       "tool": "pw-mcp-snapshot",
       "exposed": true,
       "named": false,
+      "marked": false,
+      "ref": "e5",
+      "click": "clicked",
+      "evidence": "- button [ref=e5]: TARGET"
+    },
+    {
+      "pattern": "aria-hidden-self",
+      "tool": "pw-mcp-snapshot",
+      "exposed": true,
+      "named": false,
+      "marked": true,
+      "ref": "e4",
+      "click": "clicked",
+      "evidence": "- button [aria-hidden] [ref=e4]: TARGET"
+    },
+    {
+      "pattern": "aria-hidden-named-region",
+      "tool": "pw-mcp-snapshot",
+      "exposed": true,
+      "named": false,
+      "marked": true,
       "ref": "e5",
       "click": "clicked",
       "evidence": "- button [ref=e5]: TARGET"
@@ -275,6 +364,7 @@
       "tool": "pw-mcp-snapshot",
       "exposed": true,
       "named": true,
+      "marked": false,
       "ref": "e5",
       "click": "timeout",
       "evidence": "- button \"TARGET\" [ref=e5] | - element is inert"
@@ -284,6 +374,7 @@
       "tool": "pw-mcp-snapshot",
       "exposed": true,
       "named": false,
+      "marked": false,
       "ref": "e4",
       "click": "timeout",
       "evidence": "- button [ref=e4]: TARGET | - element is inert"
@@ -293,6 +384,7 @@
       "tool": "pw-mcp-snapshot",
       "exposed": true,
       "named": true,
+      "marked": false,
       "ref": "e3",
       "click": "intercepted",
       "evidence": "- button \"TARGET\" [ref=e3] | - <dialog id=\"d\" open=\"\" aria-label=\"설정\">…</dialog> intercepts pointer events"
@@ -302,6 +394,7 @@
       "tool": "pw-mcp-snapshot",
       "exposed": false,
       "named": false,
+      "marked": false,
       "ref": null,
       "click": "not-attempted",
       "evidence": ""
@@ -311,6 +404,7 @@
       "tool": "pw-mcp-snapshot",
       "exposed": false,
       "named": false,
+      "marked": false,
       "ref": null,
       "click": "not-attempted",
       "evidence": ""
@@ -320,6 +414,7 @@
       "tool": "pw-mcp-snapshot",
       "exposed": true,
       "named": true,
+      "marked": false,
       "ref": "e5",
       "click": "clicked",
       "evidence": "- button \"TARGET\" [ref=e5]"
@@ -329,6 +424,7 @@
       "tool": "pw-mcp-snapshot",
       "exposed": true,
       "named": true,
+      "marked": false,
       "ref": "e3",
       "click": "intercepted",
       "evidence": "- button \"TARGET\" [ref=e3] | - <div class=\"backdrop\">…</div> intercepts pointer events"
@@ -338,6 +434,7 @@
       "tool": "pw-mcp-snapshot",
       "exposed": true,
       "named": true,
+      "marked": false,
       "ref": "e3",
       "click": "intercepted",
       "evidence": "- button \"TARGET\" [ref=e3] | - <div class=\"backdrop\">…</div> intercepts pointer events"
@@ -347,6 +444,7 @@
       "tool": "pw-mcp-snapshot",
       "exposed": false,
       "named": false,
+      "marked": false,
       "ref": null,
       "click": "not-attempted",
       "evidence": ""
@@ -356,6 +454,7 @@
       "tool": "pw-mcp-snapshot",
       "exposed": true,
       "named": true,
+      "marked": false,
       "ref": "e5",
       "click": "timeout",
       "evidence": "- button \"TARGET\" [ref=e5] | TimeoutError: browserBackend.callTool: Timeout 5000ms exceeded."
@@ -365,6 +464,7 @@
       "tool": "pw-mcp-snapshot",
       "exposed": false,
       "named": false,
+      "marked": false,
       "ref": null,
       "click": "not-attempted",
       "evidence": ""
@@ -374,6 +474,7 @@
       "tool": "pw-mcp-snapshot",
       "exposed": false,
       "named": false,
+      "marked": false,
       "ref": null,
       "click": "not-attempted",
       "evidence": ""
@@ -383,6 +484,7 @@
       "tool": "pw-mcp-snapshot",
       "exposed": false,
       "named": false,
+      "marked": false,
       "ref": null,
       "click": "not-attempted",
       "evidence": ""
@@ -392,6 +494,27 @@
       "tool": "devtools-mcp-snapshot",
       "exposed": false,
       "named": false,
+      "marked": false,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": ""
+    },
+    {
+      "pattern": "aria-hidden-self",
+      "tool": "devtools-mcp-snapshot",
+      "exposed": false,
+      "named": false,
+      "marked": false,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": ""
+    },
+    {
+      "pattern": "aria-hidden-named-region",
+      "tool": "devtools-mcp-snapshot",
+      "exposed": false,
+      "named": false,
+      "marked": false,
       "ref": null,
       "click": "not-attempted",
       "evidence": ""
@@ -401,6 +524,7 @@
       "tool": "devtools-mcp-snapshot",
       "exposed": false,
       "named": false,
+      "marked": false,
       "ref": null,
       "click": "not-attempted",
       "evidence": ""
@@ -410,6 +534,7 @@
       "tool": "devtools-mcp-snapshot",
       "exposed": false,
       "named": false,
+      "marked": false,
       "ref": null,
       "click": "not-attempted",
       "evidence": ""
@@ -419,6 +544,7 @@
       "tool": "devtools-mcp-snapshot",
       "exposed": false,
       "named": false,
+      "marked": false,
       "ref": null,
       "click": "not-attempted",
       "evidence": ""
@@ -428,6 +554,7 @@
       "tool": "devtools-mcp-snapshot",
       "exposed": false,
       "named": false,
+      "marked": false,
       "ref": null,
       "click": "not-attempted",
       "evidence": ""
@@ -437,6 +564,7 @@
       "tool": "devtools-mcp-snapshot",
       "exposed": false,
       "named": false,
+      "marked": false,
       "ref": null,
       "click": "not-attempted",
       "evidence": ""
@@ -446,6 +574,7 @@
       "tool": "devtools-mcp-snapshot",
       "exposed": true,
       "named": true,
+      "marked": false,
       "ref": "1_3",
       "click": "clicked",
       "evidence": "uid=1_3 button \"TARGET\""
@@ -455,6 +584,7 @@
       "tool": "devtools-mcp-snapshot",
       "exposed": true,
       "named": true,
+      "marked": false,
       "ref": "1_2",
       "click": "no-effect",
       "evidence": "uid=1_2 button \"TARGET\" | Successfully clicked on the element"
@@ -464,6 +594,7 @@
       "tool": "devtools-mcp-snapshot",
       "exposed": true,
       "named": true,
+      "marked": false,
       "ref": "1_2",
       "click": "no-effect",
       "evidence": "uid=1_2 button \"TARGET\" | Successfully clicked on the element"
@@ -473,6 +604,7 @@
       "tool": "devtools-mcp-snapshot",
       "exposed": false,
       "named": false,
+      "marked": false,
       "ref": null,
       "click": "not-attempted",
       "evidence": ""
@@ -482,6 +614,7 @@
       "tool": "devtools-mcp-snapshot",
       "exposed": true,
       "named": true,
+      "marked": false,
       "ref": "1_3",
       "click": "timeout",
       "evidence": "uid=1_3 button \"TARGET\" | Error: Failed to interact with the element with uid 1_3. The element did not become interactive within the configured timeout."
@@ -491,6 +624,7 @@
       "tool": "devtools-mcp-snapshot",
       "exposed": false,
       "named": false,
+      "marked": false,
       "ref": null,
       "click": "not-attempted",
       "evidence": ""
@@ -500,6 +634,7 @@
       "tool": "devtools-mcp-snapshot",
       "exposed": false,
       "named": false,
+      "marked": false,
       "ref": null,
       "click": "not-attempted",
       "evidence": ""
@@ -509,6 +644,7 @@
       "tool": "devtools-mcp-snapshot",
       "exposed": false,
       "named": false,
+      "marked": false,
       "ref": null,
       "click": "not-attempted",
       "evidence": ""
