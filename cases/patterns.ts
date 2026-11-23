@@ -1,5 +1,5 @@
-// 1층에서 비교하는 숨김 패턴 목록. 페이지는 cases/patterns/<id>.html.
-// preliminary: 11/23 예비 재현에서 이미 돌려 본 9종. 나머지 5종은 이번에 더한 것.
+// 1층에서 비교하는 숨김 패턴 목록이다. 페이지는 cases/patterns/<id>.html에 있다.
+// preliminary가 true인 9종은 예비 재현에서 이미 돌려 본 것이고, 나머지 5종은 이번에 더했다.
 export interface Pattern {
   id: string;
   label: string;

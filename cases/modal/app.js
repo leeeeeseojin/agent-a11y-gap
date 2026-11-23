@@ -182,5 +182,5 @@ function renderStatus() {
 
 renderHome();
 sync();
-// ?open=1: 시트가 열린 상태에서 시작하는 과제용
+// ?open=1이면 시트가 열린 상태로 시작한다. 2층의 일부 과제가 이 상태에서 출발한다.
 if (params.get("open") === "1") openSheet(document.getElementById("open-settings"));

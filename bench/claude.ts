@@ -35,7 +35,7 @@ function killTree(pid: number) {
     if (process.platform === "win32") execFileSync("taskkill", ["/pid", String(pid), "/T", "/F"], { stdio: "ignore" });
     else process.kill(-pid, "SIGKILL");
   } catch {
-    // 이미 끝난 프로세스
+    // 이미 끝난 프로세스면 할 일이 없다
   }
 }
 

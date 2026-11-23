@@ -1,4 +1,4 @@
-// Chrome DevTools MCP: 같은 Chrome을 다른 MCP로 읽으면 결과가 달라지는지 보기 위한 비교 대상.
+// Chrome DevTools MCP는 같은 Chrome을 다른 MCP로 읽으면 결과가 달라지는지 보기 위한 비교 대상이다.
 // take_snapshot의 uid를 click으로 누른다. 페이지는 pageId로 지정해야 해서 list_pages로 먼저 찾는다.
 import type { McpSession } from "../lib/mcp.js";
 import { classifyClickError, errorLine, firstLine, parseDevtoolsSnapshot, reading } from "../parse.js";
@@ -23,7 +23,7 @@ export async function readDevtoolsMcp(mcp: McpSession, target: ProbeTarget): Pro
 
 async function selectedPageId(mcp: McpSession): Promise<number> {
   const res = await mcp.call("list_pages", {});
-  // "1: http://... [selected]" 형식
+  // 목록은 "1: http://... [selected]" 형식이다
   const line = res.text.split(/\r?\n/).find((l) => l.includes("selected")) ?? res.text;
   return Number(line.match(/(\d+):/)?.[1] ?? 1);
 }

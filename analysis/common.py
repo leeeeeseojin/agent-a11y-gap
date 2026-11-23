@@ -16,7 +16,7 @@ RUNS = ROOT / "runs"
 DATA = ROOT / "analysis" / "data"
 FIGURES = ROOT / "report" / "figures"
 
-# 도구와 패턴은 README·리포트 표와 같은 순서로 둔다. 사람 기준(CDP 트리)을 맨 왼쪽에.
+# 도구와 패턴은 README·리포트 표와 같은 순서로 둔다. 사람 기준(CDP 트리)은 맨 왼쪽에 둔다.
 TOOLS = ["cdp-ax-tree", "pw-get-by-role", "pw-mcp-snapshot", "devtools-mcp-snapshot"]
 TOOL_LABELS = {
     "cdp-ax-tree": "Chrome AX tree\n(human baseline)",
@@ -26,7 +26,7 @@ TOOL_LABELS = {
 }
 
 # 노출 상태는 순서가 있는 세 단계라 한 가지 색(파랑)의 밝기로만 구분한다.
-# 숨김은 "없음"이라 색 대신 회색 바탕.
+# 숨김은 "없음"이라 색 대신 회색 바탕을 쓴다.
 STATE_COLORS = {"hidden": "#f0efec", "text-only": "#86b6ef", "named": "#1c5cab"}
 STATE_LABELS = {"hidden": "hidden", "text-only": "exposed, text only (no name)", "named": "exposed with name"}
 INK = "#1b1b1b"

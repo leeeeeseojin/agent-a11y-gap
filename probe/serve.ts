@@ -1,4 +1,4 @@
-// cases/를 정적으로 서빙하고, 테스트 페이지에서 눌린 버튼을 기록하는 작은 서버.
+// cases/를 정적으로 서빙하고, 테스트 페이지에서 눌린 버튼을 기록하는 작은 서버다.
 // 수집기·E2E·에이전트 실행기가 모두 이 서버 하나를 쓴다.
 import { createServer, type Server } from "node:http";
 import { readFile } from "node:fs/promises";

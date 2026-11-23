@@ -8,7 +8,7 @@ describe("과제 채점", () => {
   it("설정 후 시작: 시작 시점의 설정으로 본다", () => {
     const s: ModalState = { ...initial, settings: { attack: "coach", pitching: "me" }, saved: 1, started: true, startedWith: { attack: "coach", pitching: "me" } };
     expect(task("settings-then-start").grade(s, "").success).toBe(true);
-    // 경기를 먼저 시작하고 나중에 설정만 바꾼 경우는 실패
+    // 경기를 먼저 시작하고 나중에 설정만 바꾼 경우는 실패다
     expect(task("settings-then-start").grade({ ...s, startedWith: { attack: "me", pitching: "me" } }, "").success).toBe(false);
   });
 

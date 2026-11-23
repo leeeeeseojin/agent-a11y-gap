@@ -1,4 +1,4 @@
-// Playwright MCP: IntentGuard에서 에이전트가 실제로 쓴 경로.
+// Playwright MCP는 IntentGuard에서 에이전트가 실제로 쓴 경로다.
 // browser_snapshot이 대상 버튼을 보여주면, 에이전트가 할 법한 대로 그 ref를 browser_click으로 누른다.
 import type { McpSession } from "../lib/mcp.js";
 import { classifyClickError, errorLine, firstLine, parsePlaywrightSnapshot, reading } from "../parse.js";

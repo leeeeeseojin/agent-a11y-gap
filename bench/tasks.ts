@@ -31,7 +31,7 @@ function check(items: [boolean, string][]): Grade {
 
 export const TASKS: Task[] = [
   {
-    // MY DUGOUT에서 GPT-OSS가 실패한 과제를 줄인 것
+    // MY DUGOUT에서 GPT-OSS가 실패한 과제를 줄인 것이다
     id: "settings-then-start",
     prompt: "운영 방식에서 공격 작전만 코치에게 맡기고 저장한 다음, 경기를 시작해줘.",
     startOpen: false,

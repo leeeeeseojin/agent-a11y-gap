@@ -1,4 +1,4 @@
-// 기준선: Chrome이 스크린 리더에 넘기는 전체 접근성 트리 (CDP Accessibility.getFullAXTree).
+// 기준선은 Chrome이 스크린 리더에 넘기는 전체 접근성 트리(CDP Accessibility.getFullAXTree)다.
 // 이 프로젝트에서 "사람 기준"은 이 트리에서 ignored가 아닌가로 정한다.
 import type { Browser } from "playwright";
 import { NOT_FOUND, reading, type Found } from "../parse.js";

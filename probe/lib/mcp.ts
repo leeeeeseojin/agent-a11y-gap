@@ -1,4 +1,4 @@
-// MCP 서버를 stdio로 띄우고 도구를 부르는 얇은 클라이언트.
+// MCP 서버를 stdio로 띄우고 도구를 부르는 얇은 클라이언트다.
 // 에이전트가 쓰는 것과 같은 서버를 LLM 없이 직접 호출해서, 에이전트가 "받는 화면"을 그대로 본다.
 import { mkdirSync } from "node:fs";
 import path from "node:path";
@@ -35,7 +35,7 @@ export async function openMcp(args: string[]): Promise<McpSession> {
   };
 }
 
-/** 2층에서 에이전트에게 붙일 때도 같은 옵션을 쓴다. --isolated는 실행마다 새 프로필. */
+/** 2층에서 에이전트에게 붙일 때도 같은 옵션을 쓴다. --isolated는 실행마다 새 프로필을 쓴다. */
 export function playwrightMcpArgs(): string[] {
   const out = path.join(TMP, "pw-mcp");
   mkdirSync(out, { recursive: true });

@@ -1,6 +1,6 @@
-# 리포트 (작성 예정, 12/11 ~ 12/12)
+# 리포트 (작성 예정)
 
-2~4쪽. 그림은 `figures/`에 있고 모두 `analysis/` 노트북이 만든다.
+분량은 2~4쪽이다. 그림은 `figures/`에 있고 모두 `analysis/` 노트북이 만든다.
 
 1. 문제: 사람에게 숨긴 배경이 에이전트 스냅샷에는 남는다 (MY DUGOUT 사례, `docs/origin.md`)
 2. RQ1: 숨김 패턴 14종 × 도구 4종 (`figures/layer1-matrix.png`)

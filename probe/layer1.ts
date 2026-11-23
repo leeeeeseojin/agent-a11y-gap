@@ -18,7 +18,7 @@ import type { Layer1Result, Observation, ProbeTarget, Reading } from "./types.js
 const only = process.argv.slice(2);
 const patterns = only.length ? PATTERNS.filter((p) => only.includes(p.id)) : PATTERNS;
 
-// 포트를 고정해 스냅샷에 찍히는 URL이 실행마다 바뀌지 않게 한다 (버전 간 diff를 읽기 쉽게)
+// 포트를 고정해 스냅샷에 찍히는 URL이 실행마다 바뀌지 않게 한다. 버전 간 diff를 읽기 쉽게 하기 위해서다.
 const server = await startServer(Number(process.env.PROBE_PORT ?? 4310));
 const browser = await launchChrome();
 const versions = collectVersions(browser);
@@ -43,7 +43,7 @@ async function observe(pattern: string, read: (target: ProbeTarget) => Promise<R
 try {
   for (const p of patterns) await observe(p.id, (t) => readCdpTree(browser, t));
   for (const p of patterns) await observe(p.id, (t) => readGetByRole(browser, t));
-  // MCP 서버는 패턴마다 새로 띄운다. 앞 패턴의 페이지 상태나 ref 번호가 섞이지 않게.
+  // MCP 서버는 패턴마다 새로 띄운다. 앞 패턴의 페이지 상태나 ref 번호가 섞이지 않게 하기 위해서다.
   for (const p of patterns) await observe(p.id, (t) => withMcp(playwrightMcpArgs(), (mcp) => readPlaywrightMcp(mcp, t)));
   for (const p of patterns) await observe(p.id, (t) => withMcp(devtoolsMcpArgs(), (mcp) => readDevtoolsMcp(mcp, t)));
 } finally {

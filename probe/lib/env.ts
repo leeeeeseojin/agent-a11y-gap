@@ -8,7 +8,7 @@ import type { CaseServer } from "../serve.js";
 import type { Tool, Versions } from "../types.js";
 import { pkgDir } from "./mcp.js";
 
-/** 모든 도구가 같은 브라우저(설치된 Chrome 안정판, headless)를 쓰게 맞춘다. 차이가 도구에서만 나오게 하려고. */
+/** 모든 도구가 같은 브라우저(설치된 Chrome 안정판, headless)를 쓰게 맞춘다. 차이가 도구에서만 나오게 하기 위해서다. */
 export function launchChrome(): Promise<Browser> {
   return chromium.launch({ channel: "chrome", headless: true });
 }

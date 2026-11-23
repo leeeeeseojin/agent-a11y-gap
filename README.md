@@ -29,12 +29,12 @@
 | RQ2 | 그 차이가 에이전트의 성공률, 거짓 성공 보고, 턴 수에 영향을 주는가? | 과제·채점·실행기 준비, 실행 전 |
 | RQ3 | 사람과 에이전트 모두에게 배경을 숨기는 설계는 무엇인가? | LLM 없는 부분 완료 |
 
-계획 전체는 [docs/plan.md](docs/plan.md).
+계획 전체는 [docs/plan.md](docs/plan.md)에 있다.
 
 ## 지금까지의 결과
 
-@playwright/mcp 0.0.86, chrome-devtools-mcp 1.13.0, Playwright 1.65.1, Chrome 157 (headless, Windows 11).
-같은 조건으로 두 번 돌려 결과가 같음을 확인했다.
+측정 환경은 @playwright/mcp 0.0.86, chrome-devtools-mcp 1.13.0, Playwright 1.65.1, Chrome 157(headless, Windows 11)이다.
+같은 조건으로 두 번 돌려 결과가 같음을 확인했고, CI(Linux, Chrome 158)에서도 달라진 칸이 없었다.
 
 ### 1층: 어긋나는 곳은 속성으로 숨긴 패턴뿐이다
 
@@ -77,8 +77,8 @@ DevTools MCP에서는 B·C·D가 모두 배경을 숨긴다. D의 비용은 설�
 ### IntentGuard 기록 재집계
 
 IntentGuard README의 수치를 이 레포의 pandas 파이프라인으로 다시 계산했고, 모두 같게 나왔다.
-통제 실험 90회의 확인된 성공(MCP 22/30, Web v1 16/30, Web v2 30/30)과 평균 턴, 모델 4종 80회(v1 20/40 → v2 33/40),
-MY DUGOUT 수정 전후 16회(6/8 → 6/8).
+통제 실험 90회의 확인된 성공(MCP 22/30, Web v1 16/30, Web v2 30/30)과 평균 턴, 모델 4종 80회의 확인된 성공(v1 20/40 → v2 33/40),
+MY DUGOUT 수정 전후 16회의 성공(6/8 → 6/8)이 모두 원래 수치와 같다.
 MY DUGOUT 실패 2회의 내용은 수정 전후로 달랐다. 수정 후에는 설정 저장은 채웠지만, 수정 전에는 없던
 "스냅샷의 배경 ref를 눌렀다가 기다리다 끝남"이 생겼다.
 
