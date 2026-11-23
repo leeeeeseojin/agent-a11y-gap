@@ -101,7 +101,8 @@ MY DUGOUT 실패 2회의 내용은 수정 전후로 달랐다. 수정 후에는 
 
 ### 2층: 준비됨
 
-과제 4개, 서버 상태 채점, Claude Code 실행기를 만들고 채점 규칙은 단위 테스트로 확인했다. 에이전트 실행은 아직 하지 않았다.
+과제 4개, 서버 상태 채점, 실행기 두 개(Claude 모델은 Claude Code, Gemini·GPT-OSS는 Antigravity CLI)를 만들고
+채점 규칙은 단위 테스트로 확인했다. 두 실행기 모두 1회씩 시험 실행만 했고, 본실험은 아직 하지 않았다.
 
 ## 실행
 
@@ -114,6 +115,7 @@ pnpm test:e2e             # 모달 구현 A~D 사람 기준 E2E
 pnpm probe                # 1층: 패턴 16 × 도구 4 → runs/layer1/
 pnpm probe:design         # 3층: 구현 A~D 표 → runs/layer3/
 pnpm bench --model claude-haiku-5-5 --impl B --task settings-then-start --reps 1   # 2층 (모델 비용 발생)
+pnpm bench --agent antigravity --model gpt-oss-120b-medium --impl B --reps 1       # 2층, Antigravity CLI로
 pnpm import:intentguard --from ../intentguard
 ```
 
