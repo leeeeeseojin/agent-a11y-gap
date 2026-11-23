@@ -23,10 +23,11 @@ export interface McpSession {
   close(): Promise<void>;
 }
 
-export async function openMcp(args: string[]): Promise<McpSession> {
+/** cwd를 주면 MCP 서버를 그 폴더에서 띄운다. 모델이 상대 경로로 파일을 저장해도 레포 루트가 어지러워지지 않는다 */
+export async function openMcp(args: string[], cwd?: string): Promise<McpSession> {
   const client = new Client({ name: "agent-a11y-gap-probe", version: "0.1.0" });
   const env = { ...process.env, CHROME_DEVTOOLS_MCP_NO_USAGE_STATISTICS: "1" } as Record<string, string>;
-  await client.connect(new StdioClientTransport({ command: process.execPath, args, stderr: "ignore", env }));
+  await client.connect(new StdioClientTransport({ command: process.execPath, args, stderr: "ignore", env, cwd }));
 
   return {
     async call(name, input) {

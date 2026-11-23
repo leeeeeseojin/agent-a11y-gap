@@ -7,9 +7,9 @@
 // B와 D 비교처럼 같은 실행기 안의 비교에만 쓰고, 결과에는 실행기를 구분해 적는다.
 //
 // 키는 레포 루트의 .env에 OPENROUTER_API_KEY=... 로 넣는다(.gitignore에 있다).
-import { createWriteStream, existsSync, readFileSync } from "node:fs";
+import { createWriteStream, existsSync, mkdirSync, readFileSync } from "node:fs";
 import path from "node:path";
-import { openMcp, type McpTool } from "../../probe/lib/mcp.js";
+import { TMP, openMcp, type McpTool } from "../../probe/lib/mcp.js";
 import type { AgentInput, AgentRun, BrowserServer, ToolCall } from "./types.js";
 
 /** 한 실행에서 모델 응답을 받는 최대 횟수. 다른 실행기는 시간 제한만 있지만, 여기서는 루프를 직접 돌리므로 안전장치를 둔다 */
@@ -88,7 +88,10 @@ export async function runOpenAiCompat(o: AgentInput): Promise<AgentRun> {
     return result({ exitReason: "error", numTurns: 0, toolCalls: [], finalAnswer: "", model: "", limit: "quota" });
   }
 
-  const mcp = await openMcp(o.browser.args);
+  // GPT-OSS는 browser_snapshot에 파일 이름을 넣어 상대 경로로 저장하곤 해서, MCP를 .tmp 아래에서 띄운다
+  const workDir = path.join(TMP, "api-mcp");
+  mkdirSync(workDir, { recursive: true });
+  const mcp = await openMcp(o.browser.args, workDir);
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), o.timeoutMs);
   const calls: ToolCall[] = [];
