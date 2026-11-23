@@ -1,0 +1,31 @@
+{
+  "source": "IntentGuard README · docs/results/final-comparison.md",
+  "controlled": {
+    "verified": {
+      "mcp": 22,
+      "web-v1": 16,
+      "web-v2": 30
+    },
+    "success": {
+      "mcp": 30,
+      "web-v1": 28,
+      "web-v2": 30
+    },
+    "mean_turns": {
+      "mcp": 4.6,
+      "web-v1": 25.7,
+      "web-v2": 14.8
+    },
+    "n_per_path": 30
+  },
+  "multi_model": {
+    "pairs": 40,
+    "v1_confirmed": 20,
+    "v2_confirmed": 33
+  },
+  "dugout": {
+    "before_success": 6,
+    "after_success": 6,
+    "per_build": 8
+  }
+}
