@@ -25,8 +25,20 @@ export function resolveAgy(): string {
   return "agy";
 }
 
+/**
+ * 실행기 오류가 사용량·용량 때문인지 가린다. 두 오류 모두 본실험 중에 실제로 받은 문장이다.
+ * - GPT-OSS: "UNAVAILABLE (code 503): No capacity available for model ..." → 몇 분 뒤 풀린다
+ * - Sonnet·GPT-OSS: "RESOURCE_EXHAUSTED (code 429): Individual quota reached. ... Resets in 149h..." → 계정 한도다
+ * agy는 429에도 retryable: true를 붙이므로 그 표시만 믿으면 며칠짜리 한도를 계속 다시 시도하게 된다. 그래서 한도를 먼저 본다
+ */
+export function agyLimit(text: string): AgentRun["limit"] {
+  if (/Individual quota reached|RESOURCE_EXHAUSTED|code 429/i.test(text)) return "quota";
+  if (/No capacity available|UNAVAILABLE|code 503/i.test(text)) return "retry";
+  return null;
+}
+
 /** agy --output-format stream-json 출력을 실행 결과로 바꾼다. 테스트에서 직접 부를 수 있게 따로 뺐다 */
-export function parseAgyStream(lines: string[], serverName: string): Omit<AgentRun, "durationMs" | "retryable"> & { status: string; error: string } {
+export function parseAgyStream(lines: string[], serverName: string): Omit<AgentRun, "durationMs" | "limit"> & { status: string; error: string } {
   const calls: ToolCall[] = [];
   const outside: string[] = [];
   let numTurns = 0;
@@ -141,8 +153,7 @@ export function runAntigravity(o: AgentInput): Promise<AgentRun> {
         ...parsed,
         // 시간 초과는 에이전트가 과제를 못 끝낸 것이므로 무효가 아니라 실패로 센다
         exitReason: timedOut || /print timeout/.test(error + stderr) ? "timeout" : spawnError ? "error" : parsed.exitReason,
-        // 본실험 중 GPT-OSS가 "No capacity available"(503)로 자주 끝났다. agy도 이 오류를 retryable로 표시한다
-        retryable: !timedOut && parsed.exitReason === "error" && /"retryable":\s*true|code 503|No capacity available/i.test(error + stderr),
+        limit: !timedOut && parsed.exitReason === "error" ? agyLimit(error + stderr) : null,
         durationMs: Date.now() - started,
       });
     };

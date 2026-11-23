@@ -9,7 +9,7 @@
 //
 // Claude 모델은 Claude Code로, Gemini·GPT-OSS는 Antigravity CLI로 돌린다. 두 실행기는 같은 브라우저 MCP와
 // 같은 도구 권한(agents/browser.ts)을 쓰지만 턴을 세는 방식이 달라서, 턴 수는 같은 실행기 안에서만 비교한다.
-import { mkdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { parseArgs } from "node:util";
 import { IMPLS, type Impl } from "../probe/human.js";
@@ -50,11 +50,29 @@ const outDir = path.resolve("runs/layer2", browser);
 const rawDir = path.join(outDir, "raw");
 mkdirSync(rawDir, { recursive: true });
 
+/**
+ * 이미 유효한 결과가 있는 실행. 같은 조건을 다시 돌리지 않고 그 결과를 쓴다.
+ * 무효로 기록된 실행(한도·연결 오류, 브라우저 밖 도구)은 다시 돌려야 하므로 끝난 것으로 보지 않는다.
+ */
+function alreadyDone(file: string): boolean {
+  if (!existsSync(file)) return false;
+  try {
+    return !JSON.parse(readFileSync(file, "utf8")).invalid;
+  } catch {
+    return false;
+  }
+}
+
+let skipped = 0;
 try {
-  for (const task of tasks)
+  run: for (const task of tasks)
     for (const impl of impls)
       for (let rep = 1; rep <= reps; rep++) {
         const runId = `${task.id}__${impl}__${values.model}__${rep}`;
+        if (alreadyDone(path.join(outDir, `${runId}.json`))) {
+          skipped++;
+          continue;
+        }
         // 모델 서버 용량 부족 같은 일시 오류는 에이전트의 실패가 아니므로 잠시 기다렸다 같은 조건으로 다시 돌린다.
         // 시도마다 상태 키를 달리해서, 중간에 끊긴 시도가 남긴 화면 상태가 다음 시도의 채점에 섞이지 않게 한다
         let run: AgentRun;
@@ -74,9 +92,17 @@ try {
             rawLogPath: path.join(rawDir, `${runId}${attempt === 1 ? "" : `~${attempt}`}.jsonl`),
             browser: browserServer(browser),
           });
-          if (!run.retryable || attempt >= MAX_ATTEMPTS) break;
+          if (run.limit !== "retry" || attempt >= MAX_ATTEMPTS) break;
           console.log(`${runId} 일시 오류로 ${RETRY_WAIT_MS / 1000}초 뒤 다시 시도 (${attempt}/${MAX_ATTEMPTS})`);
           await new Promise((r) => setTimeout(r, RETRY_WAIT_MS));
+        }
+
+        // 계정 한도는 며칠 뒤에야 풀린다. 남은 실행도 모두 같은 오류로 끝나므로 결과를 남기지 않고 여기서 멈춘다.
+        // 결과 파일이 없으니 한도가 풀린 뒤 같은 명령을 다시 돌리면 이 실행부터 이어서 돈다
+        if (run.limit === "quota") {
+          console.log(`${runId} 계정 사용량 한도에 걸려 멈춘다. 한도가 풀린 뒤 같은 명령으로 이어서 돌리면 된다`);
+          process.exitCode = 2;
+          break run;
         }
 
         const state = (server.state.get(stateKey) as ModalState | undefined) ?? null;
@@ -107,5 +133,6 @@ try {
         console.log(`${runId.padEnd(60)} ${record.outcome.padEnd(20)} 턴 ${record.numTurns}  막힌 클릭 ${record.blockedClicks}  대상 중복 ${record.ambiguousTargets}${invalid ? `  (${invalid})` : ""}`);
       }
 } finally {
+  if (skipped) console.log(`이미 결과가 있어 건너뛴 실행 ${skipped}회`);
   await server.close();
 }

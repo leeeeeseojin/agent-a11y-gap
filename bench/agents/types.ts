@@ -42,6 +42,10 @@ export interface AgentRun {
   model: string;
   /** 브라우저 MCP가 아닌 도구로 성공한 호출. 하나라도 있으면 그 실행은 무효다 */
   outsideTools: string[];
-  /** 모델 서버 용량 부족처럼, 에이전트와 상관없이 실행기가 끝난 일시 오류. 같은 조건으로 다시 돌린다 */
-  retryable: boolean;
+  /**
+   * 에이전트와 상관없이 실행기가 끝난 사용량·용량 오류.
+   * - "retry": 모델 서버 용량 부족처럼 잠시 뒤 풀리는 오류. 기다렸다 같은 조건으로 다시 돌린다
+   * - "quota": 계정 사용량 한도. 며칠 뒤에야 풀리므로 다시 시도하지 않고 실행 전체를 멈춘다
+   */
+  limit: "retry" | "quota" | null;
 }

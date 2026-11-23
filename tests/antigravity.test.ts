@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parseAgyStream } from "../bench/agents/antigravity.js";
+import { agyLimit, parseAgyStream } from "../bench/agents/antigravity.js";
 import { invalidReason } from "../bench/tasks.js";
 
 // agy --output-format stream-json의 줄 모양. IntentGuard tests/audit.test.ts에서 쓰던 형태를 따랐다
@@ -43,6 +43,18 @@ describe("Antigravity 출력 해석", () => {
     expect(parseAgyStream([tool("call_mcp_tool", "DONE", { ServerName: "github", ToolName: "x" })], SERVER).outsideTools).toEqual(["call_mcp_tool"]);
     // 권한으로 거부된 시도는 실제로 쓰지 못했으므로 무효가 아니다
     expect(parseAgyStream([tool("run_command", "ERROR", {})], SERVER).outsideTools).toEqual([]);
+  });
+});
+
+describe("사용량·용량 오류", () => {
+  // 본실험 중 실제로 받은 문장을 줄였다. agy는 두 오류 모두에 retryable: true를 붙였다
+  const capacity = `AGY_ERROR: {"short_error":"UNAVAILABLE (code 503): No capacity available for model gpt-oss-120b-medium on the server","retryable":true}`;
+  const quota = `AGY_ERROR: {"short_error":"RESOURCE_EXHAUSTED (code 429): Individual quota reached. Resets in 149h12m2s.","retryable":true}`;
+
+  it("서버 용량 부족은 다시 시도하고, 계정 한도는 멈춘다", () => {
+    expect(agyLimit(capacity)).toBe("retry");
+    expect(agyLimit(quota)).toBe("quota");
+    expect(agyLimit("permission check failed")).toBeNull();
   });
 });
 

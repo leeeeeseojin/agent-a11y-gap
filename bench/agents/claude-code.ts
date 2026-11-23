@@ -130,7 +130,11 @@ export function runClaudeCode(o: AgentInput): Promise<AgentRun> {
         model: Object.keys(f?.modelUsage ?? {})[0] ?? "",
         // --tools ""로 내장 도구를 모두 뺐으므로 브라우저 밖 도구는 부를 수 없다
         outsideTools: [],
-        retryable: !timedOut && !!f?.is_error && /overloaded|529|rate.?limit/i.test(String(f?.result ?? "")),
+        // Claude Code는 이 실험에서 한도 오류를 아직 받아 본 적이 없어서, 알려진 문장으로만 가린다
+        limit: timedOut || !f?.is_error ? null
+          : /usage limit|limit reached/i.test(String(f?.result ?? "")) ? "quota"
+          : /overloaded|529|rate.?limit/i.test(String(f?.result ?? "")) ? "retry"
+          : null,
       });
     });
   });
