@@ -3,7 +3,7 @@
 분량은 2~4쪽이다. 그림은 `figures/`에 있고 모두 `analysis/` 노트북이 만든다.
 
 1. 문제: 사람에게 숨긴 배경이 에이전트 스냅샷에는 남는다 (MY DUGOUT 사례, `docs/origin.md`)
-2. RQ1: 숨김 패턴 14종 × 도구 4종 (`figures/layer1-matrix.png`)
+2. RQ1: 숨김 패턴 16종 × 도구 4종 (`figures/layer1-matrix.png`)
 3. RQ2: 2층 에이전트 실행 결과
 4. RQ3: 설계 대안 A~D와 비용
 5. 한계: 버전 의존, 작은 표본, 사람 참가자 없음

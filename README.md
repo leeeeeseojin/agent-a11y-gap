@@ -3,9 +3,9 @@
 브라우저 MCP가 에이전트에게 주는 페이지 스냅샷과, 사람·스크린 리더가 받는 접근성 트리가 어디서 갈라지는지 측정한다.
 그 차이가 에이전트 실패로 이어지는지, 사람과 에이전트 모두에게 맞는 모달 설계가 무엇인지 확인한다.
 
-<img src="report/figures/layer1-matrix.png" width="720" alt="숨김 패턴 14종과 도구 4종의 노출 상태 히트맵. 속성으로 숨긴 패턴 4개에서 Playwright MCP 스냅샷만 사람 기준과 다르다">
+<img src="report/figures/layer1-matrix.png" width="720" alt="숨김 패턴 16종과 도구 4종의 노출 상태 히트맵. 속성으로 숨긴 패턴 6개에서 Playwright MCP 스냅샷만 사람 기준과 다르고, 그중 2개에만 aria-hidden 표시가 있다">
 
-**사람에게 숨긴 버튼이 Playwright MCP 스냅샷에는 14개 패턴 중 4개에서 남는다. 같은 Chrome을 읽는 Chrome DevTools MCP는 14개 모두 사람 기준과 같다.**
+**사람에게 숨긴 버튼이 Playwright MCP 스냅샷에는 16개 패턴 중 6개에서 남고, 에이전트가 `[aria-hidden]` 표시로 알아챌 수 있는 것은 그중 2개뿐이다. 같은 Chrome을 읽는 Chrome DevTools MCP는 16개 모두 사람 기준과 같다.**
 
 ## 왜 시작했나
 
@@ -40,15 +40,17 @@
 
 사람 기준(Chrome 접근성 트리)에서는 숨겨졌는데 도구에는 보이는 칸만 모았다. 클릭은 도구가 준 ref를 그대로 눌렀을 때 서버에 남은 결과다.
 
-| 패턴 | Playwright MCP 스냅샷 | ref 클릭 | getByRole | DevTools MCP |
-| --- | --- | --- | --- | --- |
-| aria-hidden 조상 | `button [ref=e5]: TARGET` (이름 없음) | **눌림** | 숨김 | 숨김 |
-| inert 조상 | `button "TARGET"` | 시간 초과 (`element is inert`) | 노출 | 숨김 |
-| 모달 + 배경 inert·aria-hidden | `button [ref=e4]: TARGET` (이름 없음) | 시간 초과 (`element is inert`) | 숨김 | 숨김 |
-| 네이티브 `dialog.showModal()` | `button "TARGET"` | 가로막힘 | 노출 | 숨김 |
+| 패턴 | Playwright MCP 스냅샷 | `[aria-hidden]` 표시 | ref 클릭 | getByRole | DevTools MCP |
+| --- | --- | --- | --- | --- | --- |
+| aria-hidden 조상 div | `button [ref=e5]: TARGET` (이름 없음) | **없음** | **눌림** | 숨김 | 숨김 |
+| aria-hidden 버튼 자체 | `button [aria-hidden] [ref=e4]: TARGET` | 있음 | **눌림** | 숨김 | 숨김 |
+| aria-hidden 이름 있는 영역 | `region [aria-hidden]` 아래 `button [ref=e5]: TARGET` | 있음 (영역 줄) | **눌림** | 숨김 | 숨김 |
+| inert 조상 | `button "TARGET"` | 없음 | 시간 초과 (`element is inert`) | 노출 | 숨김 |
+| 모달 + 배경 inert·aria-hidden | `button [ref=e4]: TARGET` (이름 없음) | **없음** | 시간 초과 (`element is inert`) | 숨김 | 숨김 |
+| 네이티브 `dialog.showModal()` | `button "TARGET"` | 없음 | 가로막힘 | 노출 | 숨김 |
 
 - CSS로 렌더를 막은 패턴(display:none, visibility:hidden, `hidden`, 닫힌 details·popover, 비활성 탭)은 네 도구가 모두 같다.
-- aria-hidden 조상의 버튼은 스냅샷에 남을 뿐 아니라 **실제로 눌린다.** 스크린 리더 사용자는 모르는 버튼을 에이전트는 조작할 수 있다.
+- aria-hidden 버튼은 세 패턴 모두 스냅샷에 남을 뿐 아니라 **실제로 눌린다.** 스크린 리더 사용자는 모르는 버튼을 에이전트는 조작할 수 있다.
 - 시각적으로만 가린 패턴(오버레이, aria-modal만)에서 DevTools MCP는 `Successfully clicked on the element`라고 답하지만 클릭은 일어나지 않았다.
   사람 기준에서도 보이는 버튼이라 격차는 아니지만, 거짓 성공 보고로 이어질 수 있는 경로다.
 - inert 조상과 네이티브 dialog 밖 버튼이 남는 것은 버그가 아니라 Playwright 1.65에서 정한 동작이다.
@@ -58,17 +60,12 @@
   그래서 사람 기준과의 격차는 Playwright의 의도된 설계에서 나온다.
 - aria-hidden 요소가 AI 스냅샷에 남는 것도 의도된 동작이다. PR [#42268](https://github.com/microsoft/playwright/pull/42268)은
   AI 모드 스냅샷이 눈에 보이는 aria-hidden 요소를 일부러 포함한다고 밝히고, 대신 `getByRole`로는 찾을 수 없다는 뜻으로
-  `[aria-hidden]` 표시를 붙였다. 그런데 이 표시는 속성이 직접 붙은 요소에만 달린다. 속성이 이름 없는 조상 div에 있으면
-  스냅샷을 줄이는 과정([#41604](https://github.com/microsoft/playwright/pull/41604))에서 그 div가 접히면서 표시도 함께 사라진다.
-
-  | `aria-hidden` 위치 | AI 스냅샷 (Playwright 1.65.1) |
-  | --- | --- |
-  | 버튼 자체 | `button [aria-hidden] [ref=e3]: TARGET` |
-  | 조상 div | `button [ref=e7]: TARGET` (표시 없음) |
-  | 이름 있는 조상 영역 | `region [aria-hidden]` 아래 `button [ref=e11]: TARGET` |
-
-  모달 배경을 숨기는 흔한 방식(`#root`에 aria-hidden)이 두 번째 경우다. MY DUGOUT 수정본의 `button [ref=e54]: 경기 시작`에
-  아무 표시가 없었던 이유도 이것이다. 이 표시 누락을 다룬 이슈는 playwright와 playwright-mcp에서 찾지 못했다.
+  `[aria-hidden]` 표시를 붙였다. 그런데 aria-hidden 패턴 세 개를 나란히 놓으면 이 표시는 속성이 붙은 요소가 스냅샷에 남을 때만 보인다.
+  속성이 이름 없는 조상 div에 있으면 스냅샷을 줄이는 과정([#41604](https://github.com/microsoft/playwright/pull/41604))에서
+  그 div가 접히면서 표시도 함께 사라진다.
+- 모달 배경을 숨기는 흔한 방식(`#root`에 aria-hidden)이 바로 이 경우다. MY DUGOUT 수정본의 `button [ref=e54]: 경기 시작`에
+  아무 표시가 없었던 이유도 이것이다. 이 표시 누락을 다룬 이슈는 playwright와 playwright-mcp에서 찾지 못했고,
+  재현 페이지는 `cases/patterns/aria-hidden-*.html` 세 개다.
 
 → [analysis/01_snapshot_matrix.ipynb](analysis/01_snapshot_matrix.ipynb) · [원본 스냅샷](runs/layer1/)
 
@@ -112,7 +109,7 @@ Node 22, pnpm, 설치된 Chrome 안정판, Python 3.12가 필요하다.
 pnpm install
 pnpm test                 # 스냅샷 판정·과제 채점 단위 테스트
 pnpm test:e2e             # 모달 구현 A~D 사람 기준 E2E
-pnpm probe                # 1층: 패턴 14 × 도구 4 → runs/layer1/
+pnpm probe                # 1층: 패턴 16 × 도구 4 → runs/layer1/
 pnpm probe:design         # 3층: 구현 A~D 표 → runs/layer3/
 pnpm bench --model claude-haiku-5-5 --impl B --task settings-then-start --reps 1   # 2층 (모델 비용 발생)
 pnpm import:intentguard --from ../intentguard
@@ -131,7 +128,7 @@ cd analysis && ../.venv/Scripts/jupyter nbconvert --to notebook --execute --inpl
 
 ```
 cases/
-  patterns/       숨김 패턴 14종. 페이지마다 숨겨야 할 버튼 TARGET 하나
+  patterns/       숨김 패턴 16종. 페이지마다 숨겨야 할 버튼 TARGET 하나
   modal/          모달 구현 A~D를 ?impl=로 바꾸는 비교 화면
   patterns.ts     패턴 목록
 probe/            LLM 없이 도는 측정 (1·3층)
