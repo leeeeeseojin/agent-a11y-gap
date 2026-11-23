@@ -32,12 +32,16 @@ C는 네이티브 dialog를 쓰고, D는 시트를 여는 동안 배경을 내�
 
 ## 미리 정해 둔 것
 
-- **inert는 이미 보고된 문제다.** Playwright 이슈 [#36938](https://github.com/microsoft/playwright/issues/36938)이
-  inert 요소가 접근성 트리에서 숨겨지지 않는 버그를 다룬다. 리포트에서는 이 이슈를 인용하고 새 발견으로 주장하지 않는다.
-- **aria-hidden과 네이티브 dialog는 선행 이슈를 아직 못 찾았다.** playwright와 playwright-mcp 이슈를 다시 검색한다.
+- **inert와 모달 dialog 밖 콘텐츠는 Playwright가 정한 동작이다.** 이 문제를 다룬 이슈 [#36938](https://github.com/microsoft/playwright/issues/36938)은
+  PR [#43211](https://github.com/microsoft/playwright/pull/43211)로 닫혔다. 그 뒤 1.65 API 리뷰
+  [#43792](https://github.com/microsoft/playwright/issues/43792)에서, 로케이터와 ARIA 스냅샷은 이런 요소를 걸러내지 않고
+  클릭 같은 동작을 할 때 `element is inert`로 기다리는 쪽으로 정리됐다. 리포트에서는 이 결정을 인용하고 새 발견으로 주장하지 않는다.
+  대신 이 설계가 에이전트에게 어떤 실패를 만드는지를 본다.
+- **aria-hidden은 선행 이슈를 아직 못 찾았다.** #43792의 결정에도 들어 있지 않다. playwright와 playwright-mcp 이슈를 다시 검색한다.
   비공식 정리 문서 두 곳은 스냅샷이 aria-hidden 요소를 뺀다고 적었는데 실제 동작은 달랐다. 공식 문서와도 대조한다.
 - **결과는 특정 버전의 값이다.** 버전을 결과 폴더 이름에 넣고, CI가 매주 최신 버전으로 다시 돌려 달라진 칸을 남긴다.
 - **표본이 작다.** 조건당 반복이 적어 모델 순위나 정확한 성공률로 읽지 않는다. 실패 과정의 차이를 중심으로 해석한다.
 - **에이전트는 자체 테스트 페이지에서만 돌린다.** 사람 참가자가 없는 연구라서 설계 대안 D의 "맥락이 끊기는 비용"은
   여기서 잴 수 없다. 이 비용은 후속 사용자 연구의 질문으로 남긴다.
-- **결과는 이슈로 제보한다.** 재현 페이지(`cases/patterns/`)를 붙여 Playwright MCP에 제보한다.
+- **결과는 이슈로 제보한다.** inert와 모달 dialog는 이미 정해진 동작이므로, 제보는 aria-hidden 조상 사례를 중심으로 한다.
+  재현 페이지(`cases/patterns/`)를 붙여 Playwright MCP에 제보한다.

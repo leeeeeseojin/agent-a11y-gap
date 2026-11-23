@@ -1,5 +1,6 @@
 // Playwright getByRole은 사람 기준 E2E를 쓸 때 보통 고르는 로케이터다.
-// 1층에서 inert 조상과 네이티브 dialog를 못 걸러내는 것을 확인했다(Playwright 이슈 #36938).
+// 1.65부터 inert 요소와 모달 dialog 밖 콘텐츠를 걸러내지 않고, 클릭할 때 "element is inert"로 기다린다
+// (Playwright #43792). 1층의 inert 조상·네이티브 dialog 결과가 이 동작과 같다.
 import type { Browser } from "playwright";
 import { NOT_FOUND, classifyClickError, errorLine, reading, type Found } from "../parse.js";
 import type { ProbeTarget, Reading } from "../types.js";

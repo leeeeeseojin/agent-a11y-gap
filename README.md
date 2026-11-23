@@ -43,16 +43,19 @@
 | 패턴 | Playwright MCP 스냅샷 | ref 클릭 | getByRole | DevTools MCP |
 | --- | --- | --- | --- | --- |
 | aria-hidden 조상 | `button [ref=e5]: TARGET` (이름 없음) | **눌림** | 숨김 | 숨김 |
-| inert 조상 | `button "TARGET"` | 시간 초과 | 노출 | 숨김 |
-| 모달 + 배경 inert·aria-hidden | `button [ref=e4]: TARGET` (이름 없음) | 시간 초과 | 숨김 | 숨김 |
+| inert 조상 | `button "TARGET"` | 시간 초과 (`element is inert`) | 노출 | 숨김 |
+| 모달 + 배경 inert·aria-hidden | `button [ref=e4]: TARGET` (이름 없음) | 시간 초과 (`element is inert`) | 숨김 | 숨김 |
 | 네이티브 `dialog.showModal()` | `button "TARGET"` | 가로막힘 | 노출 | 숨김 |
 
 - CSS로 렌더를 막은 패턴(display:none, visibility:hidden, `hidden`, 닫힌 details·popover, 비활성 탭)은 네 도구가 모두 같다.
 - aria-hidden 조상의 버튼은 스냅샷에 남을 뿐 아니라 **실제로 눌린다.** 스크린 리더 사용자는 모르는 버튼을 에이전트는 조작할 수 있다.
 - 시각적으로만 가린 패턴(오버레이, aria-modal만)에서 DevTools MCP는 `Successfully clicked on the element`라고 답하지만 클릭은 일어나지 않았다.
   사람 기준에서도 보이는 버튼이라 격차는 아니지만, 거짓 성공 보고로 이어질 수 있는 경로다.
-- inert와 getByRole의 문제는 Playwright 이슈 [#36938](https://github.com/microsoft/playwright/issues/36938)에 이미 보고돼 있다.
-  aria-hidden과 네이티브 dialog의 스냅샷 동작은 선행 이슈를 확인하는 중이다.
+- inert 조상과 네이티브 dialog 밖 버튼이 남는 것은 버그가 아니라 Playwright 1.65에서 정한 동작이다.
+  이슈 [#36938](https://github.com/microsoft/playwright/issues/36938)은 PR [#43211](https://github.com/microsoft/playwright/pull/43211)로
+  닫혔고, 1.65 API 리뷰 [#43792](https://github.com/microsoft/playwright/issues/43792)에서 로케이터와 ARIA 스냅샷은 이런 요소를
+  걸러내지 않고 클릭할 때 `element is inert`로 기다리도록 정리됐다. 위 표의 시간 초과가 바로 이 대기다.
+  그래서 사람 기준과의 격차는 Playwright의 의도된 설계에서 나온다. aria-hidden 조상은 이 결정에 들어 있지 않으며, 선행 이슈를 확인하는 중이다.
 
 → [analysis/01_snapshot_matrix.ipynb](analysis/01_snapshot_matrix.ipynb) · [원본 스냅샷](runs/layer1/)
 

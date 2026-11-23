@@ -20,8 +20,8 @@ export async function openSettings(page: Page, baseURL: string, impl: Impl) {
 }
 
 /**
- * getByRole이 아니라 CDP 트리로 본다. Playwright의 getByRole은 inert를 따르지 않아(1층 결과, 이슈 #36938)
- * 사람 기준으로 쓰면 B를 실패로 잘못 판정한다.
+ * getByRole이 아니라 CDP 트리로 본다. Playwright 1.65부터 getByRole은 inert 요소와 모달 dialog 밖 콘텐츠를
+ * 걸러내지 않는다(#43792에서 정한 동작). 그래서 getByRole을 사람 기준으로 쓰면 B와 C를 실패로 잘못 판정한다.
  */
 export async function backgroundHidden(page: Page): Promise<boolean> {
   const cdp = await page.context().newCDPSession(page);
