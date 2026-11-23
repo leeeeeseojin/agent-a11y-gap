@@ -1,0 +1,5 @@
+/* 모든 패턴 페이지가 같은 모양을 쓰게 해서, 결과 차이가 숨김 방식에서만 나오게 한다. */
+body { font: 16px/1.5 system-ui, sans-serif; margin: 24px; }
+button { font: inherit; padding: 8px 16px; }
+.backdrop { position: fixed; inset: 0; background: rgb(0 0 0 / 0.45); display: grid; place-items: center; }
+.sheet { background: #fff; padding: 24px; border-radius: 12px; min-width: 280px; }
