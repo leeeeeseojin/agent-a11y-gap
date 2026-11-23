@@ -22,6 +22,7 @@ import { runClaudeCode } from "./agents/claude-code.js";
 import { runOpenAiCompat } from "./agents/openai-compat.js";
 import type { AgentRun } from "./agents/types.js";
 import { ambiguousTargets, blockedClicks } from "./metrics.js";
+import { redactPaths } from "./redact.js";
 import { TASKS, invalidReason, outcomeOf, type ModalState } from "./tasks.js";
 
 const { values } = parseArgs({
@@ -137,7 +138,7 @@ try {
           finalAnswer: run.finalAnswer,
           toolCalls: run.toolCalls,
         };
-        writeFileSync(path.join(outDir, `${runId}.json`), JSON.stringify(record, null, 2) + "\n");
+        writeFileSync(path.join(outDir, `${runId}.json`), redactPaths(JSON.stringify(record, null, 2)) + "\n");
         console.log(`${runId.padEnd(60)} ${record.outcome.padEnd(20)} 턴 ${record.numTurns}  막힌 클릭 ${record.blockedClicks}  대상 중복 ${record.ambiguousTargets}${invalid ? `  (${invalid})` : ""}`);
       }
 } finally {
