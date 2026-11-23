@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="ko" data-case="covered-by-overlay">
+<head><meta charset="utf-8"><link rel="icon" href="data:,"><title>오버레이로 가림</title><link rel="stylesheet" href="_probe.css"></head>
+<body>
+<!-- 역할 없는 반투명 판이 위를 덮는다. 시각적으로 가렸을 뿐 접근성 트리에는 남는 것이 정상이다. -->
+<h1>오버레이로 가림</h1>
+<button data-probe="TARGET">TARGET</button>
+<div class="backdrop">
+  <div class="sheet">
+    <button data-probe="CONTROL">CONTROL</button>
+  </div>
+</div>
+<script src="_probe.js"></script>
+</body>
+</html>

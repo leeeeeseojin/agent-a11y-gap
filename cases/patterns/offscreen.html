@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="ko" data-case="offscreen">
+<head><meta charset="utf-8"><link rel="icon" href="data:,"><title>화면 밖 배치</title><link rel="stylesheet" href="_probe.css"></head>
+<body>
+<!-- position:absolute로 화면 밖에 둔다. 스크린 리더 전용 텍스트에 흔히 쓰는 방식이라 접근성 트리에는 남는 것이 정상이다. -->
+<h1>화면 밖 배치</h1>
+<button data-probe="CONTROL">CONTROL</button>
+<div style="position:absolute; left:-10000px; top:0">
+  <button data-probe="TARGET">TARGET</button>
+</div>
+<script src="_probe.js"></script>
+</body>
+</html>
