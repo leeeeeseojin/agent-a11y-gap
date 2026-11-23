@@ -8,3 +8,5 @@ playwright-report/
 .tmp/
 # 2층 원본 스트림 로그는 크고 경로가 섞여 있어 올리지 않는다. 요약 JSON만 runs/에 남긴다
 runs/**/raw/
+# API 키. 2층 OpenAI 호환 실행기가 읽는다
+.env
