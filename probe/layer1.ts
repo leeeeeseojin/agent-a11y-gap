@@ -1,4 +1,4 @@
-// 1층: 숨김 패턴 14종 × 도구 4종. LLM 없이 돌려서 매번 같은 결과가 나와야 한다.
+// 1층: 숨김 패턴 16종 × 도구 4종. LLM 없이 돌려서 매번 같은 결과가 나와야 한다.
 // 결과는 runs/layer1/<버전 조합>/results.json에 남기고 runs/layer1/latest.json에도 복사한다.
 //
 //   pnpm probe                      전체 실행 후 저장
@@ -37,7 +37,7 @@ async function observe(pattern: string, read: (target: ProbeTarget) => Promise<R
   const r = { pattern, ...(await read(target)) };
   observations.push(r);
   const seen = !r.exposed ? "숨김" : r.named ? "노출(이름)" : "노출(텍스트)";
-  console.log(`${pattern.padEnd(26)} ${r.tool.padEnd(22)} ${seen.padEnd(10)} ${r.click}`);
+  console.log(`${pattern.padEnd(26)} ${r.tool.padEnd(22)} ${seen.padEnd(10)} ${r.click}${r.marked ? "  [aria-hidden]" : ""}`);
 }
 
 try {

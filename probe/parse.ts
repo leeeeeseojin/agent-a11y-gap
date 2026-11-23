@@ -6,24 +6,42 @@ export interface Found {
   exposed: boolean;
   named: boolean;
   ref: string | null;
+  /** 그 줄이나 조상 줄에 [aria-hidden] 표시가 있는가 */
+  marked: boolean;
   line: string;
 }
 
-export const NOT_FOUND: Found = { exposed: false, named: false, ref: null, line: "" };
+export const NOT_FOUND: Found = { exposed: false, named: false, ref: null, marked: false, line: "" };
 
 /**
  * Playwright MCP browser_snapshot (YAML).
  *   이름이 있으면:     - button "TARGET" [ref=e3] [cursor=pointer]
  *   텍스트만 남으면:   - button [ref=e3] [cursor=pointer]: TARGET
  * 후자가 IntentGuard에서 본 `button [ref=e48]: 경기 시작`과 같은 형태다.
+ *
+ * aria-hidden 요소에는 `[aria-hidden]` 표시가 붙는다(PR #42268). 표시는 속성이 붙은 요소의 줄에만 있으므로,
+ * 대상 줄부터 들여쓰기가 더 얕은 조상 줄까지 거슬러 올라가며 확인한다.
  */
 export function parsePlaywrightSnapshot(text: string, target = "TARGET"): Found {
-  const lines = text.split(/\r?\n/).filter((l) => l.includes(target));
-  if (lines.length === 0) return NOT_FOUND;
-  const button = lines.find((l) => /^\s*-\s*button\b/.test(l)) ?? lines[0];
+  const all = text.split(/\r?\n/);
+  const candidates = all.map((l, i) => ({ l, i })).filter(({ l }) => l.includes(target));
+  if (candidates.length === 0) return NOT_FOUND;
+  const { l: button, i } = candidates.find(({ l }) => /^\s*-\s*button\b/.test(l)) ?? candidates[0];
   const ref = button.match(/\[ref=([^\]]+)\]/)?.[1] ?? null;
   const named = button.includes(`button "${target}"`);
-  return { exposed: true, named, ref, line: button.trim() };
+  return { exposed: true, named, ref, marked: selfOrAncestorMarked(all, i), line: button.trim() };
+}
+
+function selfOrAncestorMarked(lines: string[], index: number): boolean {
+  const indent = (l: string) => l.length - l.trimStart().length;
+  let depth = indent(lines[index]);
+  if (lines[index].includes("[aria-hidden]")) return true;
+  for (let i = index - 1; i >= 0; i--) {
+    if (!lines[i].trimStart().startsWith("-") || indent(lines[i]) >= depth) continue;
+    if (lines[i].includes("[aria-hidden]")) return true;
+    depth = indent(lines[i]);
+  }
+  return false;
 }
 
 /**
@@ -37,7 +55,8 @@ export function parseDevtoolsSnapshot(text: string, target = "TARGET"): Found {
   const button = lines.find((l) => /\bbutton\b/.test(l)) ?? lines[0];
   const ref = button.match(/uid=(\S+)/)?.[1] ?? null;
   const named = button.includes(`button "${target}"`);
-  return { exposed: true, named, ref, line: button.trim() };
+  // DevTools MCP 스냅샷에는 aria-hidden 요소가 나오지 않으므로 표시도 없다
+  return { exposed: true, named, ref, marked: false, line: button.trim() };
 }
 
 /** 도구가 돌려준 오류 문장을 클릭 결과로 분류한다. */
@@ -81,6 +100,7 @@ export function reading(tool: Tool, found: Found, click: ClickOutcome, detail = 
     tool,
     exposed: found.exposed,
     named: found.named,
+    marked: found.marked,
     ref: found.ref,
     click,
     evidence: [found.line, detail].filter(Boolean).join(" | ").slice(0, 300),

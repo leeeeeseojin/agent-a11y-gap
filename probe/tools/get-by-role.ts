@@ -13,7 +13,7 @@ export async function readGetByRole(browser: Browser, target: ProbeTarget): Prom
     const count = await locator.count();
     if (count === 0) return reading("pw-get-by-role", NOT_FOUND, "not-attempted");
 
-    const found: Found = { exposed: true, named: true, ref: "getByRole", line: `getByRole('button', { name: '${target.name}' }) → ${count}개` };
+    const found: Found = { exposed: true, named: true, ref: "getByRole", marked: false, line: `getByRole('button', { name: '${target.name}' }) → ${count}개` };
     try {
       await locator.first().click({ timeout: 3000 });
     } catch (e) {

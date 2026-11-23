@@ -20,7 +20,7 @@ export async function readCdpTree(browser: Browser, target: ProbeTarget): Promis
     const visible = nodes.filter((n) => !n.ignored && n.name?.value?.includes(target.name));
     const button = visible.find((n) => n.role?.value === "button" && n.name?.value === target.name);
     const node = button ?? visible[0];
-    const found: Found = node ? { exposed: true, named: !!button, ref: null, line: `${node.role?.value} "${node.name?.value}"` } : NOT_FOUND;
+    const found: Found = node ? { exposed: true, named: !!button, ref: null, marked: false, line: `${node.role?.value} "${node.name?.value}"` } : NOT_FOUND;
 
     // CDP 트리는 누를 수 있는 ref를 주지 않으므로 클릭은 재지 않는다
     return reading("cdp-ax-tree", found, "not-attempted");

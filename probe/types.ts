@@ -18,6 +18,8 @@ export interface Reading {
   exposed: boolean;
   /** button 역할에 대상 이름이 접근성 이름으로 붙어 있는가 (텍스트만 남으면 false) */
   named: boolean;
+  /** Playwright MCP 스냅샷에서 그 줄이나 조상 줄에 [aria-hidden] 표시가 있는가. 에이전트가 "사람에게 숨겨진 요소"임을 알 수 있는 유일한 단서다 */
+  marked: boolean;
   /** 도구가 그 요소를 가리키는 클릭용 ref/uid를 줬는가 */
   ref: string | null;
   click: ClickOutcome;

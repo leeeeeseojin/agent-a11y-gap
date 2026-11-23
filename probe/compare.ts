@@ -11,7 +11,8 @@ const before = load(beforePath);
 const after = load(afterPath);
 
 const key = (o: Observation) => `${o.pattern} / ${o.tool}`;
-const summary = (o?: Observation) => (o ? `${o.exposed ? (o.named ? "노출(이름)" : "노출(텍스트)") : "숨김"}, ${o.click}` : "없음");
+const summary = (o?: Observation) =>
+  o ? `${o.exposed ? (o.named ? "노출(이름)" : "노출(텍스트)") : "숨김"}${o.marked ? " [aria-hidden]" : ""}, ${o.click}` : "없음";
 const old = new Map(before.observations.map((o) => [key(o), o]));
 
 const changed = after.observations.filter((o) => summary(old.get(key(o))) !== summary(o));
