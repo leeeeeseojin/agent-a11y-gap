@@ -1,0 +1,149 @@
+{
+  "runId": "save-same-name__B__openai-gpt-oss-120b__10",
+  "task": "save-same-name",
+  "impl": "B",
+  "browser": "playwright",
+  "agent": "api",
+  "model": "openai/gpt-oss-120b",
+  "rep": 10,
+  "outcome": "confirmed-success",
+  "invalid": null,
+  "grade": {
+    "success": true,
+    "notes": [
+      "모든 조건 충족"
+    ]
+  },
+  "numTurns": 14,
+  "blockedClicks": 0,
+  "ambiguousTargets": 0,
+  "exitReason": "completed",
+  "attempts": 1,
+  "durationMs": 24416,
+  "state": {
+    "impl": "B",
+    "settings": {
+      "attack": "me",
+      "pitching": "coach"
+    },
+    "saved": 1,
+    "rosterSaved": 0,
+    "started": false,
+    "startedWith": null
+  },
+  "finalAnswer": "운영 방식에서 투수 교체를 코치에게 맡기고 설정을 저장했습니다.  \nRESULT: confirmed",
+  "toolCalls": [
+    {
+      "name": "browser_navigate",
+      "input": {
+        "url": "http://127.0.0.1:62188/modal/?impl=B&run=save-same-name__B__openai-gpt-oss-120b__10"
+      },
+      "isError": false,
+      "resultPreview": "### Ran Playwright code\n```js\nawait page.goto('http://127.0.0.1:62188/modal/?impl=B&run=save-same-name__B__openai-gpt-oss-120b__10');\n```\n### Page\n- Page URL: http://127.0.0.1:62188/modal/?impl=B&run=save-same-name__B__openai-gpt-oss-120b__10\n- Page Title: 경기 준비\n### Snapshot\n- [Snapshot](..\\pw-mcp\\page-2026-11-23T17-07-49-113Z.yml)"
+    },
+    {
+      "name": "browser_snapshot",
+      "input": {
+        "filename": "snapshot.yml"
+      },
+      "isError": false,
+      "resultPreview": "### Page\n- Page URL: http://127.0.0.1:62188/modal/?impl=B&run=save-same-name__B__openai-gpt-oss-120b__10\n- Page Title: 경기 준비\n### Snapshot\n- [Snapshot](./snapshot.yml)"
+    },
+    {
+      "name": "browser_find",
+      "input": {
+        "text": "운영 방식",
+        "maxResults": 20
+      },
+      "isError": false,
+      "resultPreview": "### Result\nFound 1 match for \"운영 방식\":\n\n- main [ref=e3]:\n  - heading \"경기 준비\" [level=1] [ref=e4]\n  - paragraph [ref=e5]: \"공격 작전: 내가 · 투수 교체: 내가\"\n  - button \"운영 방식 설정\" [ref=e6]\n  - button \"경기 시작\" [ref=e7]\n  - paragraph [ref=e8]: 로스터 변경 사항\n  - button \"저장\" [ref=e9]"
+    },
+    {
+      "name": "browser_click",
+      "input": {
+        "target": "e6",
+        "button": "left"
+      },
+      "isError": false,
+      "resultPreview": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: '운영 방식 설정' }).click();\n```\n### Page\n- Page URL: http://127.0.0.1:62188/modal/?impl=B&run=save-same-name__B__openai-gpt-oss-120b__10\n- Page Title: 경기 준비\n### Snapshot\n- [Snapshot](..\\pw-mcp\\page-2026-11-23T17-07-55-207Z.yml)"
+    },
+    {
+      "name": "browser_snapshot",
+      "input": {
+        "filename": "snapshot2.yml"
+      },
+      "isError": false,
+      "resultPreview": "### Page\n- Page URL: http://127.0.0.1:62188/modal/?impl=B&run=save-same-name__B__openai-gpt-oss-120b__10\n- Page Title: 경기 준비\n### Snapshot\n- [Snapshot](./snapshot2.yml)"
+    },
+    {
+      "name": "browser_find",
+      "input": {
+        "text": "투수",
+        "maxResults": 20
+      },
+      "isError": false,
+      "resultPreview": "### Result\nFound 2 matches for \"투수\":\n\n- generic [ref=e1]:\n  - main [ref=e3]:\n    - heading [level=1] [ref=e10]: 경기 준비\n    - paragraph [ref=e5]: \"공격 작전: 내가 · 투수 교체: 내가\"\n    - button [ref=e11]: 운영 방식 설정\n    - button [ref=e12]: 경기 시작\n    - paragraph [ref=e8]: 로스터 변경 사항\n\n----\n\n- generic [ref=e1]:\n  - dialog \"경기 운영 설정\" [active] [ref=e15]:\n    - group \"공격 작전\" [ref=e17]:\n      - generic [ref=e19]:\n        - button \"코치에게\" [ref=e20]\n        - button \"내가\" [pressed] [ref=e21]\n    - group \"투수 교체\" [ref=e22]:\n      - generic [ref=e24]:\n        - button \"코치에게\" [ref=e25]\n        - button \"내가\" [pressed] [ref=e"
+    },
+    {
+      "name": "browser_click",
+      "input": {
+        "target": "e25",
+        "button": "left"
+      },
+      "isError": false,
+      "resultPreview": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: '코치에게' }).nth(1).click();\n```\n### Page\n- Page URL: http://127.0.0.1:62188/modal/?impl=B&run=save-same-name__B__openai-gpt-oss-120b__10\n- Page Title: 경기 준비\n### Snapshot\n- [Snapshot](..\\pw-mcp\\page-2026-11-23T17-07-59-333Z.yml)"
+    },
+    {
+      "name": "browser_snapshot",
+      "input": {
+        "filename": "snapshot3.yml"
+      },
+      "isError": false,
+      "resultPreview": "### Page\n- Page URL: http://127.0.0.1:62188/modal/?impl=B&run=save-same-name__B__openai-gpt-oss-120b__10\n- Page Title: 경기 준비\n### Snapshot\n- [Snapshot](./snapshot3.yml)"
+    },
+    {
+      "name": "browser_find",
+      "input": {
+        "text": "투수 교체",
+        "maxResults": 5
+      },
+      "isError": false,
+      "resultPreview": "### Result\nFound 2 matches for \"투수 교체\":\n\n- generic [ref=e1]:\n  - main [ref=e3]:\n    - heading [level=1] [ref=e10]: 경기 준비\n    - paragraph [ref=e5]: \"공격 작전: 내가 · 투수 교체: 내가\"\n    - button [ref=e11]: 운영 방식 설정\n    - button [ref=e12]: 경기 시작\n    - paragraph [ref=e8]: 로스터 변경 사항\n\n----\n\n- generic [ref=e1]:\n  - dialog \"경기 운영 설정\" [ref=e15]:\n    - group \"공격 작전\" [ref=e17]:\n      - generic [ref=e19]:\n        - button \"코치에게\" [ref=e20]\n        - button \"내가\" [pressed] [ref=e21]\n    - group \"투수 교체\" [ref=e22]:\n      - generic [ref=e24]:\n        - button \"코치에게\" [active] [pressed] [ref=e25]\n        - button \"내가\" [re"
+    },
+    {
+      "name": "browser_click",
+      "input": {
+        "target": "e9",
+        "button": "left"
+      },
+      "isError": true,
+      "resultPreview": "### Error\nError: Ref e9 not found in the current page snapshot. Try capturing new snapshot."
+    },
+    {
+      "name": "browser_find",
+      "input": {
+        "text": "저장",
+        "maxResults": 10
+      },
+      "isError": false,
+      "resultPreview": "### Result\nFound 2 matches for \"저장\":\n\n- generic [ref=e1]:\n  - main [ref=e3]:\n    - button [ref=e11]: 운영 방식 설정\n    - button [ref=e12]: 경기 시작\n    - paragraph [ref=e8]: 로스터 변경 사항\n    - button [ref=e13]: 저장\n  - dialog \"경기 운영 설정\" [ref=e15]:\n    - heading \"경기 운영 설정\" [level=2] [ref=e16]\n    - group \"공격 작전\" [ref=e17]:\n\n----\n\n- generic [ref=e1]:\n  - dialog \"경기 운영 설정\" [ref=e15]:\n    - group \"투수 교체\" [ref=e22]:\n      - generic [ref=e24]:\n        ...\n        - button \"내가\" [ref=e26]\n    - generic [ref=e27]:\n      - button \"닫기\" [ref=e28]\n      - button \"저장\" [ref=e29]"
+    },
+    {
+      "name": "browser_click",
+      "input": {
+        "target": "e29",
+        "button": "left"
+      },
+      "isError": false,
+      "resultPreview": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: '저장' }).click();\n```\n### Page\n- Page URL: http://127.0.0.1:62188/modal/?impl=B&run=save-same-name__B__openai-gpt-oss-120b__10\n- Page Title: 경기 준비\n### Snapshot\n- [Snapshot](..\\pw-mcp\\page-2026-11-23T17-08-07-876Z.yml)"
+    },
+    {
+      "name": "browser_snapshot",
+      "input": {
+        "filename": "final_snapshot.yml"
+      },
+      "isError": false,
+      "resultPreview": "### Page\n- Page URL: http://127.0.0.1:62188/modal/?impl=B&run=save-same-name__B__openai-gpt-oss-120b__10\n- Page Title: 경기 준비\n### Snapshot\n- [Snapshot](./final_snapshot.yml)"
+    }
+  ]
+}

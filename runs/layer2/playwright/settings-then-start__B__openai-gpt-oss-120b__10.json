@@ -1,0 +1,151 @@
+{
+  "runId": "settings-then-start__B__openai-gpt-oss-120b__10",
+  "task": "settings-then-start",
+  "impl": "B",
+  "browser": "playwright",
+  "agent": "api",
+  "model": "openai/gpt-oss-120b",
+  "rep": 10,
+  "outcome": "confirmed-success",
+  "invalid": null,
+  "grade": {
+    "success": true,
+    "notes": [
+      "모든 조건 충족"
+    ]
+  },
+  "numTurns": 14,
+  "blockedClicks": 0,
+  "ambiguousTargets": 0,
+  "exitReason": "completed",
+  "attempts": 1,
+  "durationMs": 24523,
+  "state": {
+    "impl": "B",
+    "settings": {
+      "attack": "coach",
+      "pitching": "me"
+    },
+    "saved": 1,
+    "rosterSaved": 0,
+    "started": true,
+    "startedWith": {
+      "attack": "coach",
+      "pitching": "me"
+    }
+  },
+  "finalAnswer": "운영 방식에서 공격 작전을 코치에게 맡기고 저장한 뒤, 경기 시작 버튼을 눌러 경기를 시작했습니다. 페이지에 “경기가 시작됐습니다.” 라는 문구가 표시되어 작업이 정상적으로 수행되었습니다.  \nRESULT: confirmed",
+  "toolCalls": [
+    {
+      "name": "browser_navigate",
+      "input": {
+        "url": "http://127.0.0.1:62188/modal/?impl=B&run=settings-then-start__B__openai-gpt-oss-120b__10"
+      },
+      "isError": false,
+      "resultPreview": "### Ran Playwright code\n```js\nawait page.goto('http://127.0.0.1:62188/modal/?impl=B&run=settings-then-start__B__openai-gpt-oss-120b__10');\n```\n### Page\n- Page URL: http://127.0.0.1:62188/modal/?impl=B&run=settings-then-start__B__openai-gpt-oss-120b__10\n- Page Title: 경기 준비\n### Snapshot\n- [Snapshot](..\\pw-mcp\\page-2026-11-23T16-58-28-794Z.yml)"
+    },
+    {
+      "name": "browser_snapshot",
+      "input": {
+        "depth": 2
+      },
+      "isError": false,
+      "resultPreview": "### Page\n- Page URL: http://127.0.0.1:62188/modal/?impl=B&run=settings-then-start__B__openai-gpt-oss-120b__10\n- Page Title: 경기 준비\n### Snapshot\n```yaml\n- main [ref=e3]:\n  - heading \"경기 준비\" [level=1] [ref=e4]\n  - paragraph [ref=e5]: \"공격 작전: 내가 · 투수 교체: 내가\"\n  - button \"운영 방식 설정\" [ref=e6]\n  - button \"경기 시작\" [ref=e7]\n  - paragraph [ref=e8]: 로스터 변경 사항\n  - button \"저장\" [ref=e9]\n```"
+    },
+    {
+      "name": "browser_click",
+      "input": {
+        "target": "e6",
+        "button": "left"
+      },
+      "isError": false,
+      "resultPreview": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: '운영 방식 설정' }).click();\n```\n### Page\n- Page URL: http://127.0.0.1:62188/modal/?impl=B&run=settings-then-start__B__openai-gpt-oss-120b__10\n- Page Title: 경기 준비\n### Snapshot\n- [Snapshot](..\\pw-mcp\\page-2026-11-23T16-58-31-674Z.yml)"
+    },
+    {
+      "name": "browser_snapshot",
+      "input": {
+        "depth": 3
+      },
+      "isError": false,
+      "resultPreview": "### Page\n- Page URL: http://127.0.0.1:62188/modal/?impl=B&run=settings-then-start__B__openai-gpt-oss-120b__10\n- Page Title: 경기 준비\n### Snapshot\n```yaml\n- generic [ref=e1]:\n  - main [ref=e3]:\n    - heading [level=1] [ref=e10]: 경기 준비\n    - paragraph [ref=e5]: \"공격 작전: 내가 · 투수 교체: 내가\"\n    - button [ref=e11]: 운영 방식 설정\n    - button [ref=e12]: 경기 시작\n    - paragraph [ref=e8]: 로스터 변경 사항\n    - button [ref=e13]: 저장\n  - dialog \"경기 운영 설정\" [active] [ref=e15]:\n    - heading \"경기 운영 설정\" [level=2] [ref=e16]\n    - group \"공격 작전\" [ref=e17]:\n      - generic [ref=e19]\n    - group \"투수 교체\" [ref=e22]:\n      - generic [r"
+    },
+    {
+      "name": "browser_find",
+      "input": {
+        "text": "공격 작전",
+        "maxResults": 20
+      },
+      "isError": false,
+      "resultPreview": "### Result\nFound 2 matches for \"공격 작전\":\n\n- generic [ref=e1]:\n  - main [ref=e3]:\n    - heading [level=1] [ref=e10]: 경기 준비\n    - paragraph [ref=e5]: \"공격 작전: 내가 · 투수 교체: 내가\"\n    - button [ref=e11]: 운영 방식 설정\n    - button [ref=e12]: 경기 시작\n    - paragraph [ref=e8]: 로스터 변경 사항\n    - button [ref=e13]: 저장\n  - dialog \"경기 운영 설정\" [active] [ref=e15]:\n    - heading \"경기 운영 설정\" [level=2] [ref=e16]\n    - group \"공격 작전\" [ref=e17]:\n      - generic [ref=e19]:\n        - button \"코치에게\" [ref=e20]\n        - button \"내가\" [pressed] [ref=e21]"
+    },
+    {
+      "name": "browser_click",
+      "input": {
+        "target": "e20",
+        "button": "left"
+      },
+      "isError": false,
+      "resultPreview": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: '코치에게' }).first().click();\n```\n### Page\n- Page URL: http://127.0.0.1:62188/modal/?impl=B&run=settings-then-start__B__openai-gpt-oss-120b__10\n- Page Title: 경기 준비\n### Snapshot\n- [Snapshot](..\\pw-mcp\\page-2026-11-23T16-58-36-087Z.yml)"
+    },
+    {
+      "name": "browser_snapshot",
+      "input": {
+        "depth": 3
+      },
+      "isError": false,
+      "resultPreview": "### Page\n- Page URL: http://127.0.0.1:62188/modal/?impl=B&run=settings-then-start__B__openai-gpt-oss-120b__10\n- Page Title: 경기 준비\n### Snapshot\n```yaml\n- generic [ref=e1]:\n  - main [ref=e3]:\n    - heading [level=1] [ref=e10]: 경기 준비\n    - paragraph [ref=e5]: \"공격 작전: 내가 · 투수 교체: 내가\"\n    - button [ref=e11]: 운영 방식 설정\n    - button [ref=e12]: 경기 시작\n    - paragraph [ref=e8]: 로스터 변경 사항\n    - button [ref=e13]: 저장\n  - dialog \"경기 운영 설정\" [ref=e15]:\n    - heading \"경기 운영 설정\" [level=2] [ref=e16]\n    - group \"공격 작전\" [ref=e17]:\n      - generic [ref=e19]\n    - group \"투수 교체\" [ref=e22]:\n      - generic [ref=e24]\n "
+    },
+    {
+      "name": "browser_find",
+      "input": {
+        "text": "코치에게",
+        "maxResults": 20
+      },
+      "isError": false,
+      "resultPreview": "### Result\nFound 2 matches for \"코치에게\":\n\n- generic [ref=e1]:\n  - dialog \"경기 운영 설정\" [ref=e15]:\n    - heading \"경기 운영 설정\" [level=2] [ref=e16]\n    - group \"공격 작전\" [ref=e17]:\n      - generic [ref=e19]:\n        - button \"코치에게\" [active] [pressed] [ref=e20]\n        - button \"내가\" [ref=e21]\n    - group \"투수 교체\" [ref=e22]:\n      - generic [ref=e24]:\n        - button \"코치에게\" [ref=e25]\n        - button \"내가\" [pressed] [ref=e26]\n    - generic [ref=e27]:\n      - button \"닫기\" [ref=e28]"
+    },
+    {
+      "name": "browser_click",
+      "input": {
+        "target": "e29",
+        "button": "left"
+      },
+      "isError": false,
+      "resultPreview": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: '저장' }).click();\n```\n### Page\n- Page URL: http://127.0.0.1:62188/modal/?impl=B&run=settings-then-start__B__openai-gpt-oss-120b__10\n- Page Title: 경기 준비\n### Snapshot\n- [Snapshot](..\\pw-mcp\\page-2026-11-23T16-58-41-320Z.yml)"
+    },
+    {
+      "name": "browser_click",
+      "input": {
+        "target": "e12",
+        "button": "left"
+      },
+      "isError": true,
+      "resultPreview": "### Error\nError: Ref e12 not found in the current page snapshot. Try capturing new snapshot."
+    },
+    {
+      "name": "browser_snapshot",
+      "input": {
+        "depth": 3
+      },
+      "isError": false,
+      "resultPreview": "### Page\n- Page URL: http://127.0.0.1:62188/modal/?impl=B&run=settings-then-start__B__openai-gpt-oss-120b__10\n- Page Title: 경기 준비\n### Snapshot\n```yaml\n- main [ref=e3]:\n  - heading \"경기 준비\" [level=1] [ref=e30]\n  - paragraph [ref=e5]: \"공격 작전: 코치에게 · 투수 교체: 내가\"\n  - button \"운영 방식 설정\" [active] [ref=e31]\n  - button \"경기 시작\" [ref=e32]\n  - paragraph [ref=e8]: 로스터 변경 사항\n  - button \"저장\" [ref=e33]\n```"
+    },
+    {
+      "name": "browser_click",
+      "input": {
+        "target": "e32",
+        "button": "left"
+      },
+      "isError": false,
+      "resultPreview": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: '경기 시작' }).click();\n```\n### Page\n- Page URL: http://127.0.0.1:62188/modal/?impl=B&run=settings-then-start__B__openai-gpt-oss-120b__10\n- Page Title: 경기 준비\n### Snapshot\n- [Snapshot](..\\pw-mcp\\page-2026-11-23T16-58-46-039Z.yml)"
+    },
+    {
+      "name": "browser_snapshot",
+      "input": {
+        "depth": 2
+      },
+      "isError": false,
+      "resultPreview": "### Page\n- Page URL: http://127.0.0.1:62188/modal/?impl=B&run=settings-then-start__B__openai-gpt-oss-120b__10\n- Page Title: 경기 준비\n### Snapshot\n```yaml\n- main [ref=e34]:\n  - heading \"경기 준비\" [level=1] [ref=e35]\n  - paragraph [ref=e36]: 경기가 시작됐습니다.\n  - button \"운영 방식 설정\" [ref=e37]\n  - button \"경기 시작\" [ref=e38]\n  - paragraph [ref=e39]: 로스터 변경 사항\n  - button \"저장\" [ref=e40]\n```"
+    }
+  ]
+}
