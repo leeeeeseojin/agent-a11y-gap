@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="data:,">
+<title>경기 준비</title>
+<link rel="stylesheet" href="modal.css">
+</head>
+<body>
+<!--
+  3층 설계 대안 비교용 화면. MY DUGOUT의 홈 + "경기 운영 설정" 시트를 줄여서 옮겼다.
+  ?impl=A|B|C|D 로 모달 구현만 바꾸고 화면·문구·과제는 같게 둔다.
+    A  aria-modal만 (MY DUGOUT 수정 전에 가까움)
+    B  배경 inert + aria-hidden (MY DUGOUT 수정 후, Sheet.tsx)
+    C  네이티브 <dialog>.showModal()
+    D  시트를 여는 동안 배경을 DOM에서 내림 (별도 화면)
+  배경과 시트 양쪽에 "저장" 버튼을 일부러 둔다. Playwright MCP가 배경 버튼의 이름만 빼고 남기면
+  에이전트는 `button [ref]: 저장`과 `button "저장"` 중 하나를 골라야 한다.
+-->
+<div id="app"></div>
+<script type="module" src="app.js"></script>
+</body>
+</html>
