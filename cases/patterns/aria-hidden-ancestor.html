@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="ko" data-case="aria-hidden-ancestor">
+<head><meta charset="utf-8"><link rel="icon" href="data:,"><title>aria-hidden 조상</title><link rel="stylesheet" href="_probe.css"></head>
+<body>
+<!-- 조상에 aria-hidden=true. 화면에는 보이지만 보조기술에서는 빠져야 한다. -->
+<h1>aria-hidden 조상</h1>
+<button data-probe="CONTROL">CONTROL</button>
+<div aria-hidden="true">
+  <button data-probe="TARGET">TARGET</button>
+</div>
+<script src="_probe.js"></script>
+</body>
+</html>

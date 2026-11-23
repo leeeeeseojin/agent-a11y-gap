@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="ko" data-case="inert-ancestor">
+<head><meta charset="utf-8"><link rel="icon" href="data:,"><title>inert 조상</title><link rel="stylesheet" href="_probe.css"></head>
+<body>
+<!-- 조상에 inert. 눌리지 않고 포커스도 안 되며 접근성 트리에서도 빠져야 한다. -->
+<h1>inert 조상</h1>
+<button data-probe="CONTROL">CONTROL</button>
+<div inert>
+  <button data-probe="TARGET">TARGET</button>
+</div>
+<script src="_probe.js"></script>
+</body>
+</html>
