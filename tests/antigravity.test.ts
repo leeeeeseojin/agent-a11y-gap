@@ -22,6 +22,16 @@ describe("Antigravity 출력 해석", () => {
     });
   });
 
+  it("mcp_<서버>_<도구> 이름으로 직접 부른 호출도 브라우저 호출로 센다", () => {
+    // agy 1.5.14에서 Gemini가 call_mcp_tool 대신 이 모양으로 불렀다
+    const direct = tool(`mcp_${SERVER}_browser_click`, "DONE", { target: "e4" });
+    const run = parseAgyStream([direct], SERVER);
+    expect(run.toolCalls).toMatchObject([{ name: "browser_click", input: { target: "e4" } }]);
+    expect(run.outsideTools).toEqual([]);
+    // 다른 서버 이름이 앞에 붙은 경우는 브라우저 밖 도구다
+    expect(parseAgyStream([tool("mcp_github_search", "DONE", {})], SERVER).outsideTools).toEqual(["mcp_github_search"]);
+  });
+
   it("정상 응답에 담긴 Playwright 오류도 실패한 호출로 센다", () => {
     // inert 배경 버튼을 누르면 이렇게 시간 초과가 본문으로 돌아온다
     const run = parseAgyStream([click("### Error\nTimeoutError: locator.click: Timeout 5000ms exceeded.\n  - element is inert")], SERVER);

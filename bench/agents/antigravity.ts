@@ -26,7 +26,7 @@ export function resolveAgy(): string {
 }
 
 /** agy --output-format stream-json 출력을 실행 결과로 바꾼다. 테스트에서 직접 부를 수 있게 따로 뺐다 */
-export function parseAgyStream(lines: string[], serverName: string): Omit<AgentRun, "durationMs"> & { status: string; error: string } {
+export function parseAgyStream(lines: string[], serverName: string): Omit<AgentRun, "durationMs" | "retryable"> & { status: string; error: string } {
   const calls: ToolCall[] = [];
   const outside: string[] = [];
   let numTurns = 0;
@@ -47,16 +47,21 @@ export function parseAgyStream(lines: string[], serverName: string): Omit<AgentR
     if (step?.step_type === "agent_response" && step.state === "DONE") numTurns++;
     if (step?.step_type === "tool" && (step.state === "DONE" || step.state === "ERROR")) {
       const params = step.tool_info?.parameters ?? {};
-      const browser = step.tool_name === "call_mcp_tool" && params.ServerName === serverName;
+      const toolName = String(step.tool_name);
+      // 브라우저 도구 호출은 두 모양으로 온다. call_mcp_tool로 서버와 도구 이름을 따로 넘기거나(IntentGuard 때 본 모양),
+      // "mcp_<서버>_<도구>"라는 이름으로 직접 부른다(agy 1.5.14에서 Gemini가 쓴 모양). 둘 다 브라우저 호출로 센다
+      const direct = toolName.startsWith(`mcp_${serverName}_`) ? toolName.slice(`mcp_${serverName}_`.length) : null;
+      const viaCall = toolName === "call_mcp_tool" && params.ServerName === serverName;
+      const browser = viaCall || direct !== null;
       const output = String(step.tool_info?.error?.message ?? step.tool_info?.output ?? "");
       calls.push({
-        name: browser ? String(params.ToolName) : String(step.tool_name),
-        input: browser ? params.Arguments : params,
+        name: direct ?? (viaCall ? String(params.ToolName) : toolName),
+        input: direct !== null ? params : viaCall ? params.Arguments : params,
         // Playwright MCP는 실패도 정상 응답 본문의 "### Error"로 돌려준다
         isError: step.state === "ERROR" || output.startsWith("### Error"),
         resultPreview: output.slice(0, 600),
       });
-      if (!browser && step.state === "DONE" && !HARMLESS.has(step.tool_name)) outside.push(String(step.tool_name));
+      if (!browser && step.state === "DONE" && !HARMLESS.has(toolName)) outside.push(toolName);
     }
     if (message.result) {
       status = message.result.status ?? "";
@@ -136,6 +141,8 @@ export function runAntigravity(o: AgentInput): Promise<AgentRun> {
         ...parsed,
         // 시간 초과는 에이전트가 과제를 못 끝낸 것이므로 무효가 아니라 실패로 센다
         exitReason: timedOut || /print timeout/.test(error + stderr) ? "timeout" : spawnError ? "error" : parsed.exitReason,
+        // 본실험 중 GPT-OSS가 "No capacity available"(503)로 자주 끝났다. agy도 이 오류를 retryable로 표시한다
+        retryable: !timedOut && parsed.exitReason === "error" && /"retryable":\s*true|code 503|No capacity available/i.test(error + stderr),
         durationMs: Date.now() - started,
       });
     };
