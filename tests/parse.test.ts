@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { classifyClickError, parseDevtoolsSnapshot, parsePlaywrightSnapshot } from "../probe/parse.js";
+import { classifyClickError, errorLine, parseDevtoolsSnapshot, parsePlaywrightSnapshot } from "../probe/parse.js";
 
 describe("parsePlaywrightSnapshot", () => {
   it("이름이 붙은 버튼", () => {
@@ -26,6 +26,13 @@ describe("parseDevtoolsSnapshot", () => {
   it("텍스트만 남으면 이름 없음", () => {
     const f = parseDevtoolsSnapshot('  uid=1_3 button\n    uid=1_4 StaticText "TARGET"');
     expect(f).toMatchObject({ exposed: true, named: false, ref: "1_4" });
+  });
+});
+
+describe("errorLine", () => {
+  it("시간 초과보다 무엇을 기다렸는지를 먼저 남긴다", () => {
+    const log = "TimeoutError: locator.click: Timeout 3000ms exceeded.\nCall log:\n  - waiting for locator('x')\n    - element is inert";
+    expect(errorLine(log)).toBe("- element is inert");
   });
 });
 
