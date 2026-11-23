@@ -47,11 +47,26 @@ export function httpLimit(status: number): AgentRun["limit"] {
   return null;
 }
 
-interface ChatMessage {
+export interface ChatMessage {
   role: "user" | "assistant" | "tool";
   content: string | null;
   tool_calls?: { id: string; type: "function"; function: { name: string; arguments: string } }[];
   tool_call_id?: string;
+}
+
+/**
+ * Anthropic 모델에만 프롬프트 캐시 표시를 붙인다. 이 실행기는 매 턴 대화 전체를 다시 보내므로,
+ * 마지막 메시지에 표시를 달아 두면 다음 턴은 그 앞까지를 캐시에서 읽는다(OpenRouter 기준 새 입력의 1/20 가격).
+ * 모델이 받는 내용은 같고 비용만 달라진다. 다른 모델의 요청은 그대로 둔다.
+ */
+export function withCache(model: string, messages: ChatMessage[]): unknown[] {
+  if (!model.startsWith("anthropic/")) return messages;
+  const last = messages.length - 1;
+  return messages.map((m, i) =>
+    i === last && m.role !== "assistant" && typeof m.content === "string"
+      ? { ...m, content: [{ type: "text", text: m.content, cache_control: { type: "ephemeral" } }] }
+      : m,
+  );
 }
 
 export async function runOpenAiCompat(o: AgentInput): Promise<AgentRun> {
@@ -65,7 +80,8 @@ export async function runOpenAiCompat(o: AgentInput): Promise<AgentRun> {
 
   const apiKey = envValue("OPENROUTER_API_KEY");
   const baseUrl = envValue("OPENAI_COMPAT_BASE_URL") ?? "https://openrouter.ai/api/v1";
-  // Antigravity의 gpt-oss-120b-medium과 맞추려고 추론 강도 기본값을 medium으로 둔다
+  // Antigravity의 gpt-oss-120b-medium과 맞추려고 추론 강도 기본값을 medium으로 둔다.
+  // Claude는 Antigravity에서 claude-sonnet-5-5-low로 돌렸으므로 OPENAI_COMPAT_REASONING_EFFORT=low로 맞춘다
   const effort = envValue("OPENAI_COMPAT_REASONING_EFFORT") ?? "medium";
   if (!apiKey) {
     log({ type: "error", text: "OPENROUTER_API_KEY가 없다. 레포 루트 .env에 넣을 것" });
@@ -87,7 +103,7 @@ export async function runOpenAiCompat(o: AgentInput): Promise<AgentRun> {
       const res = await fetch(`${baseUrl}/chat/completions`, {
         method: "POST",
         headers: { authorization: `Bearer ${apiKey}`, "content-type": "application/json" },
-        body: JSON.stringify({ model: o.model, messages, tools, reasoning: { effort } }),
+        body: JSON.stringify({ model: o.model, messages: withCache(o.model, messages), tools, reasoning: { effort } }),
         signal: controller.signal,
       });
       const body: any = await res.json().catch(() => ({}));

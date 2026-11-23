@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { browserServer } from "../bench/agents/browser.js";
-import { httpLimit, toOpenAiTools } from "../bench/agents/openai-compat.js";
+import { httpLimit, toOpenAiTools, withCache, type ChatMessage } from "../bench/agents/openai-compat.js";
 
 const schema = { type: "object", properties: {} };
 
@@ -22,6 +22,24 @@ describe("API 실행기 도구 정의", () => {
 
   it("허용 목록이 없는 서버(DevTools MCP)는 돌리지 않는다", () => {
     expect(() => toOpenAiTools([], browserServer("devtools"))).toThrow();
+  });
+});
+
+describe("프롬프트 캐시", () => {
+  const messages: ChatMessage[] = [
+    { role: "user", content: "요청" },
+    { role: "assistant", content: null, tool_calls: [{ id: "c1", type: "function", function: { name: "browser_snapshot", arguments: "{}" } }] },
+    { role: "tool", tool_call_id: "c1", content: "스냅샷" },
+  ];
+
+  it("Anthropic 모델이면 마지막 메시지에만 캐시 표시를 붙이고 내용은 그대로 둔다", () => {
+    const sent = withCache("anthropic/claude-sonnet-5.5", messages) as any[];
+    expect(sent[2].content).toEqual([{ type: "text", text: "스냅샷", cache_control: { type: "ephemeral" } }]);
+    expect(sent[0]).toEqual(messages[0]);
+  });
+
+  it("다른 모델의 요청은 바꾸지 않는다", () => {
+    expect(withCache("openai/gpt-oss-120b", messages)).toBe(messages);
   });
 });
 
