@@ -1,0 +1,4 @@
+## Latest page snapshot
+uid=1_0 RootWebArea "hidden 속성" url="http://127.0.0.1:4310/patterns/hidden-attribute.html"
+  uid=1_1 heading "hidden 속성" level="1"
+  uid=1_2 button "CONTROL"

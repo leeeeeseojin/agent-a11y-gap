@@ -1,0 +1,10 @@
+### Page
+- Page URL: http://127.0.0.1:4310/patterns/aria-hidden-ancestor.html
+- Page Title: aria-hidden 조상
+### Snapshot
+```yaml
+- generic [active] [ref=e1]:
+  - heading "aria-hidden 조상" [level=1] [ref=e2]
+  - button "CONTROL" [ref=e3]
+  - button [ref=e5]: TARGET
+```

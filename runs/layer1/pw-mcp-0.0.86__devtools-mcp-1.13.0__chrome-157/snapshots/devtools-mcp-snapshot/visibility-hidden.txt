@@ -1,0 +1,4 @@
+## Latest page snapshot
+uid=1_0 RootWebArea "visibility:hidden" url="http://127.0.0.1:4310/patterns/visibility-hidden.html"
+  uid=1_1 heading "visibility:hidden" level="1"
+  uid=1_2 button "CONTROL"

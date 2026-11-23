@@ -1,0 +1,517 @@
+{
+  "collectedAt": "2026-11-23T07:28:14.902Z",
+  "versions": {
+    "playwrightMcp": "0.0.86",
+    "chromeDevtoolsMcp": "1.13.0",
+    "playwright": "1.65.1",
+    "chrome": "157.0.8103.80",
+    "node": "v22.23.0",
+    "os": "win32 10.0.26200"
+  },
+  "observations": [
+    {
+      "pattern": "aria-hidden-ancestor",
+      "tool": "cdp-ax-tree",
+      "exposed": false,
+      "named": false,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": ""
+    },
+    {
+      "pattern": "inert-ancestor",
+      "tool": "cdp-ax-tree",
+      "exposed": false,
+      "named": false,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": ""
+    },
+    {
+      "pattern": "modal-inert-aria-hidden",
+      "tool": "cdp-ax-tree",
+      "exposed": false,
+      "named": false,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": ""
+    },
+    {
+      "pattern": "native-dialog-showmodal",
+      "tool": "cdp-ax-tree",
+      "exposed": false,
+      "named": false,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": ""
+    },
+    {
+      "pattern": "display-none",
+      "tool": "cdp-ax-tree",
+      "exposed": false,
+      "named": false,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": ""
+    },
+    {
+      "pattern": "visibility-hidden",
+      "tool": "cdp-ax-tree",
+      "exposed": false,
+      "named": false,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": ""
+    },
+    {
+      "pattern": "opacity-0",
+      "tool": "cdp-ax-tree",
+      "exposed": true,
+      "named": true,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": "button \"TARGET\""
+    },
+    {
+      "pattern": "covered-by-overlay",
+      "tool": "cdp-ax-tree",
+      "exposed": true,
+      "named": true,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": "button \"TARGET\""
+    },
+    {
+      "pattern": "aria-modal-only",
+      "tool": "cdp-ax-tree",
+      "exposed": true,
+      "named": true,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": "button \"TARGET\""
+    },
+    {
+      "pattern": "hidden-attribute",
+      "tool": "cdp-ax-tree",
+      "exposed": false,
+      "named": false,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": ""
+    },
+    {
+      "pattern": "offscreen",
+      "tool": "cdp-ax-tree",
+      "exposed": true,
+      "named": true,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": "button \"TARGET\""
+    },
+    {
+      "pattern": "closed-details",
+      "tool": "cdp-ax-tree",
+      "exposed": false,
+      "named": false,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": ""
+    },
+    {
+      "pattern": "inactive-tabpanel",
+      "tool": "cdp-ax-tree",
+      "exposed": false,
+      "named": false,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": ""
+    },
+    {
+      "pattern": "popover",
+      "tool": "cdp-ax-tree",
+      "exposed": false,
+      "named": false,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": ""
+    },
+    {
+      "pattern": "aria-hidden-ancestor",
+      "tool": "pw-get-by-role",
+      "exposed": false,
+      "named": false,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": ""
+    },
+    {
+      "pattern": "inert-ancestor",
+      "tool": "pw-get-by-role",
+      "exposed": true,
+      "named": true,
+      "ref": "getByRole",
+      "click": "timeout",
+      "evidence": "getByRole('button', { name: 'TARGET' }) → 1개 | TimeoutError: locator.click: Timeout 3000ms exceeded."
+    },
+    {
+      "pattern": "modal-inert-aria-hidden",
+      "tool": "pw-get-by-role",
+      "exposed": false,
+      "named": false,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": ""
+    },
+    {
+      "pattern": "native-dialog-showmodal",
+      "tool": "pw-get-by-role",
+      "exposed": true,
+      "named": true,
+      "ref": "getByRole",
+      "click": "intercepted",
+      "evidence": "getByRole('button', { name: 'TARGET' }) → 1개 | - <dialog id=\"d\" open=\"\" aria-label=\"설정\">…</dialog> intercepts pointer events"
+    },
+    {
+      "pattern": "display-none",
+      "tool": "pw-get-by-role",
+      "exposed": false,
+      "named": false,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": ""
+    },
+    {
+      "pattern": "visibility-hidden",
+      "tool": "pw-get-by-role",
+      "exposed": false,
+      "named": false,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": ""
+    },
+    {
+      "pattern": "opacity-0",
+      "tool": "pw-get-by-role",
+      "exposed": true,
+      "named": true,
+      "ref": "getByRole",
+      "click": "clicked",
+      "evidence": "getByRole('button', { name: 'TARGET' }) → 1개"
+    },
+    {
+      "pattern": "covered-by-overlay",
+      "tool": "pw-get-by-role",
+      "exposed": true,
+      "named": true,
+      "ref": "getByRole",
+      "click": "intercepted",
+      "evidence": "getByRole('button', { name: 'TARGET' }) → 1개 | - <div class=\"backdrop\">…</div> intercepts pointer events"
+    },
+    {
+      "pattern": "aria-modal-only",
+      "tool": "pw-get-by-role",
+      "exposed": true,
+      "named": true,
+      "ref": "getByRole",
+      "click": "intercepted",
+      "evidence": "getByRole('button', { name: 'TARGET' }) → 1개 | - <div class=\"backdrop\">…</div> intercepts pointer events"
+    },
+    {
+      "pattern": "hidden-attribute",
+      "tool": "pw-get-by-role",
+      "exposed": false,
+      "named": false,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": ""
+    },
+    {
+      "pattern": "offscreen",
+      "tool": "pw-get-by-role",
+      "exposed": true,
+      "named": true,
+      "ref": "getByRole",
+      "click": "timeout",
+      "evidence": "getByRole('button', { name: 'TARGET' }) → 1개 | TimeoutError: locator.click: Timeout 3000ms exceeded."
+    },
+    {
+      "pattern": "closed-details",
+      "tool": "pw-get-by-role",
+      "exposed": false,
+      "named": false,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": ""
+    },
+    {
+      "pattern": "inactive-tabpanel",
+      "tool": "pw-get-by-role",
+      "exposed": false,
+      "named": false,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": ""
+    },
+    {
+      "pattern": "popover",
+      "tool": "pw-get-by-role",
+      "exposed": false,
+      "named": false,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": ""
+    },
+    {
+      "pattern": "aria-hidden-ancestor",
+      "tool": "pw-mcp-snapshot",
+      "exposed": true,
+      "named": false,
+      "ref": "e5",
+      "click": "clicked",
+      "evidence": "- button [ref=e5]: TARGET"
+    },
+    {
+      "pattern": "inert-ancestor",
+      "tool": "pw-mcp-snapshot",
+      "exposed": true,
+      "named": true,
+      "ref": "e5",
+      "click": "timeout",
+      "evidence": "- button \"TARGET\" [ref=e5] | TimeoutError: browserBackend.callTool: Timeout 5000ms exceeded."
+    },
+    {
+      "pattern": "modal-inert-aria-hidden",
+      "tool": "pw-mcp-snapshot",
+      "exposed": true,
+      "named": false,
+      "ref": "e4",
+      "click": "timeout",
+      "evidence": "- button [ref=e4]: TARGET | TimeoutError: browserBackend.callTool: Timeout 5000ms exceeded."
+    },
+    {
+      "pattern": "native-dialog-showmodal",
+      "tool": "pw-mcp-snapshot",
+      "exposed": true,
+      "named": true,
+      "ref": "e3",
+      "click": "intercepted",
+      "evidence": "- button \"TARGET\" [ref=e3] | - <dialog id=\"d\" open=\"\" aria-label=\"설정\">…</dialog> intercepts pointer events"
+    },
+    {
+      "pattern": "display-none",
+      "tool": "pw-mcp-snapshot",
+      "exposed": false,
+      "named": false,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": ""
+    },
+    {
+      "pattern": "visibility-hidden",
+      "tool": "pw-mcp-snapshot",
+      "exposed": false,
+      "named": false,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": ""
+    },
+    {
+      "pattern": "opacity-0",
+      "tool": "pw-mcp-snapshot",
+      "exposed": true,
+      "named": true,
+      "ref": "e5",
+      "click": "clicked",
+      "evidence": "- button \"TARGET\" [ref=e5]"
+    },
+    {
+      "pattern": "covered-by-overlay",
+      "tool": "pw-mcp-snapshot",
+      "exposed": true,
+      "named": true,
+      "ref": "e3",
+      "click": "intercepted",
+      "evidence": "- button \"TARGET\" [ref=e3] | - <div class=\"backdrop\">…</div> intercepts pointer events"
+    },
+    {
+      "pattern": "aria-modal-only",
+      "tool": "pw-mcp-snapshot",
+      "exposed": true,
+      "named": true,
+      "ref": "e3",
+      "click": "intercepted",
+      "evidence": "- button \"TARGET\" [ref=e3] | - <div class=\"backdrop\">…</div> intercepts pointer events"
+    },
+    {
+      "pattern": "hidden-attribute",
+      "tool": "pw-mcp-snapshot",
+      "exposed": false,
+      "named": false,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": ""
+    },
+    {
+      "pattern": "offscreen",
+      "tool": "pw-mcp-snapshot",
+      "exposed": true,
+      "named": true,
+      "ref": "e5",
+      "click": "timeout",
+      "evidence": "- button \"TARGET\" [ref=e5] | TimeoutError: browserBackend.callTool: Timeout 5000ms exceeded."
+    },
+    {
+      "pattern": "closed-details",
+      "tool": "pw-mcp-snapshot",
+      "exposed": false,
+      "named": false,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": ""
+    },
+    {
+      "pattern": "inactive-tabpanel",
+      "tool": "pw-mcp-snapshot",
+      "exposed": false,
+      "named": false,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": ""
+    },
+    {
+      "pattern": "popover",
+      "tool": "pw-mcp-snapshot",
+      "exposed": false,
+      "named": false,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": ""
+    },
+    {
+      "pattern": "aria-hidden-ancestor",
+      "tool": "devtools-mcp-snapshot",
+      "exposed": false,
+      "named": false,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": ""
+    },
+    {
+      "pattern": "inert-ancestor",
+      "tool": "devtools-mcp-snapshot",
+      "exposed": false,
+      "named": false,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": ""
+    },
+    {
+      "pattern": "modal-inert-aria-hidden",
+      "tool": "devtools-mcp-snapshot",
+      "exposed": false,
+      "named": false,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": ""
+    },
+    {
+      "pattern": "native-dialog-showmodal",
+      "tool": "devtools-mcp-snapshot",
+      "exposed": false,
+      "named": false,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": ""
+    },
+    {
+      "pattern": "display-none",
+      "tool": "devtools-mcp-snapshot",
+      "exposed": false,
+      "named": false,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": ""
+    },
+    {
+      "pattern": "visibility-hidden",
+      "tool": "devtools-mcp-snapshot",
+      "exposed": false,
+      "named": false,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": ""
+    },
+    {
+      "pattern": "opacity-0",
+      "tool": "devtools-mcp-snapshot",
+      "exposed": true,
+      "named": true,
+      "ref": "1_3",
+      "click": "clicked",
+      "evidence": "uid=1_3 button \"TARGET\""
+    },
+    {
+      "pattern": "covered-by-overlay",
+      "tool": "devtools-mcp-snapshot",
+      "exposed": true,
+      "named": true,
+      "ref": "1_2",
+      "click": "no-effect",
+      "evidence": "uid=1_2 button \"TARGET\" | Successfully clicked on the element"
+    },
+    {
+      "pattern": "aria-modal-only",
+      "tool": "devtools-mcp-snapshot",
+      "exposed": true,
+      "named": true,
+      "ref": "1_2",
+      "click": "no-effect",
+      "evidence": "uid=1_2 button \"TARGET\" | Successfully clicked on the element"
+    },
+    {
+      "pattern": "hidden-attribute",
+      "tool": "devtools-mcp-snapshot",
+      "exposed": false,
+      "named": false,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": ""
+    },
+    {
+      "pattern": "offscreen",
+      "tool": "devtools-mcp-snapshot",
+      "exposed": true,
+      "named": true,
+      "ref": "1_3",
+      "click": "timeout",
+      "evidence": "uid=1_3 button \"TARGET\" | Error: Failed to interact with the element with uid 1_3. The element did not become interactive within the configured timeout."
+    },
+    {
+      "pattern": "closed-details",
+      "tool": "devtools-mcp-snapshot",
+      "exposed": false,
+      "named": false,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": ""
+    },
+    {
+      "pattern": "inactive-tabpanel",
+      "tool": "devtools-mcp-snapshot",
+      "exposed": false,
+      "named": false,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": ""
+    },
+    {
+      "pattern": "popover",
+      "tool": "devtools-mcp-snapshot",
+      "exposed": false,
+      "named": false,
+      "ref": null,
+      "click": "not-attempted",
+      "evidence": ""
+    }
+  ]
+}

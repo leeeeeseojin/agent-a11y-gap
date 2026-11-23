@@ -1,0 +1,4 @@
+## Latest page snapshot
+uid=1_0 RootWebArea "aria-hidden 조상" url="http://127.0.0.1:4310/patterns/aria-hidden-ancestor.html"
+  uid=1_1 heading "aria-hidden 조상" level="1"
+  uid=1_2 button "CONTROL"

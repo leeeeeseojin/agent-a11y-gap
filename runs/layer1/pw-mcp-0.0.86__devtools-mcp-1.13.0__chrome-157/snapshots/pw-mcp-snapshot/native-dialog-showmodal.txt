@@ -1,0 +1,11 @@
+### Page
+- Page URL: http://127.0.0.1:4310/patterns/native-dialog-showmodal.html
+- Page Title: 네이티브 dialog.showModal()
+### Snapshot
+```yaml
+- generic [ref=e1]:
+  - heading "네이티브 dialog.showModal()" [level=1] [ref=e2]
+  - button "TARGET" [ref=e3]
+  - dialog "설정" [ref=e4]:
+    - button "CONTROL" [active] [ref=e5]
+```

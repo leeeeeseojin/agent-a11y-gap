@@ -1,0 +1,6 @@
+## Latest page snapshot
+uid=1_0 RootWebArea "비활성 탭 패널" url="http://127.0.0.1:4310/patterns/inactive-tabpanel.html"
+  uid=1_1 heading "비활성 탭 패널" level="1"
+  uid=1_2 tab "기본" selectable selected
+  uid=1_3 tab "고급" selectable
+  uid=1_4 button "CONTROL"

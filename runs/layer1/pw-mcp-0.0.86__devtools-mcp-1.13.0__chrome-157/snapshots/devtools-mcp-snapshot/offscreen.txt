@@ -1,0 +1,5 @@
+## Latest page snapshot
+uid=1_0 RootWebArea "화면 밖 배치" url="http://127.0.0.1:4310/patterns/offscreen.html"
+  uid=1_1 heading "화면 밖 배치" level="1"
+  uid=1_2 button "CONTROL"
+  uid=1_3 button "TARGET"

@@ -1,0 +1,9 @@
+### Page
+- Page URL: http://127.0.0.1:4310/patterns/visibility-hidden.html
+- Page Title: visibility:hidden
+### Snapshot
+```yaml
+- generic [active] [ref=e1]:
+  - heading "visibility:hidden" [level=1] [ref=e2]
+  - button "CONTROL" [ref=e3]
+```

@@ -1,0 +1,5 @@
+## Latest page snapshot
+uid=1_0 RootWebArea "모달 + 배경 inert·aria-hidden" url="http://127.0.0.1:4310/patterns/modal-inert-aria-hidden.html"
+  uid=1_1 heading "모달 + 배경 inert·aria-hidden" level="1"
+  uid=1_2 dialog "설정" modal
+    uid=1_3 button "CONTROL"

@@ -1,0 +1,11 @@
+### Page
+- Page URL: http://127.0.0.1:4310/patterns/aria-modal-only.html
+- Page Title: aria-modal만 있는 모달
+### Snapshot
+```yaml
+- generic [active] [ref=e1]:
+  - heading "aria-modal만 있는 모달" [level=1] [ref=e2]
+  - button "TARGET" [ref=e3]
+  - dialog "설정" [ref=e5]:
+    - button "CONTROL" [ref=e6]
+```

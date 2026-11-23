@@ -1,0 +1,9 @@
+### Page
+- Page URL: http://127.0.0.1:4310/patterns/display-none.html
+- Page Title: display:none
+### Snapshot
+```yaml
+- generic [active] [ref=e1]:
+  - heading "display:none" [level=1] [ref=e2]
+  - button "CONTROL" [ref=e3]
+```

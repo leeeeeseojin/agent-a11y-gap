@@ -1,0 +1,11 @@
+### Page
+- Page URL: http://127.0.0.1:4310/patterns/closed-details.html
+- Page Title: 닫힌 details
+### Snapshot
+```yaml
+- generic [active] [ref=e1]:
+  - heading "닫힌 details" [level=1] [ref=e2]
+  - button "CONTROL" [ref=e3]
+  - group [ref=e4]:
+    - generic "더보기" [ref=e5]
+```

@@ -1,0 +1,5 @@
+## Latest page snapshot
+uid=1_0 RootWebArea "opacity:0" url="http://127.0.0.1:4310/patterns/opacity-0.html"
+  uid=1_1 heading "opacity:0" level="1"
+  uid=1_2 button "CONTROL"
+  uid=1_3 button "TARGET"

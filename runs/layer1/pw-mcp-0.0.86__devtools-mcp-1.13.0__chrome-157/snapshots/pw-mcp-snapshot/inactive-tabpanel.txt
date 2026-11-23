@@ -1,0 +1,13 @@
+### Page
+- Page URL: http://127.0.0.1:4310/patterns/inactive-tabpanel.html
+- Page Title: 비활성 탭 패널
+### Snapshot
+```yaml
+- generic [active] [ref=e1]:
+  - heading "비활성 탭 패널" [level=1] [ref=e2]
+  - tablist "설정 탭" [ref=e3]:
+    - tab "기본" [selected] [ref=e4]
+    - tab "고급" [ref=e5]
+  - tabpanel "기본" [ref=e6]:
+    - button "CONTROL" [ref=e7]
+```

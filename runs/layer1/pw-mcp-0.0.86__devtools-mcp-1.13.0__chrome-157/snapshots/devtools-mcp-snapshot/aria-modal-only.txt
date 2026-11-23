@@ -1,0 +1,6 @@
+## Latest page snapshot
+uid=1_0 RootWebArea "aria-modal만 있는 모달" url="http://127.0.0.1:4310/patterns/aria-modal-only.html"
+  uid=1_1 heading "aria-modal만 있는 모달" level="1"
+  uid=1_2 button "TARGET"
+  uid=1_3 dialog "설정" modal
+    uid=1_4 button "CONTROL"

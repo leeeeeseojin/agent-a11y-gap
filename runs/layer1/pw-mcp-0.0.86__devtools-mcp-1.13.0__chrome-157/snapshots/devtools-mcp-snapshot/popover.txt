@@ -1,0 +1,4 @@
+## Latest page snapshot
+uid=1_0 RootWebArea "닫힌 popover" url="http://127.0.0.1:4310/patterns/popover.html"
+  uid=1_1 heading "닫힌 popover" level="1"
+  uid=1_2 button "CONTROL" expandable

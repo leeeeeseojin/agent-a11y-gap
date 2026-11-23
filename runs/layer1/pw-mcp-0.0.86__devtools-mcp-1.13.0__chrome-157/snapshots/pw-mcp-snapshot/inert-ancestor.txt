@@ -1,0 +1,10 @@
+### Page
+- Page URL: http://127.0.0.1:4310/patterns/inert-ancestor.html
+- Page Title: inert 조상
+### Snapshot
+```yaml
+- generic [active] [ref=e1]:
+  - heading "inert 조상" [level=1] [ref=e2]
+  - button "CONTROL" [ref=e3]
+  - button "TARGET" [ref=e5]
+```

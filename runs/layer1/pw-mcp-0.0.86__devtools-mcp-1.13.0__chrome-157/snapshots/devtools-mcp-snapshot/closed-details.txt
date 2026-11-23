@@ -1,0 +1,5 @@
+## Latest page snapshot
+uid=1_0 RootWebArea "닫힌 details" url="http://127.0.0.1:4310/patterns/closed-details.html"
+  uid=1_1 heading "닫힌 details" level="1"
+  uid=1_2 button "CONTROL"
+  uid=1_3 DisclosureTriangle "더보기" expandable

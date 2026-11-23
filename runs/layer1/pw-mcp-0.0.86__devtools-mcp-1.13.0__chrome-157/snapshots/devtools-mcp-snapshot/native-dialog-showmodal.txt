@@ -1,0 +1,4 @@
+## Latest page snapshot
+uid=1_0 RootWebArea "네이티브 dialog.showModal()" url="http://127.0.0.1:4310/patterns/native-dialog-showmodal.html"
+  uid=1_1 dialog "설정" modal
+    uid=1_2 button "CONTROL" focusable focused

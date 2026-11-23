@@ -1,0 +1,10 @@
+### Page
+- Page URL: http://127.0.0.1:4310/patterns/covered-by-overlay.html
+- Page Title: 오버레이로 가림
+### Snapshot
+```yaml
+- generic [active] [ref=e1]:
+  - heading "오버레이로 가림" [level=1] [ref=e2]
+  - button "TARGET" [ref=e3]
+  - button "CONTROL" [ref=e6]
+```

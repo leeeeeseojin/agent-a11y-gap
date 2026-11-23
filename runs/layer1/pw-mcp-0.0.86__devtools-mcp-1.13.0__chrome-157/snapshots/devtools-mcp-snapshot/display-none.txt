@@ -1,0 +1,4 @@
+## Latest page snapshot
+uid=1_0 RootWebArea "display:none" url="http://127.0.0.1:4310/patterns/display-none.html"
+  uid=1_1 heading "display:none" level="1"
+  uid=1_2 button "CONTROL"

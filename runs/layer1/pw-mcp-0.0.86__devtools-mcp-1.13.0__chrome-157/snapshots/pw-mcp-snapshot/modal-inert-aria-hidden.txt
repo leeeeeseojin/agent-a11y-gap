@@ -1,0 +1,11 @@
+### Page
+- Page URL: http://127.0.0.1:4310/patterns/modal-inert-aria-hidden.html
+- Page Title: 모달 + 배경 inert·aria-hidden
+### Snapshot
+```yaml
+- generic [active] [ref=e1]:
+  - heading "모달 + 배경 inert·aria-hidden" [level=1] [ref=e2]
+  - button [ref=e4]: TARGET
+  - dialog "설정" [ref=e6]:
+    - button "CONTROL" [ref=e7]
+```

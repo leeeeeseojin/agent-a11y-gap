@@ -1,0 +1,10 @@
+### Page
+- Page URL: http://127.0.0.1:4310/patterns/offscreen.html
+- Page Title: 화면 밖 배치
+### Snapshot
+```yaml
+- generic [active] [ref=e1]:
+  - heading "화면 밖 배치" [level=1] [ref=e2]
+  - button "CONTROL" [ref=e3]
+  - button "TARGET" [ref=e5]
+```

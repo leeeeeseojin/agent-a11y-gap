@@ -1,0 +1,5 @@
+## Latest page snapshot
+uid=1_0 RootWebArea "오버레이로 가림" url="http://127.0.0.1:4310/patterns/covered-by-overlay.html"
+  uid=1_1 heading "오버레이로 가림" level="1"
+  uid=1_2 button "TARGET"
+  uid=1_3 button "CONTROL"

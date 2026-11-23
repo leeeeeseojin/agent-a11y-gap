@@ -1,0 +1,10 @@
+### Page
+- Page URL: http://127.0.0.1:4310/patterns/opacity-0.html
+- Page Title: opacity:0
+### Snapshot
+```yaml
+- generic [active] [ref=e1]:
+  - heading "opacity:0" [level=1] [ref=e2]
+  - button "CONTROL" [ref=e3]
+  - button "TARGET" [ref=e5]
+```
