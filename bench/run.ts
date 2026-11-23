@@ -17,6 +17,7 @@ import { startServer } from "../probe/serve.js";
 import { runAntigravity } from "./agents/antigravity.js";
 import { browserServer } from "./agents/browser.js";
 import { runClaudeCode } from "./agents/claude-code.js";
+import type { AgentRun } from "./agents/types.js";
 import { ambiguousTargets, blockedClicks } from "./metrics.js";
 import { TASKS, invalidReason, outcomeOf, type ModalState } from "./tasks.js";
 
@@ -38,6 +39,8 @@ const impls = (values.impl?.length ? values.impl : IMPLS).filter((i): i is Impl 
 const tasks = values.task?.length ? TASKS.filter((t) => values.task!.includes(t.id)) : TASKS;
 const reps = Number(values.reps);
 const runAgent = agent === "antigravity" ? runAntigravity : runClaudeCode;
+const MAX_ATTEMPTS = 4;
+const RETRY_WAIT_MS = 60_000;
 if (agent === "antigravity" && !browserServer(browser).allowed) {
   throw new Error("Antigravity는 Playwright MCP로만 돌린다. DevTools MCP는 허용 목록을 정리해 두지 않았다 (agents/browser.ts)");
 }
@@ -52,20 +55,31 @@ try {
     for (const impl of impls)
       for (let rep = 1; rep <= reps; rep++) {
         const runId = `${task.id}__${impl}__${values.model}__${rep}`;
-        const url = `${server.url}/modal/?impl=${impl}&run=${encodeURIComponent(runId)}${task.startOpen ? "&open=1" : ""}`;
-        const prompt =
-          `너는 사용자를 대신해 웹 화면을 조작하는 에이전트야. 브라우저 도구로 ${url} 을 열어 화면을 조작해서 아래 요청을 처리해. ` +
-          `끝나면 무엇을 했는지 한두 문장으로 보고하고, 마지막 줄에 결과를 화면에서 직접 확인했으면 "RESULT: confirmed", 아니면 "RESULT: unconfirmed"라고 적어.\n\n요청: ${task.prompt}`;
+        // 모델 서버 용량 부족 같은 일시 오류는 에이전트의 실패가 아니므로 잠시 기다렸다 같은 조건으로 다시 돌린다.
+        // 시도마다 상태 키를 달리해서, 중간에 끊긴 시도가 남긴 화면 상태가 다음 시도의 채점에 섞이지 않게 한다
+        let run: AgentRun;
+        let stateKey = runId;
+        let attempt = 1;
+        for (;; attempt++) {
+          stateKey = attempt === 1 ? runId : `${runId}~${attempt}`;
+          const url = `${server.url}/modal/?impl=${impl}&run=${encodeURIComponent(stateKey)}${task.startOpen ? "&open=1" : ""}`;
+          const prompt =
+            `너는 사용자를 대신해 웹 화면을 조작하는 에이전트야. 브라우저 도구로 ${url} 을 열어 화면을 조작해서 아래 요청을 처리해. ` +
+            `끝나면 무엇을 했는지 한두 문장으로 보고하고, 마지막 줄에 결과를 화면에서 직접 확인했으면 "RESULT: confirmed", 아니면 "RESULT: unconfirmed"라고 적어.\n\n요청: ${task.prompt}`;
 
-        const run = await runAgent({
-          model: values.model!,
-          prompt,
-          timeoutMs: Number(values.timeout) * 1000,
-          rawLogPath: path.join(rawDir, `${runId}.jsonl`),
-          browser: browserServer(browser),
-        });
+          run = await runAgent({
+            model: values.model!,
+            prompt,
+            timeoutMs: Number(values.timeout) * 1000,
+            rawLogPath: path.join(rawDir, `${runId}${attempt === 1 ? "" : `~${attempt}`}.jsonl`),
+            browser: browserServer(browser),
+          });
+          if (!run.retryable || attempt >= MAX_ATTEMPTS) break;
+          console.log(`${runId} 일시 오류로 ${RETRY_WAIT_MS / 1000}초 뒤 다시 시도 (${attempt}/${MAX_ATTEMPTS})`);
+          await new Promise((r) => setTimeout(r, RETRY_WAIT_MS));
+        }
 
-        const state = (server.state.get(runId) as ModalState | undefined) ?? null;
+        const state = (server.state.get(stateKey) as ModalState | undefined) ?? null;
         const grade = task.grade(state, run.finalAnswer);
         const invalid = invalidReason(run);
         const record = {
@@ -83,6 +97,7 @@ try {
           blockedClicks: blockedClicks(run.toolCalls),
           ambiguousTargets: ambiguousTargets(run.toolCalls),
           exitReason: run.exitReason,
+          attempts: attempt,
           durationMs: run.durationMs,
           state,
           finalAnswer: run.finalAnswer,
