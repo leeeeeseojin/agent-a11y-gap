@@ -13,12 +13,11 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { parseArgs } from "node:util";
 import { IMPLS, type Impl } from "../probe/human.js";
-import { classifyClickError } from "../probe/parse.js";
 import { startServer } from "../probe/serve.js";
 import { runAntigravity } from "./agents/antigravity.js";
 import { browserServer } from "./agents/browser.js";
 import { runClaudeCode } from "./agents/claude-code.js";
-import type { ToolCall } from "./agents/types.js";
+import { ambiguousTargets, blockedClicks } from "./metrics.js";
 import { TASKS, invalidReason, outcomeOf, type ModalState } from "./tasks.js";
 
 const { values } = parseArgs({
@@ -41,18 +40,6 @@ const reps = Number(values.reps);
 const runAgent = agent === "antigravity" ? runAntigravity : runClaudeCode;
 if (agent === "antigravity" && !browserServer(browser).allowed) {
   throw new Error("Antigravity는 Playwright MCP로만 돌린다. DevTools MCP는 허용 목록을 정리해 두지 않았다 (agents/browser.ts)");
-}
-
-/**
- * 배경 요소를 누르려다 막힌 흔적. 1층과 같은 분류 함수를 써서 가로막힘과 시간 초과만 센다.
- * inert 배경은 "element is inert"로 기다리다 시간 초과가 나므로 timeout 쪽으로 들어간다.
- */
-function blockedClicks(calls: ToolCall[]): number {
-  return calls.filter((c) => {
-    if (!/click/i.test(c.name) || !c.isError) return false;
-    const kind = classifyClickError(c.resultPreview);
-    return kind === "intercepted" || kind === "timeout";
-  }).length;
 }
 
 const server = await startServer();
@@ -94,6 +81,7 @@ try {
           grade,
           numTurns: run.numTurns,
           blockedClicks: blockedClicks(run.toolCalls),
+          ambiguousTargets: ambiguousTargets(run.toolCalls),
           exitReason: run.exitReason,
           durationMs: run.durationMs,
           state,
@@ -101,7 +89,7 @@ try {
           toolCalls: run.toolCalls,
         };
         writeFileSync(path.join(outDir, `${runId}.json`), JSON.stringify(record, null, 2) + "\n");
-        console.log(`${runId.padEnd(60)} ${record.outcome.padEnd(20)} 턴 ${record.numTurns}  막힌 클릭 ${record.blockedClicks}${invalid ? `  (${invalid})` : ""}`);
+        console.log(`${runId.padEnd(60)} ${record.outcome.padEnd(20)} 턴 ${record.numTurns}  막힌 클릭 ${record.blockedClicks}  대상 중복 ${record.ambiguousTargets}${invalid ? `  (${invalid})` : ""}`);
       }
 } finally {
   await server.close();
