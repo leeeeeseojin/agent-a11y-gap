@@ -1,0 +1,101 @@
+{
+  "runId": "close-then-start__D__openai-gpt-oss-120b__1",
+  "task": "close-then-start",
+  "impl": "D",
+  "browser": "playwright",
+  "agent": "api",
+  "model": "openai/gpt-oss-120b",
+  "rep": 1,
+  "outcome": "confirmed-success",
+  "invalid": null,
+  "grade": {
+    "success": true,
+    "notes": [
+      "모든 조건 충족"
+    ]
+  },
+  "numTurns": 8,
+  "blockedClicks": 0,
+  "ambiguousTargets": 0,
+  "exitReason": "completed",
+  "attempts": 1,
+  "durationMs": 12768,
+  "state": {
+    "impl": "D",
+    "settings": {
+      "attack": "me",
+      "pitching": "me"
+    },
+    "saved": 0,
+    "rosterSaved": 0,
+    "started": true,
+    "startedWith": {
+      "attack": "me",
+      "pitching": "me"
+    }
+  },
+  "finalAnswer": "설정 창을 닫고 “경기 시작” 버튼을 눌러 경기를 시작했습니다. 화면에 “경기가 시작됐습니다.” 라는 문구가 표시되어 경기 시작이 확인되었습니다.  \nRESULT: confirmed",
+  "toolCalls": [
+    {
+      "name": "browser_navigate",
+      "input": {
+        "url": "http://127.0.0.1:61742/modal/?impl=D&run=close-then-start__D__openai-gpt-oss-120b__1&open=1"
+      },
+      "isError": false,
+      "resultPreview": "### Ran Playwright code\n```js\nawait page.goto('http://127.0.0.1:61742/modal/?impl=D&run=close-then-start__D__openai-gpt-oss-120b__1&open=1');\n```\n### Page\n- Page URL: http://127.0.0.1:61742/modal/?impl=D&run=close-then-start__D__openai-gpt-oss-120b__1&open=1\n- Page Title: 경기 준비\n### Snapshot\n- [Snapshot](.tmp\\pw-mcp\\page-2026-11-23T16-34-09-264Z.yml)"
+    },
+    {
+      "name": "browser_snapshot",
+      "input": {
+        "filename": "snapshot.yml"
+      },
+      "isError": false,
+      "resultPreview": "### Page\n- Page URL: http://127.0.0.1:61742/modal/?impl=D&run=close-then-start__D__openai-gpt-oss-120b__1&open=1\n- Page Title: 경기 준비\n### Snapshot\n- [Snapshot](./snapshot.yml)"
+    },
+    {
+      "name": "browser_find",
+      "input": {
+        "text": "닫",
+        "maxResults": 20
+      },
+      "isError": false,
+      "resultPreview": "### Result\nFound 1 match for \"닫\":\n\n- main \"경기 운영 설정\" [ref=e3]:\n  - group \"투수 교체\" [ref=e10]:\n    - generic [ref=e12]:\n      - button \"코치에게\" [ref=e13]\n      - button \"내가\" [pressed] [ref=e14]\n  - generic [ref=e15]:\n    - button \"닫기\" [ref=e16]\n    - button \"저장\" [ref=e17]"
+    },
+    {
+      "name": "browser_click",
+      "input": {
+        "target": "e16",
+        "button": "left"
+      },
+      "isError": false,
+      "resultPreview": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: '닫기' }).click();\n```\n### Page\n- Page URL: http://127.0.0.1:61742/modal/?impl=D&run=close-then-start__D__openai-gpt-oss-120b__1&open=1\n- Page Title: 경기 준비\n### Snapshot\n- [Snapshot](.tmp\\pw-mcp\\page-2026-11-23T16-34-13-163Z.yml)"
+    },
+    {
+      "name": "browser_find",
+      "input": {
+        "text": "시작",
+        "maxResults": 20
+      },
+      "isError": false,
+      "resultPreview": "### Result\nFound 1 match for \"시작\":\n\n- main [ref=e18]:\n  - heading \"경기 준비\" [level=1] [ref=e19]\n  - paragraph [ref=e20]: \"공격 작전: 내가 · 투수 교체: 내가\"\n  - button \"운영 방식 설정\" [active] [ref=e21]\n  - button \"경기 시작\" [ref=e22]\n  - paragraph [ref=e23]: 로스터 변경 사항\n  - button \"저장\" [ref=e24]"
+    },
+    {
+      "name": "browser_click",
+      "input": {
+        "target": "e22",
+        "button": "left"
+      },
+      "isError": false,
+      "resultPreview": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: '경기 시작' }).click();\n```\n### Page\n- Page URL: http://127.0.0.1:61742/modal/?impl=D&run=close-then-start__D__openai-gpt-oss-120b__1&open=1\n- Page Title: 경기 준비\n### Snapshot\n- [Snapshot](.tmp\\pw-mcp\\page-2026-11-23T16-34-16-257Z.yml)"
+    },
+    {
+      "name": "browser_find",
+      "input": {
+        "text": "경기",
+        "maxResults": 20
+      },
+      "isError": false,
+      "resultPreview": "### Result\nFound 3 matches for \"경기\":\n\n- main [ref=e25]:\n  - heading \"경기 준비\" [level=1] [ref=e26]\n  - paragraph [ref=e27]: 경기가 시작됐습니다.\n  - button \"운영 방식 설정\" [ref=e28]\n  - button \"경기 시작\" [ref=e29]\n  - paragraph [ref=e30]: 로스터 변경 사항\n  - button \"저장\" [ref=e31]"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "runId": "read-only__D__openai-gpt-oss-120b__1",
+  "task": "read-only",
+  "impl": "D",
+  "browser": "playwright",
+  "agent": "api",
+  "model": "openai/gpt-oss-120b",
+  "rep": 1,
+  "outcome": "confirmed-success",
+  "invalid": null,
+  "grade": {
+    "success": true,
+    "notes": [
+      "모든 조건 충족"
+    ]
+  },
+  "numTurns": 3,
+  "blockedClicks": 0,
+  "ambiguousTargets": 0,
+  "exitReason": "completed",
+  "attempts": 1,
+  "durationMs": 7474,
+  "state": {
+    "impl": "D",
+    "settings": {
+      "attack": "me",
+      "pitching": "me"
+    },
+    "saved": 0,
+    "rosterSaved": 0,
+    "started": false,
+    "startedWith": null
+  },
+  "finalAnswer": "The settings page shows the “공격 작전” group with two buttons. The button labeled **“내가”** is in the pressed state, indicating that the attack operation is currently assigned to you.\n\nRESULT: confirmed",
+  "toolCalls": [
+    {
+      "name": "browser_navigate",
+      "input": {
+        "url": "http://127.0.0.1:61742/modal/?impl=D&run=read-only__D__openai-gpt-oss-120b__1&open=1"
+      },
+      "isError": false,
+      "resultPreview": "### Ran Playwright code\n```js\nawait page.goto('http://127.0.0.1:61742/modal/?impl=D&run=read-only__D__openai-gpt-oss-120b__1&open=1');\n```\n### Page\n- Page URL: http://127.0.0.1:61742/modal/?impl=D&run=read-only__D__openai-gpt-oss-120b__1&open=1\n- Page Title: 경기 준비\n### Snapshot\n- [Snapshot](.tmp\\pw-mcp\\page-2026-11-23T16-35-06-832Z.yml)"
+    },
+    {
+      "name": "browser_find",
+      "input": {
+        "text": "공격"
+      },
+      "isError": false,
+      "resultPreview": "### Result\nFound 1 match for \"공격\":\n\n- main \"경기 운영 설정\" [ref=e3]:\n  - heading \"경기 운영 설정\" [level=2] [ref=e4]\n  - group \"공격 작전\" [ref=e5]:\n    - generic [ref=e7]:\n      - button \"코치에게\" [active] [ref=e8]\n      - button \"내가\" [pressed] [ref=e9]"
+    }
+  ]
+}

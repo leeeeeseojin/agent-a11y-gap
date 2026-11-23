@@ -1,0 +1,28 @@
+{
+  "runId": "settings-then-start__A__gpt-oss-120b-medium__3",
+  "task": "settings-then-start",
+  "impl": "A",
+  "browser": "playwright",
+  "agent": "antigravity",
+  "model": "gpt-oss-120b-medium",
+  "rep": 3,
+  "outcome": "invalid",
+  "invalid": "실행기 오류(사용량 한도, 연결 등)",
+  "grade": {
+    "success": false,
+    "notes": [
+      "경기가 시작되지 않음",
+      "시작 시점에 공격 작전이 코치에게가 아님",
+      "투수 교체까지 바뀜"
+    ]
+  },
+  "numTurns": 0,
+  "blockedClicks": 0,
+  "ambiguousTargets": 0,
+  "exitReason": "error",
+  "attempts": 4,
+  "durationMs": 9525,
+  "state": null,
+  "finalAnswer": "",
+  "toolCalls": []
+}

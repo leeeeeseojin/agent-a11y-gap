@@ -1,0 +1,99 @@
+{
+  "runId": "close-then-start__B__openai-gpt-oss-120b__2",
+  "task": "close-then-start",
+  "impl": "B",
+  "browser": "playwright",
+  "agent": "api",
+  "model": "openai/gpt-oss-120b",
+  "rep": 2,
+  "outcome": "confirmed-success",
+  "invalid": null,
+  "grade": {
+    "success": true,
+    "notes": [
+      "모든 조건 충족"
+    ]
+  },
+  "numTurns": 8,
+  "blockedClicks": 0,
+  "ambiguousTargets": 0,
+  "exitReason": "completed",
+  "attempts": 1,
+  "durationMs": 13186,
+  "state": {
+    "impl": "B",
+    "settings": {
+      "attack": "me",
+      "pitching": "me"
+    },
+    "saved": 0,
+    "rosterSaved": 0,
+    "started": true,
+    "startedWith": {
+      "attack": "me",
+      "pitching": "me"
+    }
+  },
+  "finalAnswer": "설정 창을 닫고 “경기 시작” 버튼을 클릭해 경기를 시작했습니다.  \nRESULT: confirmed",
+  "toolCalls": [
+    {
+      "name": "browser_navigate",
+      "input": {
+        "url": "http://127.0.0.1:61742/modal/?impl=B&run=close-then-start__B__openai-gpt-oss-120b__2&open=1"
+      },
+      "isError": false,
+      "resultPreview": "### Ran Playwright code\n```js\nawait page.goto('http://127.0.0.1:61742/modal/?impl=B&run=close-then-start__B__openai-gpt-oss-120b__2&open=1');\n```\n### Page\n- Page URL: http://127.0.0.1:61742/modal/?impl=B&run=close-then-start__B__openai-gpt-oss-120b__2&open=1\n- Page Title: 경기 준비\n### Snapshot\n- [Snapshot](.tmp\\pw-mcp\\page-2026-11-23T16-33-55-680Z.yml)"
+    },
+    {
+      "name": "browser_snapshot",
+      "input": {
+        "depth": 2,
+        "boxes": true
+      },
+      "isError": false,
+      "resultPreview": "### Page\n- Page URL: http://127.0.0.1:61742/modal/?impl=B&run=close-then-start__B__openai-gpt-oss-120b__2&open=1\n- Page Title: 경기 준비\n### Snapshot\n```yaml\n- generic [ref=e1] [box=0,0,1280,396]:\n  - main [ref=e3] [box=430,24,420,348]:\n    - heading [level=1] [ref=e4] [box=430,24,420,48]: 경기 준비\n    - paragraph [ref=e5] [box=430,102,420,21]: \"공격 작전: 내가 · 투수 교체: 내가\"\n    - button [ref=e6] [box=430,149,420,46]: 운영 방식 설정\n    - button [ref=e7] [box=430,207,420,46]: 경기 시작\n    - paragraph [ref=e8] [box=430,279,420,21]: 로스터 변경 사항\n    - button [ref=e9] [box=430,326,420,46]: 저장\n  - dialog \"경기 운영 설정\" [active"
+    },
+    {
+      "name": "browser_find",
+      "input": {
+        "text": "닫기"
+      },
+      "isError": false,
+      "resultPreview": "### Result\nFound 1 match for \"닫기\":\n\n- generic [ref=e1]:\n  - dialog \"경기 운영 설정\" [active] [ref=e11]:\n    - group \"투수 교체\" [ref=e18]:\n      - generic [ref=e20]:\n        - button \"코치에게\" [ref=e21]\n        - button \"내가\" [pressed] [ref=e22]\n    - generic [ref=e23]:\n      - button \"닫기\" [ref=e24]\n      - button \"저장\" [ref=e25]"
+    },
+    {
+      "name": "browser_click",
+      "input": {
+        "target": "e24",
+        "button": "left"
+      },
+      "isError": false,
+      "resultPreview": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: '닫기' }).click();\n```\n### Page\n- Page URL: http://127.0.0.1:61742/modal/?impl=B&run=close-then-start__B__openai-gpt-oss-120b__2&open=1\n- Page Title: 경기 준비\n### Snapshot\n- [Snapshot](.tmp\\pw-mcp\\page-2026-11-23T16-34-00-046Z.yml)"
+    },
+    {
+      "name": "browser_find",
+      "input": {
+        "text": "경기 시작"
+      },
+      "isError": false,
+      "resultPreview": "### Result\nFound 1 match for \"경기 시작\":\n\n- main [ref=e3]:\n  - heading \"경기 준비\" [level=1] [ref=e26]\n  - paragraph [ref=e5]: \"공격 작전: 내가 · 투수 교체: 내가\"\n  - button \"운영 방식 설정\" [active] [ref=e27]\n  - button \"경기 시작\" [ref=e28]\n  - paragraph [ref=e8]: 로스터 변경 사항\n  - button \"저장\" [ref=e29]"
+    },
+    {
+      "name": "browser_click",
+      "input": {
+        "target": "e28",
+        "button": "left"
+      },
+      "isError": false,
+      "resultPreview": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: '경기 시작' }).click();\n```\n### Page\n- Page URL: http://127.0.0.1:61742/modal/?impl=B&run=close-then-start__B__openai-gpt-oss-120b__2&open=1\n- Page Title: 경기 준비\n### Snapshot\n- [Snapshot](.tmp\\pw-mcp\\page-2026-11-23T16-34-03-244Z.yml)"
+    },
+    {
+      "name": "browser_find",
+      "input": {
+        "text": "경기"
+      },
+      "isError": false,
+      "resultPreview": "### Result\nFound 3 matches for \"경기\":\n\n- main [ref=e30]:\n  - heading \"경기 준비\" [level=1] [ref=e31]\n  - paragraph [ref=e32]: 경기가 시작됐습니다.\n  - button \"운영 방식 설정\" [ref=e33]\n  - button \"경기 시작\" [ref=e34]\n  - paragraph [ref=e35]: 로스터 변경 사항\n  - button \"저장\" [ref=e36]"
+    }
+  ]
+}

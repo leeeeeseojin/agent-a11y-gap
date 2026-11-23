@@ -1,0 +1,51 @@
+{
+  "runId": "read-only__D__gemini-3.8-flash-low__1",
+  "task": "read-only",
+  "impl": "D",
+  "browser": "playwright",
+  "agent": "antigravity",
+  "model": "gemini-3.8-flash-low",
+  "rep": 1,
+  "outcome": "confirmed-success",
+  "invalid": null,
+  "grade": {
+    "success": true,
+    "notes": [
+      "모든 조건 충족"
+    ]
+  },
+  "numTurns": 3,
+  "blockedClicks": 0,
+  "ambiguousTargets": 0,
+  "exitReason": "completed",
+  "attempts": 1,
+  "durationMs": 19119,
+  "state": {
+    "impl": "D",
+    "settings": {
+      "attack": "me",
+      "pitching": "me"
+    },
+    "saved": 0,
+    "rosterSaved": 0,
+    "started": false,
+    "startedWith": null
+  },
+  "finalAnswer": "열려 있는 경기 운영 설정 창을 확인한 결과, 공격 작전은 현재 \"내가\"로 설정되어 있습니다.\n\nRESULT: confirmed",
+  "toolCalls": [
+    {
+      "name": "browser_navigate",
+      "input": {
+        "url": "http://127.0.0.1:55396/modal/?impl=D&run=read-only__D__gemini-3.8-flash-low__1&open=1"
+      },
+      "isError": false,
+      "resultPreview": "### Ran Playwright code\n```js\nawait page.goto('http://127.0.0.1:55396/modal/?impl=D&run=read-only__D__gemini-3.8-flash-low__1&open=1');\n```\n### Page\n- Page URL: http://127.0.0.1:55396/modal/?impl=D&run=read-only__D__gemini-3.8-flash-low__1&open=1\n- Page Title: 경기 준비\n### Snapshot\n- [Snapshot](..\\..\\..\\..\\..\\..\\FE Project\\agent-a11y-gap\\.tmp\\pw-mcp\\page-2026-11-23T16-09-44-689Z.yml)"
+    },
+    {
+      "name": "browser_snapshot",
+      "input": {},
+      "isError": false,
+      "resultPreview": "### Page\n- Page URL: http://127.0.0.1:55396/modal/?impl=D&run=read-only__D__gemini-3.8-flash-low__1&open=1\n- Page Title: 경기 준비\n### Snapshot\n```yaml\n- main \"경기 운영 설정\" [ref=e3]:\n  - heading \"경기 운영 설정\" [level=2] [ref=e4]\n  - group \"공격 작전\" [ref=e5]:\n    - generic [ref=e7]:\n      - button \"코치에게\" [active] [ref=e8]\n      - button \"내가\" [pressed] [ref=e9]\n  - group \"투수 교체\" [ref=e10]:\n    - generic [ref=e12]:\n      - button \"코치에게\" [ref=e13]\n      - button \"내가\" [pressed] [ref=e14]\n  - generic [ref=e15]:\n    - button \"닫기\" [ref=e16]\n    - button \"저장\" [ref=e17]\n```"
+    }
+  ]
+}
