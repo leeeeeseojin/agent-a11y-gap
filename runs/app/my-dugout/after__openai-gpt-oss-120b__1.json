@@ -1,0 +1,404 @@
+{
+  "runId": "after__openai-gpt-oss-120b__1",
+  "app": "my-dugout",
+  "label": "after",
+  "url": "http://localhost:4320/",
+  "agent": "api",
+  "model": "openai/gpt-oss-120b",
+  "rep": 1,
+  "outcome": "confirmed-success",
+  "invalid": null,
+  "grade": {
+    "success": true,
+    "notes": [
+      "모든 조건 충족"
+    ]
+  },
+  "settings": {
+    "showCoach": true,
+    "offense": "coach",
+    "defense": "me",
+    "ask": "key",
+    "delegateDelay": 2600
+  },
+  "numTurns": 42,
+  "blockedClicks": 0,
+  "ambiguousTargets": 0,
+  "usage": {
+    "calls": 42,
+    "promptTokens": 212023,
+    "completionTokens": 7901,
+    "maxPromptTokens": 13485,
+    "costUsd": 0.02667
+  },
+  "snapshotChars": [
+    610,
+    610,
+    445,
+    610,
+    445,
+    109,
+    610,
+    109,
+    1911,
+    1911,
+    626,
+    2431,
+    965,
+    7821,
+    1990
+  ],
+  "exitReason": "completed",
+  "durationMs": 110542,
+  "finalAnswer": "팀을 한화로 선택하고, 원정 경기로 전환했습니다. 운영 방식에서는 공격 작전만 코치에게 맡기고, 투수·수비는 직접 선택하도록 설정한 뒤 경기를 시작했습니다. 이제 경기 초입(1회 초) 화면이 표시되고 있습니다.  \n\nRESULT: confirmed",
+  "toolCalls": [
+    {
+      "name": "browser_navigate",
+      "input": {
+        "url": "http://localhost:4320/"
+      },
+      "isError": false,
+      "resultPreview": "### Ran Playwright code\n```js\nawait page.goto('http://localhost:4320/');\n```\n### Page\n- Page URL: http://localhost:4320/\n- Page Title: MY DUGOUT\n### Snapshot\n- [Snapshot](..\\pw-mcp\\page-2026-11-24T02-52-34-281Z.yml)"
+    },
+    {
+      "name": "browser_snapshot",
+      "input": {
+        "boxes": true
+      },
+      "isError": false,
+      "resultPreview": "### Page\n- Page URL: http://localhost:4320/\n- Page Title: MY DUGOUT\n### Snapshot\n```yaml\n- generic [ref=e4] [box=400,0,480,800]:\n  - button \"운영 방식 설정\" [ref=e5] [cursor=pointer] [box=820,16,44,44]\n  - heading \"MY DUGOUT\" [level=1] [ref=e46] [box=485,286,310,56]\n  - paragraph [ref=e47] [box=574,354,131,25]: 내가 감독이라면?\n  - button \"경기 시작\" [ref=e48] [cursor=pointer] [box=530,409,220,48]\n  - button \"로스터 편집\" [ref=e49] [cursor=pointer] [box=530,469,220,48]\n  - button \"지금까지 기록\" [ref=e50] [cursor=pointer] [box=530,529,220,48]\n  - paragraph [ref=e51] [box=522,605,235,34]: 가상의 선수와 기록비공식 팬 게임 · KBO, 구단, 선수와"
+    },
+    {
+      "name": "browser_find",
+      "input": {
+        "text": "한화"
+      },
+      "isError": false,
+      "resultPreview": "### Result\nNo matches found for \"한화\"."
+    },
+    {
+      "name": "browser_snapshot",
+      "input": {
+        "boxes": true,
+        "depth": 2
+      },
+      "isError": false,
+      "resultPreview": "### Page\n- Page URL: http://localhost:4320/\n- Page Title: MY DUGOUT\n### Snapshot\n```yaml\n- generic [ref=e4] [box=400,0,480,800]:\n  - button \"운영 방식 설정\" [ref=e5] [cursor=pointer] [box=820,16,44,44]\n  - heading \"MY DUGOUT\" [level=1] [ref=e46] [box=485,286,310,56]\n  - paragraph [ref=e47] [box=574,354,131,25]: 내가 감독이라면?\n  - button \"경기 시작\" [ref=e48] [cursor=pointer] [box=530,409,220,48]\n  - button \"로스터 편집\" [ref=e49] [cursor=pointer] [box=530,469,220,48]\n  - button \"지금까지 기록\" [ref=e50] [cursor=pointer] [box=530,529,220,48]\n  - paragraph [ref=e51] [box=522,605,235,34]: 가상의 선수와 기록비공식 팬 게임 · KBO, 구단, 선수와"
+    },
+    {
+      "name": "browser_console_messages",
+      "input": {
+        "level": "info"
+      },
+      "isError": false,
+      "resultPreview": "### Result\nTotal messages: 0 (Errors: 0, Warnings: 0)\n"
+    },
+    {
+      "name": "browser_find",
+      "input": {
+        "text": "팀"
+      },
+      "isError": false,
+      "resultPreview": "### Result\nNo matches found for \"팀\"."
+    },
+    {
+      "name": "browser_snapshot",
+      "input": {
+        "depth": 3
+      },
+      "isError": false,
+      "resultPreview": "### Page\n- Page URL: http://localhost:4320/\n- Page Title: MY DUGOUT\n### Snapshot\n```yaml\n- generic [ref=e4]:\n  - button \"운영 방식 설정\" [ref=e5] [cursor=pointer]\n  - heading \"MY DUGOUT\" [level=1] [ref=e46]\n  - paragraph [ref=e47]: 내가 감독이라면?\n  - button \"경기 시작\" [ref=e48] [cursor=pointer]\n  - button \"로스터 편집\" [ref=e49] [cursor=pointer]\n  - button \"지금까지 기록\" [ref=e50] [cursor=pointer]\n  - paragraph [ref=e51]: 가상의 선수와 기록비공식 팬 게임 · KBO, 구단, 선수와 관계없어요\n```"
+    },
+    {
+      "name": "browser_find",
+      "input": {
+        "text": "운영"
+      },
+      "isError": false,
+      "resultPreview": "### Result\nFound 1 match for \"운영\":\n\n- generic [ref=e4]:\n  - button \"운영 방식 설정\" [ref=e5] [cursor=pointer]\n  - heading \"MY DUGOUT\" [level=1] [ref=e46]\n  - paragraph [ref=e47]: 내가 감독이라면?\n  - button \"경기 시작\" [ref=e48] [cursor=pointer]"
+    },
+    {
+      "name": "browser_snapshot",
+      "input": {
+        "boxes": true,
+        "depth": 5
+      },
+      "isError": false,
+      "resultPreview": "### Page\n- Page URL: http://localhost:4320/\n- Page Title: MY DUGOUT\n### Snapshot\n```yaml\n- generic [ref=e4] [box=400,0,480,800]:\n  - button \"운영 방식 설정\" [ref=e5] [cursor=pointer] [box=820,16,44,44]\n  - heading \"MY DUGOUT\" [level=1] [ref=e46] [box=485,286,310,56]\n  - paragraph [ref=e47] [box=574,354,131,25]: 내가 감독이라면?\n  - button \"경기 시작\" [ref=e48] [cursor=pointer] [box=530,409,220,48]\n  - button \"로스터 편집\" [ref=e49] [cursor=pointer] [box=530,469,220,48]\n  - button \"지금까지 기록\" [ref=e50] [cursor=pointer] [box=530,529,220,48]\n  - paragraph [ref=e51] [box=522,605,235,34]: 가상의 선수와 기록비공식 팬 게임 · KBO, 구단, 선수와"
+    },
+    {
+      "name": "browser_find",
+      "input": {
+        "text": "선"
+      },
+      "isError": false,
+      "resultPreview": "### Result\nFound 1 match for \"선\":\n\n- generic [ref=e4]:\n  - button \"경기 시작\" [ref=e48] [cursor=pointer]\n  - button \"로스터 편집\" [ref=e49] [cursor=pointer]\n  - button \"지금까지 기록\" [ref=e50] [cursor=pointer]\n  - paragraph [ref=e51]: 가상의 선수와 기록비공식 팬 게임 · KBO, 구단, 선수와 관계없어요"
+    },
+    {
+      "name": "browser_find",
+      "input": {
+        "text": "구단"
+      },
+      "isError": false,
+      "resultPreview": "### Result\nFound 1 match for \"구단\":\n\n- generic [ref=e4]:\n  - button \"경기 시작\" [ref=e48] [cursor=pointer]\n  - button \"로스터 편집\" [ref=e49] [cursor=pointer]\n  - button \"지금까지 기록\" [ref=e50] [cursor=pointer]\n  - paragraph [ref=e51]: 가상의 선수와 기록비공식 팬 게임 · KBO, 구단, 선수와 관계없어요"
+    },
+    {
+      "name": "browser_snapshot",
+      "input": {
+        "depth": 10
+      },
+      "isError": false,
+      "resultPreview": "### Page\n- Page URL: http://localhost:4320/\n- Page Title: MY DUGOUT\n### Snapshot\n```yaml\n- generic [ref=e4]:\n  - button \"운영 방식 설정\" [ref=e5] [cursor=pointer]\n  - heading \"MY DUGOUT\" [level=1] [ref=e46]\n  - paragraph [ref=e47]: 내가 감독이라면?\n  - button \"경기 시작\" [ref=e48] [cursor=pointer]\n  - button \"로스터 편집\" [ref=e49] [cursor=pointer]\n  - button \"지금까지 기록\" [ref=e50] [cursor=pointer]\n  - paragraph [ref=e51]: 가상의 선수와 기록비공식 팬 게임 · KBO, 구단, 선수와 관계없어요\n```"
+    },
+    {
+      "name": "browser_snapshot",
+      "input": {
+        "filename": "snapshot.yml"
+      },
+      "isError": false,
+      "resultPreview": "### Page\n- Page URL: http://localhost:4320/\n- Page Title: MY DUGOUT\n### Snapshot\n- [Snapshot](./snapshot.yml)"
+    },
+    {
+      "name": "browser_find",
+      "input": {
+        "regex": "한"
+      },
+      "isError": false,
+      "resultPreview": "### Result\nNo matches found for /한/."
+    },
+    {
+      "name": "browser_find",
+      "input": {
+        "text": "홈"
+      },
+      "isError": false,
+      "resultPreview": "### Result\nNo matches found for \"홈\"."
+    },
+    {
+      "name": "browser_find",
+      "input": {
+        "text": "Team"
+      },
+      "isError": false,
+      "resultPreview": "### Result\nNo matches found for \"Team\"."
+    },
+    {
+      "name": "browser_snapshot",
+      "input": {
+        "boxes": true
+      },
+      "isError": false,
+      "resultPreview": "### Page\n- Page URL: http://localhost:4320/\n- Page Title: MY DUGOUT\n### Snapshot\n```yaml\n- generic [ref=e4] [box=400,0,480,800]:\n  - button \"운영 방식 설정\" [ref=e5] [cursor=pointer] [box=820,16,44,44]\n  - heading \"MY DUGOUT\" [level=1] [ref=e46] [box=485,286,310,56]\n  - paragraph [ref=e47] [box=574,354,131,25]: 내가 감독이라면?\n  - button \"경기 시작\" [ref=e48] [cursor=pointer] [box=530,409,220,48]\n  - button \"로스터 편집\" [ref=e49] [cursor=pointer] [box=530,469,220,48]\n  - button \"지금까지 기록\" [ref=e50] [cursor=pointer] [box=530,529,220,48]\n  - paragraph [ref=e51] [box=522,605,235,34]: 가상의 선수와 기록비공식 팬 게임 · KBO, 구단, 선수와"
+    },
+    {
+      "name": "browser_snapshot",
+      "input": {
+        "filename": "snapshot.yml"
+      },
+      "isError": false,
+      "resultPreview": "### Page\n- Page URL: http://localhost:4320/\n- Page Title: MY DUGOUT\n### Snapshot\n- [Snapshot](./snapshot.yml)"
+    },
+    {
+      "name": "browser_snapshot<|channel|>commentary",
+      "input": {
+        "depth": 3,
+        "boxes": true
+      },
+      "isError": true,
+      "resultPreview": "Unknown tool: browser_snapshot<|channel|>commentary"
+    },
+    {
+      "name": "browser_click",
+      "input": {
+        "element": "운영 방식 설정 button",
+        "target": "e5"
+      },
+      "isError": false,
+      "resultPreview": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: '운영 방식 설정' }).click();\n```\n### Page\n- Page URL: http://localhost:4320/\n- Page Title: MY DUGOUT\n### Snapshot\n- [Snapshot](..\\pw-mcp\\page-2026-11-24T02-52-53-834Z.yml)"
+    },
+    {
+      "name": "browser_snapshot",
+      "input": {
+        "depth": 3,
+        "boxes": true
+      },
+      "isError": false,
+      "resultPreview": "### Page\n- Page URL: http://localhost:4320/\n- Page Title: MY DUGOUT\n### Snapshot\n```yaml\n- dialog \"경기 운영 설정\" [active] [ref=e53] [box=416,361,448,423]:\n  - generic [ref=e54] [box=438,381,404,44]:\n    - heading \"운영 방식\" [level=2] [ref=e55] [box=438,388,85,30]\n    - button \"설정 닫기\" [ref=e56] [cursor=pointer] [box=798,381,44,44]: ✕\n  - generic [ref=e57] [box=438,433,404,71]:\n    - generic [ref=e58] [box=438,447,80,45]:\n      - generic [ref=e59] [box=438,447,80,21]: 공격 작전\n      - text: 번트, 도루, 대타\n    - group \"공격 작전\" [ref=e60] [box=719,450,123,40]:\n      - button \"내가\" [pressed] [ref=e61] [cursor=point"
+    },
+    {
+      "name": "browser_click",
+      "input": {
+        "element": "공격 작전 코치에게 button",
+        "target": "e62"
+      },
+      "isError": false,
+      "resultPreview": "### Ran Playwright code\n```js\nawait page.getByRole('group', { name: '공격 작전' }).getByRole('button', { name: '코치에게' }).click();\n```\n### Page\n- Page URL: http://localhost:4320/\n- Page Title: MY DUGOUT\n### Snapshot\n- [Snapshot](..\\pw-mcp\\page-2026-11-24T02-52-59-119Z.yml)"
+    },
+    {
+      "name": "browser_find",
+      "input": {
+        "text": "선택"
+      },
+      "isError": false,
+      "resultPreview": "### Result\nNo matches found for \"선택\"."
+    },
+    {
+      "name": "browser_click",
+      "input": {
+        "element": "경기 시작 button",
+        "target": "e48"
+      },
+      "isError": true,
+      "resultPreview": "### Error\nError: Ref e48 not found in the current page snapshot. Try capturing new snapshot."
+    },
+    {
+      "name": "browser_find",
+      "input": {
+        "text": "팀"
+      },
+      "isError": false,
+      "resultPreview": "### Result\nNo matches found for \"팀\"."
+    },
+    {
+      "name": "browser_find",
+      "input": {
+        "text": "팀"
+      },
+      "isError": false,
+      "resultPreview": "### Result\nNo matches found for \"팀\"."
+    },
+    {
+      "name": "browser_find",
+      "input": {
+        "text": "구단"
+      },
+      "isError": false,
+      "resultPreview": "### Result\nNo matches found for \"구단\"."
+    },
+    {
+      "name": "browser_snapshot",
+      "input": {
+        "depth": 10,
+        "boxes": true
+      },
+      "isError": false,
+      "resultPreview": "### Page\n- Page URL: http://localhost:4320/\n- Page Title: MY DUGOUT\n### Snapshot\n```yaml\n- dialog \"경기 운영 설정\" [ref=e53] [box=416,361,448,423]:\n  - generic [ref=e54] [box=438,381,404,44]:\n    - heading \"운영 방식\" [level=2] [ref=e55] [box=438,388,85,30]\n    - button \"설정 닫기\" [ref=e56] [cursor=pointer] [box=798,381,44,44]: ✕\n  - generic [ref=e57] [box=438,433,404,71]:\n    - generic [ref=e58] [box=438,447,80,45]:\n      - generic [ref=e59] [box=438,447,80,21]: 공격 작전\n      - text: 번트, 도루, 대타\n    - group \"공격 작전\" [ref=e60] [box=719,450,123,40]:\n      - button \"내가\" [ref=e61] [cursor=pointer] [box=722,453,47"
+    },
+    {
+      "name": "browser_click",
+      "input": {
+        "element": "로스터 편집 button",
+        "target": "e49"
+      },
+      "isError": true,
+      "resultPreview": "### Error\nError: Ref e49 not found in the current page snapshot. Try capturing new snapshot."
+    },
+    {
+      "name": "browser_find",
+      "input": {
+        "text": "경기 시작"
+      },
+      "isError": false,
+      "resultPreview": "### Result\nNo matches found for \"경기 시작\"."
+    },
+    {
+      "name": "browser_click",
+      "input": {
+        "element": "설정 닫기 button",
+        "target": "e56"
+      },
+      "isError": false,
+      "resultPreview": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: '설정 닫기' }).click();\n```\n### Page\n- Page URL: http://localhost:4320/\n- Page Title: MY DUGOUT\n### Snapshot\n- [Snapshot](..\\pw-mcp\\page-2026-11-24T02-53-42-557Z.yml)"
+    },
+    {
+      "name": "browser_snapshot",
+      "input": {
+        "depth": 3,
+        "boxes": true
+      },
+      "isError": false,
+      "resultPreview": "### Page\n- Page URL: http://localhost:4320/\n- Page Title: MY DUGOUT\n### Snapshot\n```yaml\n- generic [ref=e4] [box=400,0,480,800]:\n  - button \"운영 방식 설정\" [active] [ref=e82] [cursor=pointer] [box=820,16,44,44]\n  - heading \"MY DUGOUT\" [level=1] [ref=e123] [box=485,286,310,56]\n  - paragraph [ref=e124] [box=574,354,131,25]: 내가 감독이라면?\n  - button \"경기 시작\" [ref=e125] [cursor=pointer] [box=530,409,220,48]\n  - button \"로스터 편집\" [ref=e126] [cursor=pointer] [box=530,469,220,48]\n  - button \"지금까지 기록\" [ref=e127] [cursor=pointer] [box=530,529,220,48]\n  - paragraph [ref=e128] [box=522,605,235,34]: 가상의 선수와 기록비공식 팬 게"
+    },
+    {
+      "name": "browser_click",
+      "input": {
+        "element": "경기 시작 button",
+        "target": "e125"
+      },
+      "isError": false,
+      "resultPreview": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: '경기 시작' }).click();\n```\n### Page\n- Page URL: http://localhost:4320/\n- Page Title: MY DUGOUT\n### Snapshot\n- [Snapshot](..\\pw-mcp\\page-2026-11-24T02-53-49-099Z.yml)"
+    },
+    {
+      "name": "browser_snapshot",
+      "input": {
+        "depth": 5,
+        "boxes": true
+      },
+      "isError": false,
+      "resultPreview": "### Page\n- Page URL: http://localhost:4320/\n- Page Title: MY DUGOUT\n### Snapshot\n```yaml\n- generic [ref=e129] [box=400,0,480,800]:\n  - generic [ref=e130] [box=416,16,448,44]:\n    - button \"뒤로\" [ref=e131] [cursor=pointer] [box=416,16,44,44]\n    - heading \"내 구단 고르기\" [level=1] [ref=e134] [box=470,22,142,33]\n  - generic [ref=e136] [box=418,144,444,492]:\n    - button \"LG LG 트윈스\" [ref=e137] [cursor=pointer] [box=418,144,216,89]:\n      - generic [ref=e152] [box=484,167,51,43]:\n        - generic [ref=e153] [box=484,167,51,23]: LG\n        - text: LG 트윈스\n    - button \"한화 한화 이글스\" [ref=e154] [cursor=point"
+    },
+    {
+      "name": "browser_click",
+      "input": {
+        "element": "한화 한화 이글스 button",
+        "target": "e154"
+      },
+      "isError": false,
+      "resultPreview": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: '한화 한화 이글스' }).click();\n```\n### Page\n- Page URL: http://localhost:4320/\n- Page Title: MY DUGOUT\n### Snapshot\n- [Snapshot](..\\pw-mcp\\page-2026-11-24T02-53-54-542Z.yml)"
+    },
+    {
+      "name": "browser_snapshot",
+      "input": {
+        "depth": 5,
+        "boxes": true
+      },
+      "isError": false,
+      "resultPreview": "### Page\n- Page URL: http://localhost:4320/\n- Page Title: MY DUGOUT\n### Snapshot\n```yaml\n- generic [ref=e130] [box=416,137,448,522]:\n  - paragraph [ref=e309] [box=584,137,113,28]: 오늘의 상대는\n  - heading \"삼성 라이온즈\" [level=1] [ref=e310] [box=538,173,203,50]\n  - generic [ref=e311] [box=515,231,250,172]:\n    - generic [ref=e312] [box=515,231,88,172]:\n      - generic [ref=e313] [box=531,241,56,20]: 내 구단\n      - text: 한화\n      - generic [ref=e328] [box=538,376,41,19]: 홈 · 대전\n    - generic [ref=e329] [box=621,298,38,38]: VS\n    - generic [ref=e330] [box=677,233,88,169]:\n      - generic [ref=e331] [box=70"
+    },
+    {
+      "name": "browser_click",
+      "input": {
+        "element": "원정으로 바꾸기 button",
+        "target": "e348"
+      },
+      "isError": false,
+      "resultPreview": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: '원정으로 바꾸기' }).click();\n```\n### Page\n- Page URL: http://localhost:4320/\n- Page Title: MY DUGOUT\n### Snapshot\n- [Snapshot](..\\pw-mcp\\page-2026-11-24T02-54-08-329Z.yml)"
+    },
+    {
+      "name": "browser_click",
+      "input": {
+        "element": "라인업 짜기 button",
+        "target": "e349"
+      },
+      "isError": false,
+      "resultPreview": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: '라인업 짜기' }).click();\n```\n### Page\n- Page URL: http://localhost:4320/\n- Page Title: MY DUGOUT\n### Snapshot\n- [Snapshot](..\\pw-mcp\\page-2026-11-24T02-54-11-302Z.yml)"
+    },
+    {
+      "name": "browser_snapshot",
+      "input": {
+        "depth": 5,
+        "boxes": true
+      },
+      "isError": false,
+      "resultPreview": "### Page\n- Page URL: http://localhost:4320/\n- Page Title: MY DUGOUT\n### Snapshot\n```yaml\n- generic [ref=e352] [box=400,0,480,800]:\n  - generic [ref=e353] [box=416,16,448,44]:\n    - button \"뒤로\" [ref=e354] [cursor=pointer] [box=416,16,44,44]\n    - heading \"한화 라인업\" [level=1] [ref=e357] [box=470,22,117,33]\n  - generic [ref=e358] [box=416,74,448,520]:\n    - heading \"타순\" [level=2] [ref=e359] [box=436,92,408,25]\n    - paragraph [ref=e360] [box=436,121,408,17]: 선수를 누르면 자리를 바꿀 수 있어요\n    - generic [ref=e361] [box=436,146,408,46]:\n      - button \"1 안도혁 중견수 .310 · 74홈런\" [ref=e362] [cursor=pointer] [box=43"
+    },
+    {
+      "name": "browser_click",
+      "input": {
+        "element": "플레이볼! button",
+        "target": "e474"
+      },
+      "isError": false,
+      "resultPreview": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: '플레이볼!' }).click();\n```\n### Page\n- Page URL: http://localhost:4320/\n- Page Title: MY DUGOUT\n### Snapshot\n- [Snapshot](..\\pw-mcp\\page-2026-11-24T02-54-16-387Z.yml)"
+    },
+    {
+      "name": "browser_snapshot",
+      "input": {
+        "depth": 3,
+        "boxes": true
+      },
+      "isError": false,
+      "resultPreview": "### Page\n- Page URL: http://localhost:4320/\n- Page Title: MY DUGOUT\n### Snapshot\n```yaml\n- generic [ref=e475] [box=400,0,480,800]:\n  - generic [ref=e476] [box=400,0,480,800]:\n    - img [ref=e477] [box=400,-136,480,800]:\n      - generic [ref=e567] [cursor=pointer] [box=618,367,45,85]: 안영수\n      - generic [ref=e581] [cursor=pointer] [box=758,184,45,85]: 김지혁\n      - generic [ref=e597] [cursor=pointer] [box=695,97,45,85]: 한하규\n      - generic [ref=e613] [cursor=pointer] [box=478,184,45,85]: 장현준\n      - generic [ref=e629] [cursor=pointer] [box=540,97,45,85]: 이시석\n      - generic [ref=e645] [cursor=po"
+    }
+  ]
+}
