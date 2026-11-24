@@ -10,6 +10,7 @@
     "probe": "tsx probe/layer1.ts",
     "probe:design": "tsx probe/layer3.ts",
     "bench": "tsx bench/run.ts",
+    "bench:app": "tsx bench/app.ts",
     "import:intentguard": "tsx analysis/import-intentguard.ts",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",

@@ -142,7 +142,8 @@ export async function runOpenAiCompat(o: AgentInput): Promise<AgentRun> {
         // Playwright MCP는 실패도 정상 응답 본문의 "### Error"로 돌려준다(Antigravity 실행기와 같은 기준)
         const isError = reply.isError || reply.text.startsWith("### Error");
         calls.push({ name: tc.function.name, input: args, isError, resultPreview: reply.text.slice(0, 600) });
-        log({ type: "tool", name: tc.function.name, input: args, isError, result: reply.text.slice(0, 2000) });
+        // fullLength: 잘라 쓰기 전 응답 길이. 스냅샷이 매 턴 얼마나 큰지 보려고 남긴다
+        log({ type: "tool", name: tc.function.name, input: args, isError, result: reply.text.slice(0, 2000), fullLength: reply.text.length });
         messages.push({ role: "tool", tool_call_id: tc.id, content: reply.text });
       }
     }
