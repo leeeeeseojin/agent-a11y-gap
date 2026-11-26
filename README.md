@@ -5,9 +5,9 @@
 
 <img src="report/figures/layer1-matrix.png" width="720" alt="숨김 패턴 16종과 도구 4종의 노출 상태 히트맵. 속성으로 숨긴 패턴 6개에서 Playwright MCP 스냅샷만 사람 기준과 다르고, 그중 2개에만 aria-hidden 표시가 있다">
 
-**사람에게 숨긴 버튼이 Playwright MCP 스냅샷에는 16개 패턴 중 6개에서 남고, 에이전트가 `[aria-hidden]` 표시로 알아챌 수 있는 것은 그중 2개뿐이다. 같은 Chrome을 읽는 Chrome DevTools MCP는 16개 모두 사람 기준과 같다.**
+사람에게 숨긴 버튼이 Playwright MCP 스냅샷에는 16개 패턴 중 6개에서 남고, 에이전트가 `[aria-hidden]` 표시로 알아챌 수 있는 것은 그중 2개뿐이다. 같은 Chrome을 읽는 Chrome DevTools MCP는 16개 모두 사람 기준과 같다.
 
-## 왜 시작했나
+## 배경
 
 [IntentGuard](https://github.com/leeeeeseojin/intentguard)에서 MY DUGOUT 설정 시트를 표준대로 고쳤다.
 `aria-modal`, 배경 `inert`·`aria-hidden`, Esc 닫기를 넣었고, 사람 기준 E2E 5개가 모두 통과했다.
@@ -29,9 +29,9 @@
 | RQ2 | 그 차이가 에이전트의 성공률, 거짓 성공 보고, 턴 수에 영향을 주는가? | 2층 완료. 행동(막힌 클릭)에는 영향, 성공률에는 차이 없음 |
 | RQ3 | 사람과 에이전트 모두에게 배경을 숨기는 설계는 무엇인가? | LLM 없는 부분 완료. MY DUGOUT에 적용 |
 
-계획 전체는 [docs/plan.md](docs/plan.md)에, 결과를 정리한 리포트는 [report/README.md](report/README.md)에 있다.
+계획 전체는 [docs/plan.md](docs/plan.md), 결과를 정리한 보고서는 [report/README.md](report/README.md)에 있다.
 
-## 지금까지의 결과
+## 결과
 
 측정 환경은 @playwright/mcp 0.0.86, chrome-devtools-mcp 1.13.0, Playwright 1.65.1, Chrome 157(headless, Windows 11)이다.
 같은 조건으로 두 번 돌려 결과가 같음을 확인했고, CI(Linux, Chrome 158)에서도 달라진 칸이 없었다.
@@ -42,15 +42,15 @@
 
 | 패턴 | Playwright MCP 스냅샷 | `[aria-hidden]` 표시 | ref 클릭 | getByRole | DevTools MCP |
 | --- | --- | --- | --- | --- | --- |
-| aria-hidden 조상 div | `button [ref=e5]: TARGET` (이름 없음) | **없음** | **눌림** | 숨김 | 숨김 |
-| aria-hidden 버튼 자체 | `button [aria-hidden] [ref=e4]: TARGET` | 있음 | **눌림** | 숨김 | 숨김 |
-| aria-hidden 이름 있는 영역 | `region [aria-hidden]` 아래 `button [ref=e5]: TARGET` | 있음 (영역 줄) | **눌림** | 숨김 | 숨김 |
+| aria-hidden 조상 div | `button [ref=e5]: TARGET` (이름 없음) | 없음 | 눌림 | 숨김 | 숨김 |
+| aria-hidden 버튼 자체 | `button [aria-hidden] [ref=e4]: TARGET` | 있음 | 눌림 | 숨김 | 숨김 |
+| aria-hidden 이름 있는 영역 | `region [aria-hidden]` 아래 `button [ref=e5]: TARGET` | 있음 (영역 줄) | 눌림 | 숨김 | 숨김 |
 | inert 조상 | `button "TARGET"` | 없음 | 시간 초과 (`element is inert`) | 노출 | 숨김 |
-| 모달 + 배경 inert·aria-hidden | `button [ref=e4]: TARGET` (이름 없음) | **없음** | 시간 초과 (`element is inert`) | 숨김 | 숨김 |
+| 모달 + 배경 inert·aria-hidden | `button [ref=e4]: TARGET` (이름 없음) | 없음 | 시간 초과 (`element is inert`) | 숨김 | 숨김 |
 | 네이티브 `dialog.showModal()` | `button "TARGET"` | 없음 | 가로막힘 | 노출 | 숨김 |
 
 - CSS로 렌더를 막은 패턴(display:none, visibility:hidden, `hidden`, 닫힌 details·popover, 비활성 탭)은 네 도구가 모두 같다.
-- aria-hidden 버튼은 세 패턴 모두 스냅샷에 남을 뿐 아니라 **실제로 눌린다.** 스크린 리더 사용자는 모르는 버튼을 에이전트는 조작할 수 있다.
+- aria-hidden 버튼은 세 패턴 모두 스냅샷에 남고, 실제로 눌린다. 스크린 리더 사용자는 모르는 버튼을 에이전트는 조작할 수 있다.
 - 시각적으로만 가린 패턴(오버레이, aria-modal만)에서 DevTools MCP는 `Successfully clicked on the element`라고 답하지만 클릭은 일어나지 않았다.
   사람 기준에서도 보이는 버튼이라 격차는 아니지만, 거짓 성공 보고로 이어질 수 있는 경로다.
 - inert 조상과 네이티브 dialog 밖 버튼이 남는 것은 버그가 아니라 Playwright 1.65에서 정한 동작이다.
@@ -69,7 +69,7 @@
 - 표시는 자식이 하나뿐인 aria-hidden div가 스냅샷을 줄이는 단계(`unwrapSingleChildGenerics`)에서 펼쳐질 때 버려진다.
   Playwright에서 고치는 방법 두 가지와, 그 전에 화면 코드에서 할 수 있는 우회 두 가지를 검증해 [docs/aria-hidden-mark.md](docs/aria-hidden-mark.md)에 정리했다.
 
-→ [analysis/01_snapshot_matrix.ipynb](analysis/01_snapshot_matrix.ipynb) · [원본 스냅샷](runs/layer1/)
+관련 자료: [analysis/01_snapshot_matrix.ipynb](analysis/01_snapshot_matrix.ipynb), [원본 스냅샷](runs/layer1/)
 
 ### 3층: 사람 기준을 지키는 구현 중 에이전트에게도 배경을 숨기는 것은 D뿐이다
 
@@ -88,7 +88,7 @@ B는 MY DUGOUT 수정본과 같은 구조이고, 스냅샷 형태와 시간 초�
 DevTools MCP에서는 B·C·D가 모두 배경을 숨긴다. D의 비용은 설정을 고르는 동안 뒤 화면의 맥락을 볼 수 없다는 것인데,
 사람 참가자 없이는 잴 수 없어 한계로 남긴다.
 
-→ [analysis/02_agent_runs.ipynb](analysis/02_agent_runs.ipynb) · [e2e/modal.spec.ts](e2e/modal.spec.ts)
+관련 자료: [analysis/02_agent_runs.ipynb](analysis/02_agent_runs.ipynb), [e2e/modal.spec.ts](e2e/modal.spec.ts)
 
 ### IntentGuard 기록 재집계
 
@@ -98,7 +98,7 @@ MY DUGOUT 수정 전후 16회의 성공(6/8 → 6/8)이 모두 원래 수치와 
 MY DUGOUT 실패 2회의 내용은 수정 전후로 달랐다. 수정 후에는 설정 저장은 채웠지만, 수정 전에는 없던
 "스냅샷의 배경 ref를 눌렀다가 기다리다 끝남"이 생겼다.
 
-→ [analysis/03_intentguard_reanalysis.ipynb](analysis/03_intentguard_reanalysis.ipynb)
+관련 자료: [analysis/03_intentguard_reanalysis.ipynb](analysis/03_intentguard_reanalysis.ipynb)
 
 ### 2층: 격차는 에이전트의 행동을 바꾸지만, 결과(성공률)는 바꾸지 않았다
 
@@ -109,7 +109,7 @@ MY DUGOUT 실패 2회의 내용은 수정 전후로 달랐다. 수정 후에는 
 | --- | --- | --- | --- | --- | --- |
 | Gemini 3.8 Flash (Antigravity) | B | 8/8 | 0 | 0 | 10.5 |
 | | D | 8/8 | 0 | 0 | 9.5 |
-| GPT-OSS 120B (API) | B | 7/8 | **1** | **1** | 11 |
+| GPT-OSS 120B (API) | B | 7/8 | 1 | 1 | 11 |
 | | D | 8/8 | 0 | 0 | 8.5 |
 | Claude Sonnet 5.5 (API) | B | 8/8 | 0 | 0 | 6 |
 | | D | 8/8 | 0 | 0 | 6 |
@@ -128,10 +128,10 @@ MY DUGOUT 실패 2회의 내용은 수정 전후로 달랐다. 수정 후에는 
 | --- | --- | --- | --- |
 | 확인된 성공 | 16/20 | 15/20 | 1.00 |
 | 거짓 성공 | 3/20 | 1/20 | 0.61 |
-| 배경 버튼에서 막힌 클릭이 있었던 실행 | **5/20** | **0/20** | 0.047 |
+| 배경 버튼에서 막힌 클릭이 있었던 실행 | 5/20 | 0/20 | 0.047 |
 
 - 성공률은 B와 D가 같았다. "설정 바꾸고 시작"에서는 오히려 D가 6/10으로 더 낮았는데, D의 실패 네 건에는
-  배경 버튼을 누른 흔적이 없다. 공격 작전을 저장하지 못하거나 60턴 한도까지 헤맨 경우다.
+  배경 버튼을 누른 흔적이 없다. 공격 작전을 저장하지 못하거나 60턴 한도까지 진행하지 못한 경우다.
 - 배경 버튼을 눌러 막힌 실행은 B에서만 나왔다. 대부분은 다시 찾아 회복했지만, 한 번은 막힌 뒤 예전 ref를 거듭 누르다
   설정을 저장하지 않고 경기를 시작하고 "저장한 뒤 시작했다"고 보고했다. MY DUGOUT에서 본 실패와 같은 모양이다.
   p = 0.047은 같은 표본에 검정을 세 번 한 값이라(보정하면 0.14) 방향만 읽는다.
@@ -142,11 +142,11 @@ MY DUGOUT 실패 2회의 내용은 수정 전후로 달랐다. 수정 후에는 
 - DevTools MCP 보조 실험(Claude Haiku 5.5, B·D × 과제 4 × 2회)에서는 B·D 모두 막힌 클릭이 없었다. 1층에서 DevTools MCP가 B의 배경을
   숨긴 것과 맞다. 대신 D의 "같은 이름 저장"에서 거짓 성공이 두 번 나왔다. 시트를 닫은 뒤 홈의 로스터 "저장"까지 누른 경우다.
 
-→ [analysis/02_agent_runs.ipynb](analysis/02_agent_runs.ipynb)
+관련 자료: [analysis/02_agent_runs.ipynb](analysis/02_agent_runs.ipynb)
 
 ### 적용: MY DUGOUT 시트를 B에서 D로 바꿨다
 
-출발점이 된 MY DUGOUT의 설정·선수 카드·선수 편집 시트에 리포트의 권고 세 가지를 적용했다.
+출발점이 된 MY DUGOUT의 설정·선수 카드·선수 편집 시트에 보고서의 권고 세 가지를 적용했다.
 변경은 커밋 5개다([0e3bf5f...f1c4912](https://github.com/leeeeeseojin/my-dugout/compare/0e3bf5f...f1c4912)).
 
 | 권고 | 적용 |
@@ -159,13 +159,13 @@ MY DUGOUT 실패 2회의 내용은 수정 전후로 달랐다. 수정 후에는 
 이름 없는 버튼 줄도 없으며, 스냅샷의 버튼 수가 시트 안 버튼 수와 같다. 같은 테스트를 수정 전 빌드에 돌리면 실패한다.
 기존 사람 기준 E2E 5개는 그대로 통과하고, 포커스 가둠·포커스 복귀·버튼 이름 중복·시트 안 요약 테스트를 더해 13개가 통과한다.
 
-3층의 줄인 화면에서는 드러나지 않았지만, 실제 앱에 D를 적용하면 할 일이 더 있었다.
+3층의 축소 화면에서는 드러나지 않았지만, 실제 앱에 D를 적용하자 추가 작업이 필요했다.
 
-- **언마운트되는 쪽의 상태를 위로 올려야 한다.** 경기 중 작전 패널에서 골라 둔 작전이 시트를 여닫으면 사라져서, 그 값을 경기 화면으로 올렸다.
-- **포커스 복귀를 다시 찾아야 한다.** 시트를 닫으면 배경이 새로 그려져 연 버튼도 새 요소다. 여는 버튼에 `data-opener` 이름표를 달고
-  닫을 때 그 이름표로 찾는다. 또 B에서는 `inert`가 하던 포커스 가둠을 Tab 처리로 직접 넣었다.
-- **배경의 시간 흐름이 끊긴다.** 코치에게 맡긴 판단의 대기 시간은 시트가 열린 동안 멈추고 닫으면 처음부터 다시 센다.
-  B에서는 시트를 보는 동안에도 배경에서 대기 시간이 흘러가 결정이 나 버릴 수 있었으므로, 사람에게도 나아진 쪽이다.
+첫째, 언마운트되는 쪽의 상태를 위로 올려야 했다. 경기 중 작전 패널에서 골라 둔 작전이 시트를 여닫으면 사라져서, 그 값을 경기 화면으로 올렸다.
+
+둘째, 포커스 복귀 대상을 다시 찾아야 했다. 시트를 닫으면 배경이 새로 그려지므로 시트를 연 버튼도 새 요소가 된다. 여는 버튼에 `data-opener` 이름표를 달고 닫을 때 그 이름표로 찾는다. 또 B에서 `inert`가 하던 포커스 가둠을 Tab 처리로 직접 넣었다.
+
+셋째, 배경의 시간 흐름이 끊긴다. 코치에게 맡긴 판단의 대기 시간은 시트가 열린 동안 멈추고, 닫으면 처음부터 다시 센다. B에서는 시트를 보는 동안에도 배경에서 대기 시간이 흘러 결정이 나 버릴 수 있었으므로, 사람에게도 개선된 변화다.
 
 에이전트 실행은 다시 돌리지 않았다. 그래서 막힌 클릭이 실제로 사라졌는지는 스냅샷으로만 확인한 것이고, 2층처럼 에이전트 결과로 잰 것은 아니다.
 
@@ -214,7 +214,7 @@ e2e/              사람 기준 E2E (Playwright Test)
 tests/            단위 테스트 (Vitest)
 runs/             실행 원본 기록. 버전 조합별 폴더
 analysis/         Python 노트북 01~03과 IntentGuard 기록 CSV
-report/           리포트와 그림
+report/           보고서와 그림
 docs/             출발점, 연구 계획, [aria-hidden] 표시 누락 분석
 ```
 
