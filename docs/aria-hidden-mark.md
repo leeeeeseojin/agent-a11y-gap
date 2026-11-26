@@ -20,9 +20,9 @@ Playwright AI 스냅샷은 aria-hidden 요소에 `[aria-hidden]` 표시를 붙�
 | 구조 | AI 스냅샷 | 표시 |
 | --- | --- | --- |
 | 버튼 자체에 aria-hidden | `button [aria-hidden] [ref]: 경기 시작` | 있음 |
-| 조상 div, 자식 1개 | `button [ref]: 경기 시작` | **없음** |
+| 조상 div, 자식 1개 | `button [ref]: 경기 시작` | 없음 |
 | 조상 div, 자식 2개 | `generic [aria-hidden]` 아래 버튼 두 개 | 있음 |
-| `#root` > 래퍼 div (MY DUGOUT 구조) | `generic` 아래 홈 · 경기 시작 · 로스터 편집 | **없음** |
+| `#root` > 래퍼 div (MY DUGOUT 구조) | `generic` 아래 홈 · 경기 시작 · 로스터 편집 | 없음 |
 
 표시가 사라지는 조건은 "aria-hidden이 이름 없는 div에 있고, 그 div의 자식이 하나뿐"인 경우다.
 React 앱은 보통 `#root` 안에 앱 래퍼 div 하나만 두므로, `#root`에 aria-hidden을 거는 흔한 모달 처리가 정확히 이 조건에 걸린다.
@@ -55,7 +55,7 @@ var unwrapSingleChildGenerics = {
 `return "unwrap"` 바로 앞에 한 가지를 더하면 된다. 두 방법 모두 설치된 패키지는 건드리지 않고
 `.tmp`에 복사한 playwright-core에서 시험했다. aria-hidden이 없는 div의 결과는 두 방법 모두 그대로였다.
 
-**방법 1. 펼치되 표시를 자식에게 넘긴다**
+### 방법 1. 펼치되 표시를 자식에게 넘긴다
 
 ```js
     if (node.props["aria-hidden"] !== void 0)
@@ -69,7 +69,7 @@ var unwrapSingleChildGenerics = {
 | 조상 div, 자식 1개 | `button [aria-hidden] [ref]: 경기 시작` |
 | `#root` > 래퍼 div | `generic [aria-hidden]` 아래 홈 · 경기 시작 · 로스터 편집 |
 
-**방법 2. aria-hidden이 붙은 generic은 펼치지 않는다**
+### 방법 2. aria-hidden이 붙은 generic은 펼치지 않는다
 
 ```js
     if (node.props["aria-hidden"] !== void 0)
@@ -90,7 +90,7 @@ var unwrapSingleChildGenerics = {
 Playwright가 고쳐지기 전에도 aria-hidden을 거는 위치만 바꾸면 표시가 남는다.
 MY DUGOUT `src/ui/Sheet.tsx`는 지금 `document.getElementById("root")`에 `inert`와 `aria-hidden`을 건다.
 
-**우회 1. 자식이 여럿인 요소에 건다**
+### 우회 1. 자식이 여럿인 요소에 건다
 
 `#root` 대신 앱 래퍼(`#root`의 첫 자식)에 건다.
 
@@ -103,7 +103,7 @@ MY DUGOUT `src/ui/Sheet.tsx`는 지금 `document.getElementById("root")`에 `ine
 
 코드는 가장 적게 바뀐다. 다만 그 래퍼의 자식이 나중에 하나로 줄면 같은 이유로 표시가 다시 사라진다.
 
-**우회 2. 시트가 열린 동안만 `#root`에 이름을 붙인다**
+### 우회 2. 시트가 열린 동안만 `#root`에 이름을 붙인다
 
 aria-hidden과 함께 `role="region"`, `aria-label="배경 화면"`을 걸고, 닫을 때 같이 뗀다.
 
