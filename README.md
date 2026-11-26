@@ -167,7 +167,9 @@ MY DUGOUT 실패 2회의 내용은 수정 전후로 달랐다. 수정 후에는 
 
 셋째, 배경의 시간 흐름이 끊긴다. 코치에게 맡긴 판단의 대기 시간은 시트가 열린 동안 멈추고, 닫으면 처음부터 다시 센다. B에서는 시트를 보는 동안에도 배경에서 대기 시간이 흘러 결정이 나 버릴 수 있었으므로, 사람에게도 개선된 변화다.
 
-에이전트 실행은 다시 돌리지 않았다. 그래서 막힌 클릭이 실제로 사라졌는지는 스냅샷으로만 확인한 것이고, 2층처럼 에이전트 결과로 잰 것은 아니다.
+적용 후에는 실제 앱에 에이전트를 돌리는 실행기 `bench:app`([bench/app.ts](bench/app.ts))을 만들었다. 2층과 같은 API 실행기를 쓰고, 과제와 채점 기준은 IntentGuard의 MY DUGOUT 시나리오를 그대로 가져왔다. MY DUGOUT은 상태를 서버에 보내지 않으므로, 에이전트가 끝나면 같은 브라우저의 최종 화면과 localStorage로 채점한다.
+
+수정 후(D) 빌드에서 GPT-OSS 120B로 비용을 확인하려고 1회만 시험 실행했다. 결과는 확인된 성공이었고 배경 버튼에 막힌 클릭은 없었다(42턴, $0.027, [기록](runs/app/my-dugout/after__openai-gpt-oss-120b__1.json)). 1회이고 수정 전 빌드와 비교하지도 않았으므로 측정 결과로 읽지 않는다. 막힌 클릭이 실제로 사라졌는지는 지금까지 스냅샷과 E2E로 확인한 것이고, 2층처럼 반복한 에이전트 결과로 잰 것은 아니다.
 
 ## 실행
 
@@ -182,6 +184,7 @@ pnpm probe:design         # 3층: 구현 A~D 표 → runs/layer3/
 pnpm bench --model claude-haiku-5-5 --impl B --task settings-then-start --reps 1   # 2층 (모델 비용 발생)
 pnpm bench --agent antigravity --model gpt-oss-120b-medium --impl B --reps 1       # 2층, Antigravity CLI로
 pnpm bench --agent api --model openai/gpt-oss-120b --impl B --reps 1              # 2층, OpenAI 호환 API로 (키는 .env)
+pnpm bench:app --url http://localhost:4320/ --label after --reps 1                # 실제 앱(MY DUGOUT) 빌드에 같은 API 실행기
 pnpm import:intentguard --from ../intentguard
 ```
 
@@ -221,7 +224,7 @@ docs/             출발점, 연구 계획, [aria-hidden] 표시 누락 분석
 ## 한계
 
 - 결과는 위 버전 조합에서의 값이다. CI가 매주 최신 MCP 버전으로 1층을 다시 돌려 달라진 칸을 남긴다(Linux에서 돌아서 Windows 결과와 다를 수 있다).
-- 에이전트 실행은 조건당 반복이 적어 모델 순위나 정확한 성공률로 읽지 않는다.
+- 에이전트 실행은 조건당 반복이 적어 모델 순위나 정확한 성공률로 읽지 않는다. MY DUGOUT 실제 앱 실행은 시험 실행 1회뿐이다.
 - 2층은 모델마다 실행기가 다르다. 특히 GPT-OSS는 MY DUGOUT에서 실패한 Antigravity가 아니라 API 실행기로 돌렸으므로,
   시스템 지시와 쓸 수 있는 도구가 그때와 다르다.
 - 사람 참가자가 없다. "사람 기준"은 Chrome 접근성 트리와 키보드 동작으로 대신했다.
